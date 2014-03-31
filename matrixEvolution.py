@@ -7,6 +7,7 @@ Genetic Matrix evolution
 """
 
 import random 
+import copy
 
 def formMatrix(x,y):
 	"""Forms a random matrix of size x,y. The output is a nested list 
@@ -54,7 +55,7 @@ def mutateMatrix(M,r,rangeMutate):
 	r: mutation rate. Within the mutation rate, the different mutations will happen equally probably
 	rangeMutate: the range in which mutation type 2 will occur in
 	"""
-	MOut = M
+	MOut = copy.deepcopy(M)
 	for i in range(len(M)):
 		for j in range(len(M[i])):
 			mutate = random.random()
@@ -65,14 +66,16 @@ def mutateMatrix(M,r,rangeMutate):
 				switchIndexY = random.randint(0,len(M[switchIndexX]) -1)
 				MOut[i][j] = M[switchIndexX][switchIndexY]
 				MOut[switchIndexX][switchIndexY] = M[i][j]
-				print '(',i,j,')', '(',switchIndexX,switchIndexX,')'
+				print "switch"
 			elif mutate < (1-r) + (2*r/3.0): #Change value within a range
 				diff = random.random()*rangeMutate
 				MOut[i][j] = M[i][j] + (diff - diff/2.0) #uses a symetrical range
 				if MOut[i][j] >1: #clips MOut at 1
 					MOut[i][j] = 1 
+				print "range"
 			else:
 				MOut[i][j] = random.random()
+				print "random"
 	return MOut
 
 def matrixScale(M,S):
@@ -93,8 +96,8 @@ def matrixScale(M,S):
 
 
 if __name__ == '__main__':
-	a= formMatrix(3,3)
-	b = formMatrix(3,3)
+	a= formMatrix(4,2)
+	b = formMatrix(4,2)
 	M = mixMatrix(a,b)
 	print M
-	print mutateMatrix(M,.5,.2)
+	print mutateMatrix(M,.2,.2)
