@@ -24,7 +24,7 @@ def formMatrix(x,y):
 def mixMatrix(M1,M2):
 	"""Checks if two matricies are of equal size and then mixes them randomly."""
 	if len(M1) != len(M2): #checks if the x coordinates are equal
-		raise Exception("matricies must be equal size")
+		raise Exception("Matricies must be equal size")
 
 	for i in range(len(M1)-1): #checks if the y coordinates are equal
 		if len(M1[i]) != len(M2[i]):
@@ -64,7 +64,7 @@ def mutateMatrix(M,r,rangeMutate):
 			elif mutate < (1-r) + (r/3.0): #switch values with a randomly determined other member of the matrix
 				switchIndexX = random.randint(0,len(M)-1)
 				switchIndexY = random.randint(0,len(M[switchIndexX]) -1)
-				MOut[i][j] = M[switchIndexX][switchIndexY]
+				MOut[i][j] = M[switchIndexX][switchIndexY]  
 				MOut[switchIndexX][switchIndexY] = M[i][j]
 				print "switch"
 			elif mutate < (1-r) + (2*r/3.0): #Change value within a range
@@ -86,14 +86,6 @@ def matrixScale(M,S):
 			Mout[i][j] = (M[i][j] -.5)*S
 
 	return Mout
-
-
-
-
-
-
-
-
 
 if __name__ == '__main__':
 	a= formMatrix(4,2)
