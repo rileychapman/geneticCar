@@ -61,17 +61,28 @@ def mutateMatrix(M,r,rangeMutate):
 			if mutate < (1-r):
 				pass
 			elif mutate < (1-r) + (r/3.0): #switch values with a randomly determined other member of the matrix
-				switchIndexX = random.randint(0,len(M1)-1)
-				switchIndexY = random.randint(0,len(M1[switchIndexX]) -1)
+				switchIndexX = random.randint(0,len(M)-1)
+				switchIndexY = random.randint(0,len(M[switchIndexX]) -1)
 				MOut[i][j] = M[switchIndexX][switchIndexY]
+				MOut[switchIndexX][switchIndexY] = M[i][j]
+				print '(',i,j,')', '(',switchIndexX,switchIndexX,')'
 			elif mutate < (1-r) + (2*r/3.0): #Change value within a range
-				diff = random.random()/rangeMutate
+				diff = random.random()*rangeMutate
 				MOut[i][j] = M[i][j] + (diff - diff/2.0) #uses a symetrical range
+				if MOut[i][j] >1: #clips MOut at 1
+					MOut[i][j] = 1 
 			else:
 				MOut[i][j] = random.random()
 	return MOut
 
+def matrixScale(M,S):
+	"""Takes a matrix with values from zero to 1 and returns a matrix with values centered around zero scaled by value S"""
+	Mout = []
+	for i in range(len(M)):
+		for j in range(len(M[i])):
+			Mout[i][j] = (M[i][j] -.5)*S
 
+	return Mout
 
 
 
@@ -82,8 +93,8 @@ def mutateMatrix(M,r,rangeMutate):
 
 
 if __name__ == '__main__':
-	a= formMatrix(2,2)
-	b = formMatrix(2,2)
-	print a
-	print b
-	print mixMatrix(a,b)
+	a= formMatrix(3,3)
+	b = formMatrix(3,3)
+	M = mixMatrix(a,b)
+	print M
+	print mutateMatrix(M,.5,.2)
