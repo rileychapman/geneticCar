@@ -8,25 +8,22 @@ Facilitates Genetic Matrix evolution
 
 import matrixEvolution
 
-def createChromosome(l):
-	""" Builds a chromosome out of matrices
-		l: length of chromosome
-		returns: list of matrices representing a chromosome
-	"""
-	chromosome = []
-	for i in range(l):
-		chromosome.append(matrixEvolution.formMatrix(2,2))
-	return chromosome
+class Chromosome:
+	def __init__(self,length = 20):
+		genes = []
+		for i in range(length):
+			genes.append(matrixEvolution.formMatrix(2,2))
+		self.genes = genes
 	
-def evolve(fittest):
-	""" Takes in the best genes and creates a new chromosome for the next generation
-		fittest: the best genes from the previous generation
-	"""
-	mixMatrix
-	mutate
+	def evolve(self):
+		""" Takes in the best genes and creates a new chromosome for the next generation
+			fittest: the best genes from the previous generation
+		"""
+		#mixMatrix
+		#mutate
 
 
 
 if __name__ == '__main__':
-	chrom = createChromosome(2)
-	print chrom
+	chrom = Chromosome(2)
+	print chrom.genes
