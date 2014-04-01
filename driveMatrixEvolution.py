@@ -15,8 +15,7 @@ class Chromosome:
 		self.strength = 0.0 
 
 	def print_chrom(self):
-		print self.genes
-		print self.strength
+		print "   chromosome: " + str(self.genes) + '   strength: ' + str(self.strength)
 
 class Genome:
 	def __init__(self,population = 20,mutationRate = .5, mutationRange = .2):
@@ -76,7 +75,11 @@ class Genome:
 
 
 if __name__ == '__main__':
-	gen = Genome(3)
+	gen = Genome(2)
+	gen.live()
+	gen.print_genome()
+
+	gen.evolve()
 	gen.live()
 	gen.print_genome()
 
