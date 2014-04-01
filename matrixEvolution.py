@@ -66,16 +66,16 @@ def mutateMatrix(M,r,rangeMutate):
 				switchIndexY = random.randint(0,len(M[switchIndexX]) -1)
 				MOut[i][j] = M[switchIndexX][switchIndexY]  
 				MOut[switchIndexX][switchIndexY] = M[i][j]
-				print "switch"
+				#print "switch"
 			elif mutate < (1-r) + (2*r/3.0): #Change value within a range
 				diff = random.random()*rangeMutate
 				MOut[i][j] = M[i][j] + (diff - diff/2.0) #uses a symetrical range
 				if MOut[i][j] >1: #clips MOut at 1
 					MOut[i][j] = 1 
-				print "range"
+				#print "range"
 			else:
 				MOut[i][j] = random.random()
-				print "random"
+				#print "random"
 	return MOut
 
 def matrixScale(M,S):
