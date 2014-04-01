@@ -63,16 +63,12 @@ class Genome:
 			nextGenChromosomesB.append(BChrom)
 			i -= 1
 
-		print "A group: "+ str(len(nextGenChromosomesA))
-		print "B group: " + str(len(nextGenChromosomesB))
 		#combine the two groups to form the next generation genome
 		nextGenChromos = []
 		for i in range(len(nextGenChromosomesA)):
 			chrom = Chromosome()
 			chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
 			nextGenChromos.append(chrom)
-
-		print "combined group: " + str(len(nextGenChromos))
 
 		self.chromosomes = nextGenChromos
 		self.generation += 1
@@ -86,7 +82,7 @@ if __name__ == '__main__':
 
 	gen.evolve()
 	gen.live()
-	#gen.print_genome()
+	gen.print_genome()
 
 
 
