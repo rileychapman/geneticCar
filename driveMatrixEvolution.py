@@ -14,6 +14,10 @@ class Chromosome:
 		self.genes = matrixEvolution.formMatrix(3,2)
 		self.strength = 0.0 
 
+	def print_chrom(self):
+		print self.genes
+		print self.strength
+
 class Genome:
 	def __init__(self,population = 20,mutationRate = .5, mutationRange = .2):
 		chrom = []
@@ -29,8 +33,7 @@ class Genome:
 	def print_genome(self):
 		print 'Generation: ' + str(gen.generation)
 		for chrom in self.chromosomes:
-			print chrom.genes
-			print chrom.strength
+			chrom.print_chrom()
 	
 	def live(self):
 		""" Test generation and determines the 2 most fit chromosomes
@@ -59,14 +62,17 @@ class Genome:
 			nextGenChromosomesA.append(AChrom)
 			nextGenChromosomesB.append(BChrom)
 			i -= 1
+
+		print "A group: "+ str(len(nextGenChromosomesA))
+		print "B group: " + str(len(nextGenChromosomesB))
 		#combine the two groups to form the next generation genome
 		nextGenChromos = []
-		for chromA in nextGenChromosomesA:
-			for chromB in nextGenChromosomesB:
-				chrom = Chromosome()
-				chrom.genes = matrixEvolution.mixMatrix(chromA.genes,chromB.genes)
-				nextGenChromos.append(chrom)
+		for i in range(len(nextGenChromosomesA)):
+			chrom = Chromosome()
+			chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
+			nextGenChromos.append(chrom)
 
+		print "combined group: " + str(len(nextGenChromos))
 
 		self.chromosomes = nextGenChromos
 		self.generation += 1
@@ -79,7 +85,8 @@ if __name__ == '__main__':
 	gen.print_genome()
 
 	gen.evolve()
-	gen.print_genome()
+	gen.live()
+	#gen.print_genome()
 
 
 
