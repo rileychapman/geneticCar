@@ -83,27 +83,27 @@ class Duck:
         self.gravity = 0
         
     def update(self):
-        self.x += collision_test(dx, 0)
-        self.y += collision_test(0,dy)
+        self.x += self.vx
+        self.y += self.vy
         
-    def collision_test(self, dx, dy):
-        # Move the rect
-        self.rect.x += dx
-        self.rect.y += dy
-    
-        # If you collide with a wall, move out based on velocity
-        for wall in walls:
-            if self.rect.colliderect(wall.rect):
-                if dx > 0: # Moving right; Hit the left side of the wall
-                    self.rect.right = wall.rect.left
-                if dx < 0: # Moving left; Hit the right side of the wall
-                    self.rect.left = wall.rect.right
-                if dy > 0: # Moving down; Hit the top side of the wall
-                    self.rect.bottom = wall.rect.top
-                if dy < 0: # Moving up; Hit the bottom side of the wall
-                    self.rect.top = wall.rect.bottom
-                    
-    
+#    def collision_test(self, dx, dy):
+#        # Move the rect
+#        self.rect.x += dx
+#        self.rect.y += dy
+#    
+#        # If you collide with a wall, move out based on velocity
+#        for wall in walls:
+#            if self.rect.colliderect(wall.rect):
+#                if dx > 0: # Moving right; Hit the left side of the wall
+#                    self.rect.right = wall.rect.left
+#                if dx < 0: # Moving left; Hit the right side of the wall
+#                    self.rect.left = wall.rect.right
+#                if dy > 0: # Moving down; Hit the top side of the wall
+#                    self.rect.bottom = wall.rect.top
+#                if dy < 0: # Moving up; Hit the bottom side of the wall
+#                    self.rect.top = wall.rect.bottom
+#                    
+#    
 
         
 class Platform:
