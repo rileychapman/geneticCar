@@ -28,7 +28,7 @@ class motion:
         f = self.w1+self.w2 #force on the car
         self.vx+=f/self.mt*cos(theta) #updates velocity
         self.vy+=f/self.mt*sin(theta) 
-        self.x+=self.vx#updates position
+        self.x+=self.vx#updates position    
         self.y+=self.vy
         
         
