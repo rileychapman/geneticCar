@@ -58,52 +58,53 @@ def change_to_list(num):
             x = 0
     return walls
     
+blocks = change_to_list(0)
         
 class Platformer_Model:
     """ Encodes the game state """
     """TO-DO: Clean up these level lists"""
     def __init__(self):
         self.level1 = change_to_list(0)
-        self.duck = Duck((155,230,249),20,20,40,40)
-    
+        self.duck = Duck()
+        
     def update(self):
-        self.duck.update()
+        self.duck.update(vx, vy)
 
 class Duck:
     """Code for moving car"""
-    def __init__(self,color,height,width,x,y):
-        self.color = color
-        self.height = height
-        self.width = width
-        self.x = x
-        self.y = y
-        self.vy = 0.0
-        self.vx = 0.0
-        self.friction = 0
-        self.gravity = 0
+    def __init__(self):
+        self.rect = pygame.Rect(32, 32, 16, 16)
+#        self.x = 0
+#        self.y = 0
+#        self.vy = 0.0
+#        self.vx = 0.0
+#        self.friction = 0
+#        self.gravity = 0
+#        
+    def update(self, vx, vy):
+        if vx != 0:
+            self.collision_test(vx, 0)
+        if vy != 0:
+            self.collision_test(0, vy)
         
-    def update(self):
-        self.x += self.vx
-        self.y += self.vy
-        
-#    def collision_test(self, dx, dy):
-#        # Move the rect
-#        self.rect.x += dx
-#        self.rect.y += dy
-#    
-#        # If you collide with a wall, move out based on velocity
-#        for wall in walls:
-#            if self.rect.colliderect(wall.rect):
-#                if dx > 0: # Moving right; Hit the left side of the wall
-#                    self.rect.right = wall.rect.left
-#                if dx < 0: # Moving left; Hit the right side of the wall
-#                    self.rect.left = wall.rect.right
-#                if dy > 0: # Moving down; Hit the top side of the wall
-#                    self.rect.bottom = wall.rect.top
-#                if dy < 0: # Moving up; Hit the bottom side of the wall
-#                    self.rect.top = wall.rect.bottom
-#                    
-#    
+    def collision_test(self, vx, vy):
+        # Move the rect
+        self.rect.x += vx
+        self.rect.y += vy
+    
+        # If you collide with a wall, move out based on velocity
+        for wall in blocks:
+            if self.rect.colliderect(wall.rect):
+                if vx > 0: # Moving right; Hit the left side of the wall
+                    self.rect.right = wall.rect.left
+                if vx < 0: # Moving left; Hit the right side of the wall
+                    self.rect.left = wall.rect.right
+                if vy > 0: # Moving down; Hit the top side of the wall
+                    self.rect.bottom = wall.rect.top
+                if vy < 0: # Moving up; Hit the bottom side of the wall
+                    self.rect.top = wall.rect.bottom
+                    
+    
 
         
 class Platform:
@@ -123,7 +124,7 @@ class PyGameWindowView:
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
-        pygame.draw.rect(self.screen, pygame.Color(self.model.duck.color[0], self.model.duck.color[1], self.model.duck.color[2]), pygame.Rect(self.model.duck.x, self.model.duck.y, self.model.duck.width, self.model.duck.height))
+        pygame.draw.rect(screen, pygame.Color(0,255,0), model.duck.rect)
         for wall in walls:
             pygame.draw.rect(screen, pygame.Color(255, 255, 255), wall.rect)          
         pygame.display.update()
@@ -138,13 +139,13 @@ class PyGameKeyboardController:
         if event.type != KEYDOWN:
             return
         if event.key == pygame.K_LEFT:
-            self.model.duck.vx += -2
+            self.model.duck.update(-10, 0)
         if event.key == pygame.K_RIGHT:
-            self.model.duck.vx += 2
+            self.model.duck.update(10,0)
         if event.key == pygame.K_UP:
-            self.model.duck.vy += -2
+            self.model.duck.update(0,-10)
         if event.key == pygame.K_DOWN:
-            self.model.duck.vy += 2
+            self.model.duck.update(0,10)
 
 
 if __name__ == '__main__':
@@ -155,6 +156,8 @@ if __name__ == '__main__':
     model = Platformer_Model()
     view = PyGameWindowView(model,screen)
     controller = PyGameKeyboardController(model)
+#    car = Duck()
+#    pygame.draw.rect(screen, (255, 200, 0), car.rect)
 
     running = True
 
@@ -166,7 +169,7 @@ if __name__ == '__main__':
             if event.type == KEYDOWN:
                 controller.handle_pygame_event(event)
         
-        model.update()
+#        model.update()
         view.draw()
         time.sleep(0.001)
 
