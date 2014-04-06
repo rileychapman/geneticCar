@@ -332,7 +332,7 @@ if __name__ == '__main__':
 
         
 #        model.update()
-        view.draw2()
+        view.draw1()
         time.sleep(0.001)
 
     pygame.quit()
