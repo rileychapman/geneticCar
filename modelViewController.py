@@ -15,56 +15,7 @@ class Wall(object):
         walls.append(self)
         self.rect = pygame.Rect(pos[0], pos[1], 5, 5)
         self.pos = pos
-"""
-def hold_levels():
-    Normal function that holds our levels as lists. Any other way is too hard
-    level = [[
-        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-        "W                                 W",
-        "W         WWWWWW                  W",
-        "W   WWWW       W                  W",
-        "W   W        WWWW                 W",
-        "W WWW  WWWW                       W",
-        "W   W     W W                     W",
-        "W   W     W   WWW                WW",
-        "W   WWW WWW   W W                 W",
-        "W     W   W   W W                 W",
-        "WWW   W   WWWWW W                 W",
-        "W W      WW                       W",
-        "W W   WWWW   WWW                  W",
-        "W     W    W   W                  W",
-        "W                                 W",
-        "W                                 W",
-        "W                                 W",
-        "W                                 W",
-        "W                                 W",
-        "W                                 W",
-        "WWWWWWWWWWWWW   WWWWWWWWWWWWWWWWW W",
-        "W                                 W",
-        "W                                 W",
-        "WW                                W",
-        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-                              ]]
-    print level
-    return level
 
-def change_to_list(num):
-    level = hold_levels()       
-    for platform in level[num]:
-        x = y = 0
-        for row in level[num]:
-            for col in row:
-                if col == "W":
-                    walls.append(Wall((x, y)))
-#                    if col == "E":
-#                        end_rect = pygame.Rect(x, y, 16, 16)
-                x += 20
-            y += 20
-            x = 0
-    return walls
-    
-blocks = change_to_list(0)
-"""        
 class Platformer_Model:
     """ Encodes the game state """
     """TO-DO: Clean up these level lists"""
@@ -89,13 +40,14 @@ class Duck:
 
     def __init__(self,model,pos):
         self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
-        self.model = model
         self.x = pos[0]       #x position
         self.y = pos[1]        #y position
         self.dx = 0        
         self.dy = 0
         self.theta=0 #angle from the reference frame of the car is at angle zero if it pointed in the positive x direction. 
-        self.radius = 1 #wheel radius
+        self.radius = 5 #wheel radius
+        self.pointlist = [pos,pos]
+        self.model= model
 
     def update(self, w1, w2):
         """ updates the position and angle of the car given the speed of rotation of the wheel. Angular veloctity of the wheel is use rather than a torque output becuase
@@ -109,11 +61,12 @@ class Duck:
         Car angle, x and y updated
         Car angle is determined from the reference frame of the car
         """
-        t=(w1-w2)*self.radius #distance around the turning circle that the wheels have traveled against each other
-        turn_circle_circumfrence = self.rect.width*2*math.pi
-        w = t/turn_circle_circumfrence * 2*math.pi #change  in angle
+        t=(w2-w1)*self.radius #distance around the turning circle that the wheels have traveled against each other
+        w = math.atan(float(t)/self.rect.width)
 
         dist = float(w1+w2)/2 #calculates the forward distance by which the car travels
+
+        self.theta+=w #updates angle\
 
         #updating the position of the car
         self.dx = dist*math.cos(self.theta)
@@ -121,10 +74,17 @@ class Duck:
 
         self.x += self.dx
         self.y += self.dy
+        self.rect.center = (self.x,self.y)
 
-        self.theta+=w #updates angle
+        """
         print 'w',w,"theta",self.theta,'dist',dist
         print 'x',self.x,'dx',self.dx,'y',self.y,'dy',self.dy
+        print "wheel1pos", (self.x-self.rect.width/2*math.sin(self.theta),self.y+self.rect.width/2*math.cos(self.theta) )
+        #print "wheel2pos", (self.x+self.rect.width/2*math.sin(self.theta),self.y-self.rect.width/2*math.cos(self.theta) )
+
+        print """
+        self.pointlist.append((self.x,self.y))
+    
 
         if self.dx != 0:
             self.collision_test(self.dx, 0)
@@ -217,6 +177,28 @@ class PyGameWindowView:
 
         pygame.display.update()
 
+    def draw3(self):
+        drawListInner  = []
+        drawListOuter = []
+        self.screen.fill(pygame.Color(0,0,0))
+        pygame.draw.lines(screen,(255,255,255),False,self.model.duck.pointlist)
+
+        pygame.draw.rect(screen, pygame.Color(0,255,0), model.duck.rect)
+        if self.model.drawMode == True:
+            for trackblock in model.Track:
+                intRect = trackblock.rect.inflate(50,50)
+                pygame.draw.rect(screen,pygame.Color(255,255,255),intRect)
+        else:
+            drawInd = 0
+            for trackblock in model.Track3[1]:
+                drawListInner.append((trackblock.pos[0],trackblock.pos[1]))
+            for trackblock in model.Track3[0]: #model.FinalTrack[1]:
+                drawListOuter.append((trackblock.pos[0],trackblock.pos[1]))
+            pygame.draw.lines(screen,(255,255,255),True,drawListInner)
+            pygame.draw.lines(screen,(255,255,255),True,drawListOuter)   
+
+        pygame.display.update()
+
 
 
 class PyGameController:
@@ -228,13 +210,17 @@ class PyGameController:
         if event.type == KEYDOWN:
 
             if event.key == pygame.K_LEFT:
-                self.model.duck.update(-1, 0)
+                print 'Kleft, (-1,0'
+                self.model.duck.update(4,5)
             if event.key == pygame.K_RIGHT:
-                self.model.duck.update(1,0)
+                print 'Kright, (1,0)'
+                self.model.duck.update(5,4)
             if event.key == pygame.K_UP:
-                self.model.duck.update(0,-1)
+                print 'Up, 0,-1'
+                self.model.duck.update(5,5)
             if event.key == pygame.K_DOWN:
-                self.model.duck.update(0,1)
+                print 'Down, 0,1'
+                self.model.duck.update(-5,-5)
         if event.type == MOUSEBUTTONDOWN:
             self.model.drawTrack = True
     
@@ -366,7 +352,7 @@ if __name__ == '__main__':
 
         
 #        model.update()
-        view.draw2()
+        view.draw3()
         time.sleep(0.001)
 
     pygame.quit()
