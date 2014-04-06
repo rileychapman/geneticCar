@@ -210,16 +210,12 @@ class PyGameController:
         if event.type == KEYDOWN:
 
             if event.key == pygame.K_LEFT:
-                print 'Kleft, (-1,0'
                 self.model.duck.update(4,5)
             if event.key == pygame.K_RIGHT:
-                print 'Kright, (1,0)'
                 self.model.duck.update(5,4)
             if event.key == pygame.K_UP:
-                print 'Up, 0,-1'
                 self.model.duck.update(5,5)
             if event.key == pygame.K_DOWN:
-                print 'Down, 0,1'
                 self.model.duck.update(-5,-5)
         if event.type == MOUSEBUTTONDOWN:
             self.model.drawTrack = True
