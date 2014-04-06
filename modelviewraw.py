@@ -7,8 +7,11 @@ import pygame, random, math, time
 from pygame.locals import *
 import math
 
+walls = []
+
 class Wall(object):
     def __init__(self, pos):
+
         walls.append(self)
         self.rect = pygame.Rect(pos[0], pos[1], 5, 5)
         self.pos = pos
@@ -52,7 +55,7 @@ def change_to_list(num):
         for row in level[num]:
             for col in row:
                 if col == "W":
-                    Wall((x, y))
+                    walls.append(Wall((x, y)))
 #                    if col == "E":
 #                        end_rect = pygame.Rect(x, y, 16, 16)
                 x += 20
@@ -83,16 +86,11 @@ class Platformer_Model:
 
 class Duck:
     """Code for moving car"""
+
     def __init__(self,model,pos):
         self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
         self.model = model
-#        self.x = 0
-#        self.y = 0
-#        self.vy = 0.0
-#        self.vx = 0.0
-#        self.friction = 0
-#        self.gravity = 0
-#        
+
     def update(self, vx, vy):
         if vx != 0:
             self.collision_test(vx, 0)
@@ -304,9 +302,11 @@ def dist_walls(wall1,wall2):
     return math.sqrt((wall1.pos[0]-wall2.pos[0])**2 + (wall1.pos[1]-wall2.pos[1])**2)
 
 if __name__ == '__main__':
+#    walls = []
     pygame.init()
     walls = []
     size = (1200, 900)
+
     screen = pygame.display.set_mode(size)
     model = Platformer_Model()
     view = PyGameWindowView(model,screen)
