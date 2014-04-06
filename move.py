@@ -11,12 +11,12 @@ class motion:
         self.y = y
         self.vx = 0        
         self.vy = 0
-        self.theta=theta
-        self.w1=w1
-        self.w2=w2
-        self.m1=m1
-        self.m2=m2
-        self.mt=mt
+        self.theta=theta #angle
+        self.w1=w1 #wheel1
+        self.w2=w2 #wheel2
+        self.m1=m1 #wheel motion 1?
+        self.m2=m2 #wheel motion 2?
+        self.mt=mt #motion turn?
         self.l=l
         self.w=0
     def turn(self):
