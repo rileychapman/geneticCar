@@ -7,20 +7,12 @@ import pygame, random, math, time
 from pygame.locals import *
 import math
 
-walls = []
-
 class Wall(object):
     def __init__(self, pos):
-<<<<<<< HEAD
-#        walls.append(self)
-        self.rect = pygame.Rect(pos[0], pos[1], 20, 20)
-
-=======
         walls.append(self)
         self.rect = pygame.Rect(pos[0], pos[1], 10, 10)
         self.pos = pos
 """
->>>>>>> 64cea6c5d273effe0ca3927c9a99a293eff243f1
 def hold_levels():
     Normal function that holds our levels as lists. Any other way is too hard
     level = [[
@@ -60,7 +52,7 @@ def change_to_list(num):
         for row in level[num]:
             for col in row:
                 if col == "W":
-                    walls.append(Wall((x, y)))
+                    Wall((x, y))
 #                    if col == "E":
 #                        end_rect = pygame.Rect(x, y, 16, 16)
                 x += 20
@@ -86,11 +78,6 @@ class Platformer_Model:
 
 class Duck:
     """Code for moving car"""
-<<<<<<< HEAD
-    def __init__(self):
-        self.rect = pygame.Rect(32, 32, 16, 16)
-        
-=======
     def __init__(self,model,pos):
         self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
         self.model = model
@@ -101,7 +88,6 @@ class Duck:
 #        self.friction = 0
 #        self.gravity = 0
 #        
->>>>>>> 64cea6c5d273effe0ca3927c9a99a293eff243f1
     def update(self, vx, vy):
         if vx != 0:
             self.collision_test(vx, 0)
@@ -244,8 +230,8 @@ class PyGameController:
 
 
 if __name__ == '__main__':
-#    walls = []
     pygame.init()
+    walls = []
     size = (700, 500)
     screen = pygame.display.set_mode(size)
     model = Platformer_Model()
