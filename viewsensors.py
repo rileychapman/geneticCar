@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@author: sophiali and Paul Titchener
+@author: sophiali
 """
 
 import pygame, random, math, time
@@ -20,31 +20,18 @@ class Wall(object):
 class Platformer_Model:
     """ Encodes the game state """
     """TO-DO: Clean up these level lists"""
-    def __init__(self,screen_size):
+    def __init__(self):
         #self.level1 = change_to_list(0)
         self.duck = Duck(self,(100,100))
         self.drawTrack = False
         self.drawMode = True
         self.Track = []
         self.offsetMode = True
+        self.trackPopped = []
+        self.innerTrack = []
         self.Track1 = [[],[]]
         self.Track2 = [[],[]]
         self.Track3 = [[],[]]
-        self.ArrayTrack = []
-        self.drawListInner = []
-        self.drawListOuter = []
-        #making the track be an array instead of pair of lists
-        xInd = 0
-        while xInd in range(size[0]):
-            yInd = 0
-
-            self.ArrayTrack.append([])
-            while yInd in range(size[1]):
-                self.ArrayTrack[xInd].append(0)
-                yInd +=1
-            xInd +=1
-
-
         
     def update(self):
         self.duck.update(vx, vy)
@@ -152,22 +139,22 @@ class PyGameWindowView:
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
-        pygame.draw.rect(self.screen, pygame.Color(0,255,0), model.duck.rect)
+        pygame.draw.rect(screen, pygame.Color(0,255,0), model.duck.rect)
         for wall in walls:
-            pygame.draw.rect(self.screen, pygame.Color(255, 255, 255), wall.rect)          
+            pygame.draw.rect(screen, pygame.Color(255, 255, 255), wall.rect)          
         pygame.display.update()
 
     def draw1(self):
         self.screen.fill(pygame.Color(0,0,0))
-        pygame.draw.rect(self.screen, pygame.Color(0,255,0), model.duck.rect)
+        pygame.draw.rect(screen, pygame.Color(0,255,0), model.duck.rect)
         if self.model.drawMode == True:
             for trackblock in model.Track:
-                pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
+                pygame.draw.rect(screen,pygame.Color(255,255,255),trackblock.rect)
         else:
             for trackblock in model.Track3[1]:
-                pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
+                pygame.draw.rect(screen,pygame.Color(255,255,255),trackblock.rect)
             for trackblock in model.Track3[0]: #model.FinalTrack[1]:
-                pygame.draw.rect(self.screen,pygame.Color(255,0,255),trackblock.rect)
+                pygame.draw.rect(screen,pygame.Color(255,0,255),trackblock.rect)
         pygame.display.update()
 
     def draw2(self):
@@ -175,19 +162,19 @@ class PyGameWindowView:
         drawListOuter = []
         self.screen.fill(pygame.Color(0,0,0))
 
-        pygame.draw.rect(self.screen, pygame.Color(0,255,0), model.duck.rect)
+        pygame.draw.rect(screen, pygame.Color(0,255,0), model.duck.rect)
         if self.model.drawMode == True:
             for trackblock in model.Track:
                 intRect = trackblock.rect.inflate(50,50)
-                pygame.draw.rect(self.screen,pygame.Color(255,255,255),intRect)
+                pygame.draw.rect(screen,pygame.Color(255,255,255),intRect)
         else:
             drawInd = 0
             for trackblock in model.Track3[1]:
                 drawListInner.append((trackblock.pos[0],trackblock.pos[1]))
             for trackblock in model.Track3[0]: #model.FinalTrack[1]:
                 drawListOuter.append((trackblock.pos[0],trackblock.pos[1]))
-            pygame.draw.lines(self.screen,(255,255,255),True,drawListInner)
-            pygame.draw.lines(self.screen,(255,255,255),True,drawListOuter)   
+            pygame.draw.lines(screen,(255,255,255),True,drawListInner)
+            pygame.draw.lines(screen,(255,255,255),True,drawListOuter)   
 
         pygame.display.update()
 
@@ -195,92 +182,84 @@ class PyGameWindowView:
         drawListInner  = []
         drawListOuter = []
         self.screen.fill(pygame.Color(0,0,0))
-        pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
+        pygame.draw.lines(screen,(255,255,255),False,self.model.duck.pointlist)
 
-        pygame.draw.rect(self.screen, pygame.Color(0,255,0), model.duck.rect)
+        pygame.draw.rect(screen, pygame.Color(0,255,0), model.duck.rect)
         if self.model.drawMode == True:
             for trackblock in model.Track:
                 intRect = trackblock.rect.inflate(50,50)
-                pygame.draw.rect(self.screen,pygame.Color(255,255,255),intRect)
+                pygame.draw.rect(screen,pygame.Color(255,255,255),intRect)
         else:
-
-            pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListInner)
-            pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListOuter)   
+            drawInd = 0
+            for trackblock in model.Track3[1]:
+                drawListInner.append((trackblock.pos[0],trackblock.pos[1]))
+            for trackblock in model.Track3[0]: #model.FinalTrack[1]:
+                drawListOuter.append((trackblock.pos[0],trackblock.pos[1]))
+            pygame.draw.lines(screen,(255,255,255),True,drawListInner)
+            pygame.draw.lines(screen,(255,255,255),True,drawListOuter)   
 
         pygame.display.update()
 
-<<<<<<< HEAD:viewsensors.py
     def distance_calculate(self):
         xp = float(self.model.duck.rect.x)
         yp = float(self.model.duck.rect.y)
         
-        xp_b = xp
-        yp_b = yp
+        xp_l = xp
+        yp_l = yp
+        
+        xp_r = xp
+        yp_r = yp
         
         print "Current car location", xp, yp
         theta = float(self.model.duck.theta)
-        theta_back = theta + pi
+        theta_back = theta + (pi/2)
         print "Current car orientation", theta
         x = float(500*sin(theta))
 #        print x
         y = float(500*cos(theta))
         
-        x_b = float(500*sin(theta_back))
+        x_l = float(500*sin(theta_back))
 #        print x
-        y_b = float(500*cos(theta_back))
+        y_l = float(500*cos(theta_back))
+        
+        x_r = float(500*sin(theta_back - pi))
+#        print x
+        y_r = float(500*cos(theta_back - pi))
         
         distance = math.sqrt((x-xp)**2 + (y-yp)**2)
         dx = (x-xp)/distance * 2
         dy = (y-yp)/distance * 2
         pygame.draw.line(screen,(255,255,255),(xp,yp),(x,y))
 
-        distance = math.sqrt((x_b-xp)**2 + (y_b-yp)**2)
-        dx_b = (x_b-xp)/distance * 2
-        dy_b = (y_b-yp)/distance * 2
-        pygame.draw.line(screen,(0,255,0),(xp,yp),(x_b,y_b))        
+        distance = math.sqrt((x_l-xp)**2 + (y_l-yp)**2)
+        dx_l = (x_l-xp)/distance * 2
+        dy_l = (y_l-yp)/distance * 2
+        pygame.draw.line(screen,(0,255,0),(xp,yp),(x_l,y_l))        
+        
+        distance = math.sqrt((x_r-xp)**2 + (y_r-yp)**2)
+        dx_r = (x_r-xp)/distance * 2
+        dy_r = (y_r-yp)/distance * 2
+        pygame.draw.line(screen,(0,255,0),(xp,yp),(x_r,y_r))   
         
         pygame.display.update()
-=======
-    def draw4(self):
-        self.screen.fill(pygame.Color(0,0,0))
-        xInd = 0
-        thing = pygame.Rect(20,20,5,5)
-        pygame.draw.rect(self.screen,pygame.Color(255,255,255),thing)
-        if self.model.drawMode:
-            for trackblock in model.Track:
-                intRect = trackblock.rect.inflate(50,50)
-                pygame.draw.rect(self.screen,pygame.Color(255,255,255),intRect)
-        else:
-            for a in self.model.ArrayTrack:
-                yInd = 0
-                for b in a:
-                    print b
-                    if b ==1:
-                        print 'hit'
-                        c = pygame.Rect(xInd,yInd,1,1)
-                        pygame.draw.rect(self.screen,pygame.Color(255,0,0),c)
-                    yInd +=1
-                xInd +=1
-
-
-        pygame.display.update()
-
-
-
-
->>>>>>> 6557c6bac1ff3821b648c8366cef96c7ebd324fa:modelViewController.py
 
         f_inner = []
-        b_inner = []
+        l_inner = []
         f_outer = []
-        b_outer = []
+        l_outer = []
+        
+        r_outer = []
+        r_inner = []        
         
         while distance >= 2:
             xp += dx
             yp += dy
             
-            xp_b += dx_b
-            yp_b += dy_b
+            xp_l += dx_l
+            yp_l += dy_l
+            
+            xp_r += dx_r
+            yp_r += dy_r
             
             distance -= 2
             
@@ -288,22 +267,31 @@ class PyGameWindowView:
                 if wall.rect.collidepoint(xp,yp):
                     f_inner.append((xp, yp))
 #                    print "Closest forward inner", int(xp), int(yp)
-                if wall.rect.collidepoint(xp_b,yp_b):
-                    b_inner.append((xp_b, yp_b))
+                if wall.rect.collidepoint(xp_l,yp_l):
+                    l_inner.append((xp_l, yp_l))
+#                    print "Closest back inner", int(xp_b), int(yp_b)
+                if wall.rect.collidepoint(xp_r,yp_r):
+                    r_inner.append((xp_r, yp_r))
 #                    print "Closest back inner", int(xp_b), int(yp_b)
 
             for wall in self.model.Track3[1]:
                 if wall.rect.collidepoint(xp,yp):
                     f_outer.append((xp,yp))
 #                    print "Closest forward outer", int(xp), int(yp)
-                if wall.rect.collidepoint(xp_b,yp_b):
-                    b_outer.append((xp_b, yp_b))
+                if wall.rect.collidepoint(xp_l,yp_l):
+                    l_outer.append((xp_l, yp_l))
 #                    print "Closest back outer", int(xp_b), int(yp_b)
+                if wall.rect.collidepoint(xp_r,yp_r):
+                    r_outer.append((xp_r, yp_r))
+
+    
         print "Closest forward inner", (tuple(map(mean, zip(*f_inner))))
-        print "Closest back inner", tuple(map(mean, zip(*b_inner)))
+        print "Closest left inner", tuple(map(mean, zip(*l_inner)))
         print "Closest forward outer", tuple(map(mean, zip(*f_outer)))
-        print "Closest back outer", tuple(map(mean, zip(*b_outer)))
-       
+        print "Closest left outer", tuple(map(mean, zip(*l_outer)))
+        print "Closest right outer", tuple(map(mean, zip(*r_outer)))
+        print "Closest right inner", tuple(map(mean, zip(*r_inner)))
+        
 class PyGameController:
     """ Manipulate game state based on keyboard input """
     def __init__(self, model):
@@ -420,62 +408,7 @@ class PyGameController:
         for element in self.model.Track2[1]:
             self.model.Track3[1].append(element)
 
-
-        drawInd = 0
-        for trackblock in self.model.Track3[1]:
-            self.model.drawListInner.append((int(trackblock.pos[0]),int(trackblock.pos[1])))
-        for trackblock in self.model.Track3[0]: 
-            self.model.drawListOuter.append((int(trackblock.pos[0]),int(trackblock.pos[1])))
-
-        innerInd = 0
-        while innerInd in range(len(self.model.drawListInner)-1):
-            p1 = self.model.drawListInner[innerInd] #first point
-            p2 = self.model.drawListInner[innerInd+1] #second point
-
-            if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
-                xInd = 0
-                slope = float(p1[1]-p2[1])/(p1[0]-p2[0])
-                while xInd in range(abs(p1[0]-p2[0])):
-                    yIndAppend = int(p1[1] + slope*xInd)
-                    xIndAppend = int(p1[0] + xInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
-                    xInd +=1
-            elif abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]) != 0:
-                yInd = 0
-                slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
-                while yInd in range(abs(p1[1]-p2[1])):
-                    xIndAppend = int(p1[0] + slope*yInd)
-                    yIndAppend = int(p1[1] + yInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
-                    yInd +=1
-            innerInd+=1
-
-        outerInd = 0
-        while outerInd in range(len(self.model.drawListOuter)-1):
-            p1 = self.model.drawListOuter[outerInd] #first point
-            p2 = self.model.drawListOuter[outerInd+1] #second point
-
-            if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
-                xInd = 0
-                slope = float(p1[1]-p2[1])/(p1[0]-p2[0])
-                while xInd in range(abs(p1[0]-p2[0])):
-                    yIndAppend = int(p1[1] + slope*xInd)
-                    xIndAppend = int(p1[0] + xInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
-                    xInd +=1
-            elif abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]) != 0:
-                yInd = 0
-                slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
-                while yInd in range(abs(p1[1]-p2[1])):
-                    xIndAppend = int(p1[0] + slope*yInd)
-                    yIndAppend = int(p1[1] + yInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
-                    yInd +=1
-            outerInd+=1
-
- 
-
-
+        print 'number of popped elements',numPopped
 
 def dist_walls(wall1,wall2):
     return math.sqrt((wall1.pos[0]-wall2.pos[0])**2 + (wall1.pos[1]-wall2.pos[1])**2)
@@ -484,10 +417,10 @@ if __name__ == '__main__':
 #    walls = []
     pygame.init()
     walls = []
-    size = (800, 600)
+    size = (1200, 900)
 
     screen = pygame.display.set_mode(size)
-    model = Platformer_Model(size)
+    model = Platformer_Model()
     view = PyGameWindowView(model,screen)
     controller = PyGameController(model)
 
