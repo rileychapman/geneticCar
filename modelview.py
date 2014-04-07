@@ -136,6 +136,15 @@ class PyGameWindowView:
         xp = float(self.model.duck.rect.x)
         yp = float(self.model.duck.rect.y)
         print "Current car location", xp, yp
+#        block_pos = (xp, yp)
+#        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
+#        dx = (x-xp)/distance * 2
+#        dy = (y-yp)/distance * 2
+
+#        while distance >= 2:
+#            xp += dx
+#            yp += dy
+#            distance -= 2
         calcu = []
         xdistance = []
         ydistance = []
@@ -157,11 +166,13 @@ class PyGameWindowView:
                 xdistance.append((walltuple[0]))
         if len(ydistance) == 0:
             raise Exception("No length on y")
+#        print ydistance    
         print "TOP", abs(min(x for x in ydistance if (x is not 0 and x < 0)))
         print "BOTTOM", min(x for x in ydistance if (x is not 0 and x > 0))
         print "RIGHT", min(x for x in xdistance if (x is not 0 and x > 0))
         print "LEFT", abs(min(x for x in xdistance if (x is not 0 and x < 0)))
         print " "
+#        print "distance", xdistance 
         
 class PyGameKeyboardController:
     """ Manipulate game state based on keyboard input """

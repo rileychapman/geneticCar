@@ -6,7 +6,6 @@
 import pygame, random, math, time
 from pygame.locals import *
 import math
-from numpy import mean
 
 walls = []
 
@@ -14,7 +13,7 @@ class Wall(object):
     def __init__(self, pos):
 
         walls.append(self)
-        self.rect = pygame.Rect(pos[0], pos[1], 10, 10)
+        self.rect = pygame.Rect(pos[0], pos[1], 5, 5)
         self.pos = pos
 
 class Platformer_Model:
@@ -53,7 +52,7 @@ class Duck:
     """Code for moving car"""
 
     def __init__(self,model,pos):
-        self.rect = pygame.Rect(pos[0], pos[1], 10, 10)
+        self.rect = pygame.Rect(pos[0], pos[1], 16, 16)
         self.x = pos[0]       #x position
         self.y = pos[1]        #y position
         self.dx = 0        
@@ -209,38 +208,6 @@ class PyGameWindowView:
 
         pygame.display.update()
 
-<<<<<<< HEAD:viewsensors.py
-    def distance_calculate(self):
-        xp = float(self.model.duck.rect.x)
-        yp = float(self.model.duck.rect.y)
-        
-        xp_b = xp
-        yp_b = yp
-        
-        print "Current car location", xp, yp
-        theta = float(self.model.duck.theta)
-        theta_back = theta + pi
-        print "Current car orientation", theta
-        x = float(500*sin(theta))
-#        print x
-        y = float(500*cos(theta))
-        
-        x_b = float(500*sin(theta_back))
-#        print x
-        y_b = float(500*cos(theta_back))
-        
-        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
-        dx = (x-xp)/distance * 2
-        dy = (y-yp)/distance * 2
-        pygame.draw.line(screen,(255,255,255),(xp,yp),(x,y))
-
-        distance = math.sqrt((x_b-xp)**2 + (y_b-yp)**2)
-        dx_b = (x_b-xp)/distance * 2
-        dy_b = (y_b-yp)/distance * 2
-        pygame.draw.line(screen,(0,255,0),(xp,yp),(x_b,y_b))        
-        
-        pygame.display.update()
-=======
     def draw4(self):
         self.screen.fill(pygame.Color(0,0,0))
         xInd = 0
@@ -268,48 +235,14 @@ class PyGameWindowView:
 
 
 
->>>>>>> 6557c6bac1ff3821b648c8366cef96c7ebd324fa:modelViewController.py
 
-        f_inner = []
-        b_inner = []
-        f_outer = []
-        b_outer = []
-        
-        while distance >= 2:
-            xp += dx
-            yp += dy
-            
-            xp_b += dx_b
-            yp_b += dy_b
-            
-            distance -= 2
-            
-            for wall in self.model.Track3[0]:
-                if wall.rect.collidepoint(xp,yp):
-                    f_inner.append((xp, yp))
-#                    print "Closest forward inner", int(xp), int(yp)
-                if wall.rect.collidepoint(xp_b,yp_b):
-                    b_inner.append((xp_b, yp_b))
-#                    print "Closest back inner", int(xp_b), int(yp_b)
 
-            for wall in self.model.Track3[1]:
-                if wall.rect.collidepoint(xp,yp):
-                    f_outer.append((xp,yp))
-#                    print "Closest forward outer", int(xp), int(yp)
-                if wall.rect.collidepoint(xp_b,yp_b):
-                    b_outer.append((xp_b, yp_b))
-#                    print "Closest back outer", int(xp_b), int(yp_b)
-        print "Closest forward inner", (tuple(map(mean, zip(*f_inner))))
-        print "Closest back inner", tuple(map(mean, zip(*b_inner)))
-        print "Closest forward outer", tuple(map(mean, zip(*f_outer)))
-        print "Closest back outer", tuple(map(mean, zip(*b_outer)))
-       
 class PyGameController:
     """ Manipulate game state based on keyboard input """
     def __init__(self, model):
         self.model = model
     
-    def handle_pygame_event_key(self, event):
+    def handle_pygame_event(self, event):
         if event.type == KEYDOWN:
 
             if event.key == pygame.K_LEFT:
@@ -320,11 +253,6 @@ class PyGameController:
                 self.model.duck.update(5,5)
             if event.key == pygame.K_DOWN:
                 self.model.duck.update(-5,-5)
-        else:
-            return
-        
-                
-    def handle_pygame_event_mouse(self,event):
         if event.type == MOUSEBUTTONDOWN:
             self.model.drawTrack = True
     
@@ -499,22 +427,19 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
-            if event.type == MOUSEBUTTONDOWN or event.type == MOUSEBUTTONUP:
-                controller.handle_pygame_event_mouse(event)
-            if event.type == KEYDOWN: 
-                controller.handle_pygame_event_key(event)
-                view.distance_calculate()
+            if event.type == KEYDOWN or event.type == MOUSEBUTTONDOWN or event.type == MOUSEBUTTONUP:
+                controller.handle_pygame_event(event)
                 
             if model.drawTrack == True and model.drawMode == True:
                 controller.draw_track()
             if model.drawTrack == False and model.drawMode ==False and model.offsetMode == True:
                 controller.offset_track(50)
                 model.offsetMode = False
-            
+    
 
         
 #        model.update()
-        view.draw1()
+        view.draw3()
         time.sleep(0.001)
 
     pygame.quit()
