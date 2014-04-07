@@ -221,13 +221,15 @@ class PyGameWindowView:
             for a in self.model.ArrayTrack:
                 yInd = 0
                 for b in a:
-                    print b
                     if b ==1:
-                        print 'hit'
-                        c = pygame.Rect(xInd,yInd,1,1)
-                        pygame.draw.rect(self.screen,pygame.Color(255,0,0),c)
+                        c = pygame.Rect(xInd,yInd,5,5)
+                        pygame.draw.rect(self.screen,pygame.Color(255,255,255),c)
                     yInd +=1
                 xInd +=1
+            listInnerInt = self.model.drawListInner[0:]
+            listOuterInt = self.model.drawListOuter[0:]
+            pygame.draw.lines(self.screen,(255,255,255),True,listInnerInt)
+            pygame.draw.lines(self.screen,(255,255,255),True,listOuterInt)   
 
 
         pygame.display.update()
@@ -368,12 +370,15 @@ class PyGameController:
                     xIndAppend = int(p1[0] + xInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     xInd +=1
-            elif abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]) != 0:
+            else:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
                 yInd = 0
-                slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
+                if p1[1]-p2[1] !=0:
+                    slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
+                else:
+                    slope = 50000
                 while yInd in range(abs(p1[1]-p2[1])):
-                    xIndAppend = int(p1[0] + slope*yInd)
-                    yIndAppend = int(p1[1] + yInd)
+                    xIndAppend = int(p1[0] - slope*yInd)
+                    yIndAppend = int(p1[1] - yInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     yInd +=1
             innerInd+=1
@@ -391,12 +396,15 @@ class PyGameController:
                     xIndAppend = int(p1[0] + xInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     xInd +=1
-            elif abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]) != 0:
+            else:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
                 yInd = 0
-                slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
+                if p1[1]-p2[1] != 0:
+                    slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
+                else:
+                    slope = 50000
                 while yInd in range(abs(p1[1]-p2[1])):
-                    xIndAppend = int(p1[0] + slope*yInd)
-                    yIndAppend = int(p1[1] + yInd)
+                    xIndAppend = int(p1[0] - slope*yInd)
+                    yIndAppend = int(p1[1] - yInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     yInd +=1
             outerInd+=1
@@ -412,7 +420,7 @@ if __name__ == '__main__':
 #    walls = []
     pygame.init()
     walls = []
-    size = (800, 600)
+    size = (500, 500)
 
     screen = pygame.display.set_mode(size)
     model = Platformer_Model(size)
@@ -421,7 +429,7 @@ if __name__ == '__main__':
 
 
     running = True
-
+    running2= False
     while running:
            
         for event in pygame.event.get():
@@ -435,11 +443,8 @@ if __name__ == '__main__':
             if model.drawTrack == False and model.drawMode ==False and model.offsetMode == True:
                 controller.offset_track(50)
                 model.offsetMode = False
-    
-
-        
-#        model.update()
-        view.draw3()
+          
+        view.draw4()
         time.sleep(0.001)
 
     pygame.quit()
