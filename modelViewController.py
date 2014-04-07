@@ -361,6 +361,8 @@ class PyGameController:
         while innerInd in range(len(self.model.drawListInner)-1):
             p1 = self.model.drawListInner[innerInd] #first point
             p2 = self.model.drawListInner[innerInd+1] #second point
+            xSign = p1[0] - p2[0]
+            ySign = p1[1] - p2[1]
 
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
                 xInd = 0
