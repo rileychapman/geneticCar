@@ -30,7 +30,7 @@ class Genome:
 		self.mutationRange = mutationRange
 
 	def print_genome(self):
-		print 'Generation: ' + str(gen.generation)
+		print 'Generation: ' + str(self.generation)
 		for chrom in self.chromosomes:
 			chrom.print_chrom()
 	
