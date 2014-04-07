@@ -361,26 +361,28 @@ class PyGameController:
         while innerInd in range(len(self.model.drawListInner)-1):
             p1 = self.model.drawListInner[innerInd] #first point
             p2 = self.model.drawListInner[innerInd+1] #second point
-            xSign = p1[0] - p2[0]
-            ySign = p1[1] - p2[1]
 
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
+                xSign = (p1[0] - p2[0])/abs(p1[0]-p2[0])
+                print xSign
                 xInd = 0
                 slope = float(p1[1]-p2[1])/(p1[0]-p2[0])
                 while xInd in range(abs(p1[0]-p2[0])):
-                    yIndAppend = int(p1[1] + slope*xInd)
-                    xIndAppend = int(p1[0] + xInd)
+                    yIndAppend = int(p1[1] - xSign*slope*xInd)
+                    xIndAppend = int(p1[0] - xSign*xInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     xInd +=1
-            else:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
+            elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
+                ySign = (p1[1] - p2[1])/abs(p1[1]-p2[1])
+                print ySign
                 yInd = 0
                 if p1[1]-p2[1] !=0:
                     slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
                 else:
                     slope = 50000
                 while yInd in range(abs(p1[1]-p2[1])):
-                    xIndAppend = int(p1[0] - slope*yInd)
-                    yIndAppend = int(p1[1] - yInd)
+                    xIndAppend = int(p1[0] - ySign*slope*yInd)
+                    yIndAppend = int(p1[1] - ySign*yInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     yInd +=1
             innerInd+=1
@@ -391,22 +393,27 @@ class PyGameController:
             p2 = self.model.drawListOuter[outerInd+1] #second point
 
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
+                xSign = (p1[0] - p2[0])/abs(p1[0]-p2[0])
+
+
                 xInd = 0
                 slope = float(p1[1]-p2[1])/(p1[0]-p2[0])
                 while xInd in range(abs(p1[0]-p2[0])):
-                    yIndAppend = int(p1[1] + slope*xInd)
-                    xIndAppend = int(p1[0] + xInd)
+                    yIndAppend = int(p1[1] - xSign*slope*xInd)
+                    xIndAppend = int(p1[0] - xSign*xInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     xInd +=1
-            else:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
+            elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
+                ySign = (p1[1] - p2[1])/abs(p1[1]-p2[1])
+
                 yInd = 0
                 if p1[1]-p2[1] != 0:
                     slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
                 else:
                     slope = 50000
                 while yInd in range(abs(p1[1]-p2[1])):
-                    xIndAppend = int(p1[0] - slope*yInd)
-                    yIndAppend = int(p1[1] - yInd)
+                    xIndAppend = int(p1[0] - ySign*slope*yInd)
+                    yIndAppend = int(p1[1] - ySign*yInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     yInd +=1
             outerInd+=1
