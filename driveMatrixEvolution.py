@@ -75,7 +75,7 @@ class Genome:
 
 
 if __name__ == '__main__':
-	gen = Genome(2)
+	gen = Genome(4)
 	gen.live()
 	gen.print_genome()
 
@@ -86,6 +86,8 @@ if __name__ == '__main__':
 	gen.evolve()
 	gen.live()
 	gen.print_genome()
+
+	
 
 
 
