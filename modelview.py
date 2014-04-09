@@ -257,11 +257,6 @@ class PyGameWindowView:
 #                    print "Closest back outer", int(xp_b), int(yp_b)
                 if wall.rect.collidepoint(xp_r,yp_r):
                     r_outer.append((xp_r, yp_r))
-
-            
-    
-    
-    
     
 class PyGameKeyboardController:
     """ Manipulate game state based on keyboard input """
