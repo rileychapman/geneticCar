@@ -133,15 +133,7 @@ class Duck:
                     
     
 
-        
-class Platform:
-    """ Encodes the state of a singular rectangular platform in the game """
-    def __init__(self,color,height,width,x,y):
-        self.color = color
-        self.height = height
-        self.width = width
-        self.x = x
-        self.y = y
+    
 
 class PyGameWindowView:
     """ Draws our game in a Pygame window """
