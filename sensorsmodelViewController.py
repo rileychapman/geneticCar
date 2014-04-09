@@ -278,10 +278,13 @@ class PyGameWindowView:
                 intRect = trackblock.rect.inflate(50,50)
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),intRect)
         else:
+            print 'track3',model.Track3[0]
             drawInd = 0
             for trackblock in model.Track3[1]:
                 drawListInner.append((trackblock.pos[0],trackblock.pos[1]))
-            for trackblock in model.Track3[0]: #model.FinalTrack[1]:
+            for trackblock in model.Track3[0]:
+                print 'track3', model.Track3[0]#model.FinalTrack[1]:
+                print "drawlist position", trackblock.pos[0]
                 drawListOuter.append((trackblock.pos[0],trackblock.pos[1]))
             pygame.draw.lines(self.screen,(255,255,255),True,drawListInner)
             pygame.draw.lines(self.screen,(255,255,255),True,drawListOuter)   
@@ -331,7 +334,7 @@ class PyGameWindowView:
 
 
         pygame.display.update()
-    
+        
     def distance_calculate(self):
         xp = float(self.model.duck.rect.x)
         yp = float(self.model.duck.rect.y)
@@ -346,7 +349,6 @@ class PyGameWindowView:
         theta = float(self.model.duck.theta)
         theta_back = theta + (pi/2)
         print "Current car orientation", theta
-        print "  "
         x = 500*sin(theta)
         y = 500*cos(theta)
         
@@ -361,14 +363,14 @@ class PyGameWindowView:
         dy = (y-yp)/distance * 2
         pygame.draw.line(screen,(255,0,0),(xp,yp),(x,y))
 
-        distance = math.sqrt((x_l-xp)**2 + (y_l-yp)**2)
-        dx_l = (x_l-xp)/distance * 2
-        dy_l = (y_l-yp)/distance * 2
+        distance1 = math.sqrt((x_l-xp)**2 + (y_l-yp)**2)
+        dx_l = (x_l-xp)/distance1 * 2
+        dy_l = (y_l-yp)/distance1 * 2
         pygame.draw.line(screen,(0,255,0),(xp,yp),(x_l,y_l))        
         
-        distance = math.sqrt((x_r-xp)**2 + (y_r-yp)**2)
-        dx_r = (x_r-xp)/distance * 2
-        dy_r = (y_r-yp)/distance * 2
+        distance2 = math.sqrt((x_r-xp)**2 + (y_r-yp)**2)
+        dx_r = (x_r-xp)/distance2 * 2
+        dy_r = (y_r-yp)/distance2 * 2
         pygame.draw.line(screen,(0,0,255),(xp,yp),(x_r,y_r))   
         
         pygame.display.update()
@@ -385,46 +387,60 @@ class PyGameWindowView:
             xp += dx
             yp += dy
             
+            distance -= 2
+            
+            #finds distances for inner wall
+            for wall in self.model.Track3[0]:
+                if wall.rect.collidepoint(xp,yp):
+                    f_inner.append((xp, yp))
+
+            #finds distances for outer wall
+            for wall in self.model.Track3[1]:
+                if wall.rect.collidepoint(xp,yp):
+                    f_outer.append((xp,yp))
+
+        while distance1 >= 2:         
             xp_l += dx_l
             yp_l += dy_l
             
+            distance1 -= 2
+            #finds distances for inner wall
+            for wall in self.model.Track3[0]:
+                if wall.rect.collidepoint(xp_l,yp_l):
+                    l_inner.append((xp_l, yp_l))
+
+            #finds distances for outer wall
+            for wall in self.model.Track3[1]:
+                if wall.rect.collidepoint(xp_l,yp_l):
+                    l_outer.append((xp_l, yp_l))
+                    
+        while distance2 >= 2:
             xp_r += dx_r
             yp_r += dy_r
             
-            distance -= 2
+            distance2 -= 2
             
-            xInd = 0
-            yInd = 0            
-            
-            while xInd < len(self.model.ArrayTrack):
-                while yInd < len(self.model.ArrayTrack[xInd]):
-                    if yInd == 1:
-                        f_inner.append((xInd, yInd))
-                        return
-                    yInd += 1
-                xInd += 1
-                
-#                if wall.rect.collidepoint(xp,yp):
-#                    f_inner.append((xp, yp))
-##                    print "Closest forward inner", int(xp), int(yp)
-#                if wall.rect.collidepoint(xp_l,yp_l):
-#                    l_inner.append((xp_l, yp_l))
-##                    print "Closest back inner", int(xp_b), int(yp_b)
-#                if wall.rect.collidepoint(xp_r,yp_r):
-#                    r_inner.append((xp_r, yp_r))
-##                    print "Closest back inner", int(xp_b), int(yp_b)
-#
-#            for wall in self.model.Track3[1]:
-#                if wall.rect.collidepoint(xp,yp):
-#                    f_outer.append((xp,yp))
-##                    print "Closest forward outer", int(xp), int(yp)
-#                if wall.rect.collidepoint(xp_l,yp_l):
-#                    l_outer.append((xp_l, yp_l))
-##                    print "Closest back outer", int(xp_b), int(yp_b)
-#                if wall.rect.collidepoint(xp_r,yp_r):
-#                    r_outer.append((xp_r, yp_r))
-            
-            print "Closest forward inner", (tuple(map(mean, zip(*f_inner))))
+            #finds distances for inner wall
+            for wall in self.model.Track3[0]:
+                if wall.rect.collidepoint(xp_r,yp_r):
+                    r_inner.append((xp_r, yp_r))
+
+            #finds distances for outer wall
+            for wall in self.model.Track3[1]:
+                if wall.rect.collidepoint(xp_r,yp_r):
+                    r_outer.append((xp_r, yp_r))
+
+        print "Closest forward outer", tuple(map(mean, zip(*f_outer)))
+        print "Closest forward inner", (tuple(map(mean, zip(*f_inner))))
+        
+        print "Closest left outer", tuple(map(mean, zip(*l_outer)))
+        print "Closest left inner", tuple(map(mean, zip(*l_inner)))
+
+        print "Closest right outer", tuple(map(mean, zip(*r_outer)))
+        print "Closest right inner", tuple(map(mean, zip(*r_inner)))
+        
+        print "  "
+        
 
 
 class PyGameController:
@@ -508,7 +524,7 @@ class PyGameController:
             if not innerPop:
                 self.model.Track2[0].append(self.model.Track1[0][innerInd])
             innerInd +=1
-
+            break
         outerInd = 1
         while outerInd in range(len(self.model.Track1[1])-2):
             outerPop = False
@@ -653,7 +669,7 @@ if __name__ == '__main__':
                 controller.offset_track(50)
                 model.offsetMode = False
           
-        view.draw3()
+        view.draw2()
         time.sleep(0.001)
 
     pygame.quit()
