@@ -25,6 +25,9 @@ view = View.PyGameWindowView(model,screen)
 controller = Controller.PyGameController(model)
 
 
+Generation = 0
+Individual = (Generation,0)
+
 running = True
 while running:
        
@@ -39,8 +42,11 @@ while running:
         if model.drawTrack == False and model.drawMode ==False and model.offsetMode == True:
             controller.offset_track(50)
             model.offsetMode = False
+    if model.duck.FAIL:
+        model.new_individual()
+        
       
-    view.draw3()
+    view.draw1()
     time.sleep(0.001)
 
 pygame.quit()

@@ -38,6 +38,10 @@ class Platformer_Model:
     def update(self):
         self.duck.update(vx, vy)
 
+    def new_individual(self):
+        if self.duck.FAIL:
+            self.duck = Duck(self,(100,100))
+
 class Duck:
     """Code for moving car"""
 
@@ -51,6 +55,7 @@ class Duck:
         self.radius = 5 #wheel radius
         self.pointlist = [pos,pos]
         self.model= model
+        self.FAIL = False
 
     def update(self, w1, w2):
         """ updates the position and angle of the car given the speed of rotation of the wheel. Angular veloctity of the wheel is use rather than a torque output becuase
@@ -102,21 +107,9 @@ class Duck:
         # If you collide with a wall, move out based on velocity
         for wall in self.model.Track3[1]:
             if self.rect.colliderect(wall.rect):
-                if vx > 0: # Moving right; Hit the left side of the wall
-                    self.rect.right = wall.rect.left
-                if vx < 0: # Moving left; Hit the right side of the wall
-                    self.rect.left = wall.rect.right
-                if vy > 0: # Moving down; Hit the top side of the wall
-                    self.rect.bottom = wall.rect.top
-                if vy < 0: # Moving up; Hit the bottom side of the wall
-                    self.rect.top = wall.rect.bottom
+                self.FAIL = True
+                print "FAIL"
         for wall in self.model.Track3[0]:
             if self.rect.colliderect(wall.rect):
-                if vx > 0: # Moving right; Hit the left side of the wall
-                    self.rect.right = wall.rect.left
-                if vx < 0: # Moving left; Hit the right side of the wall
-                    self.rect.left = wall.rect.right
-                if vy > 0: # Moving down; Hit the top side of the wall
-                    self.rect.bottom = wall.rect.top
-                if vy < 0: # Moving up; Hit the bottom side of the wall
-                    self.rect.top = wall.rect.bottom
+                self.FAIL = True
+                print "FAIL"

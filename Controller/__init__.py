@@ -12,7 +12,7 @@ class Wall(object):
     def __init__(self, pos):
 
         #walls.append(self)
-        self.rect = pygame.Rect(pos[0], pos[1], 5, 5)
+        self.rect = pygame.Rect(pos[0], pos[1], 10, 10)
         self.pos = pos
 
 class PyGameController:
@@ -149,7 +149,8 @@ class PyGameController:
                 while xInd in range(abs(p1[0]-p2[0])):
                     yIndAppend = int(p1[1] - xSign*slope*xInd)
                     xIndAppend = int(p1[0] - xSign*xInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1
+                    self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
                     xInd +=1
             elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
                 ySign = (p1[1] - p2[1])/abs(p1[1]-p2[1])
@@ -163,6 +164,7 @@ class PyGameController:
                     xIndAppend = int(p1[0] - ySign*slope*yInd)
                     yIndAppend = int(p1[1] - ySign*yInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             innerInd+=1
 
@@ -181,6 +183,7 @@ class PyGameController:
                     yIndAppend = int(p1[1] - xSign*slope*xInd)
                     xIndAppend = int(p1[0] - xSign*xInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     xInd +=1
             elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
                 ySign = (p1[1] - p2[1])/abs(p1[1]-p2[1])
@@ -194,6 +197,7 @@ class PyGameController:
                     xIndAppend = int(p1[0] - ySign*slope*yInd)
                     yIndAppend = int(p1[1] - ySign*yInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             outerInd+=1
 
