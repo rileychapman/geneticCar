@@ -413,9 +413,6 @@ class PyGameController:
                     yInd +=1
             outerInd+=1
 
- 
-
-
 
 def dist_walls(wall1,wall2):
     return math.sqrt((wall1.pos[0]-wall2.pos[0])**2 + (wall1.pos[1]-wall2.pos[1])**2)
@@ -448,7 +445,7 @@ if __name__ == '__main__':
                 controller.offset_track(50)
                 model.offsetMode = False
           
-        view.draw4()
+        view.draw3()
         time.sleep(0.001)
 
     pygame.quit()
