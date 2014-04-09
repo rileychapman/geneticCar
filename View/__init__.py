@@ -14,22 +14,22 @@ class PyGameWindowView:
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
-        pygame.draw.rect(self.screen, pygame.Color(0,255,0), model.duck.rect)
+        pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
         for wall in walls:
             pygame.draw.rect(self.screen, pygame.Color(255, 255, 255), wall.rect)          
         pygame.display.update()
 
     def draw1(self):
         self.screen.fill(pygame.Color(0,0,0))
-        pygame.draw.rect(self.screen, pygame.Color(0,255,0), model.duck.rect)
+        pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
         if self.model.drawMode == True:
-            for trackblock in model.Track:
+            for trackblock in self.model.Track:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
         else:
-            for trackblock in model.Track3[1]:
+            for trackblock in self.model.Track3[1]:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
-            for trackblock in model.Track3[0]: #model.FinalTrack[1]:
-                pygame.draw.rect(self.screen,pygame.Color(255,0,255),trackblock.rect)
+            for trackblock in self.model.Track3[0]: #model.FinalTrack[1]:
+                pygame.draw.rect(self.screen,pygame.Color(255,0,0),trackblock.rect)
         pygame.display.update()
 
     def draw2(self):
