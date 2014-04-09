@@ -185,8 +185,8 @@ class PyGameWindowView:
                 drawListInner.append((trackblock.pos[0],trackblock.pos[1]))
             for trackblock in model.Track3[0]: #model.FinalTrack[1]:
                 drawListOuter.append((trackblock.pos[0],trackblock.pos[1]))
-            pygame.draw.lines(self.screen,(255,255,255),True,drawListInner)
-            pygame.draw.lines(self.screen,(255,255,255),True,drawListOuter)   
+            pygame.draw.lines(self.screen,(255,255,255),True,drawListInner,3)
+            pygame.draw.lines(self.screen,(255,255,255),True,drawListOuter,3)   
 
         pygame.display.update()
 
@@ -226,8 +226,8 @@ class PyGameWindowView:
                         pygame.draw.rect(self.screen,pygame.Color(255,255,255),c)
                     yInd +=1
                 xInd +=1
-            listInnerInt = self.model.drawListInner[0:]
-            listOuterInt = self.model.drawListOuter[0:]
+            listInnerInt = self.model.drawListInner[0:-1]
+            listOuterInt = self.model.drawListOuter[0:-1]
             pygame.draw.lines(self.screen,(255,255,255),True,listInnerInt)
             pygame.draw.lines(self.screen,(255,255,255),True,listOuterInt)   
 
@@ -356,6 +356,9 @@ class PyGameController:
             self.model.drawListInner.append((int(trackblock.pos[0]),int(trackblock.pos[1])))
         for trackblock in self.model.Track3[0]: 
             self.model.drawListOuter.append((int(trackblock.pos[0]),int(trackblock.pos[1])))
+
+        self.model.drawListInner.append(self.model.drawListInner[0])
+        self.model.drawListOuter.append(self.model.drawListOuter[0])
 
         innerInd = 0
         while innerInd in range(len(self.model.drawListInner)-1):
