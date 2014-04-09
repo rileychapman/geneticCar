@@ -1,3 +1,20 @@
+"""
+@author: Sophie Li and Paul Titchener
+"""
+
+import pygame, random, math, time
+from pygame.locals import *
+import math
+
+#walls = []
+
+class Wall(object):
+    def __init__(self, pos):
+
+        #walls.append(self)
+        self.rect = pygame.Rect(pos[0], pos[1], 5, 5)
+        self.pos = pos
+
 class PyGameController:
     """ Manipulate game state based on keyboard input """
     def __init__(self, model):
@@ -25,7 +42,7 @@ class PyGameController:
 
     def draw_track(self):
         wallBlock = Wall(pygame.mouse.get_pos())
-        model.Track.append(wallBlock)
+        self.model.Track.append(wallBlock)
 
 
     def offset_track(self,radius):

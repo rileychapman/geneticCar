@@ -2,6 +2,10 @@
 @author: Sophie Li and Paul Titchener
 """
 
+import pygame, random, math, time
+from pygame.locals import *
+import math
+
 class Platformer_Model:
     """ Encodes the game state """
     """TO-DO: Clean up these level lists"""
@@ -20,11 +24,11 @@ class Platformer_Model:
         self.drawListOuter = []
         #making the track be an array instead of pair of lists
         xInd = 0
-        while xInd in range(size[0]):
+        while xInd in range(screen_size[0]):
             yInd = 0
 
             self.ArrayTrack.append([])
-            while yInd in range(size[1]):
+            while yInd in range(screen_size[1]):
                 self.ArrayTrack[xInd].append(0)
                 yInd +=1
             xInd +=1
