@@ -1,0 +1,10 @@
+reinforcement learning
+
+SLAM
+	simultaneous location and mapping
+
+limits to the physics of the car
+	acceleration
+	car can't stop in time to hit a wall
+	__init__.py for model,view and controller - w/in the folders
+	import model - that'll take in the __init__.py from the folder into the upper level code
