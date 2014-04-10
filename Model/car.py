@@ -72,17 +72,15 @@ class Duck:
             self.Fitness = distance(self.TotalMovement,True)
             print 'Fitness',self.Fitness
 
-        self.read_sensor()
+        self.read_sensors()
 
-    def read_sensor(self):
+    def check_sensor(self,slope1):
         x = self.model.duck.x
         y = self.model.duck.y
-        theta = self.model.duck.theta
-
+     
         #sensor 1 is on the front, sensor 2 is on left, sensor 3 is on right
 
         #sensor 1 code:
-        slope1 = math.tan(theta)
 
         hit1 = False
         if slope1 > .5:
@@ -107,11 +105,26 @@ class Duck:
                 except IndexError:
                     hit1 = True
                 xAdd +=1
-
+        self.model.sensorPoints.append((xInd,yInd))
         sensor1 = math.sqrt((x-xInd)**2 + (y-yInd)**2)
-        print 'sensor val',sensor1
+        print 'slope',slope1,'sensor val',sensor1
         return sensor1
 
+    def read_sensors(self):
+        self.model.sensorPoints = []
+        theta = self.model.duck.theta
+
+        if theta <math.pi/2 and theta > -math.pi/2:
+            slope1 = math.tan(theta)
+            sensor1 = self.check_sensor(slope1)
+            print 'front'
+  
+        else:
+            slope1 = math.tan(theta)
+            sensor1 = self.check_sensor(-slope1)
+            print 'front'
+        
+        return [sensor1]
 
         
     def collision_test(self, vx, vy):
