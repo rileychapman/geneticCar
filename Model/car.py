@@ -144,3 +144,24 @@ class Duck:
             if self.rect.colliderect(wall.rect):
                 self.FAIL = True
                 print "FAIL"
+
+def distance(L,Absolute=False):
+    """returns the sum of the distances between the elements of a lists
+    Input: list
+    Output: sum of the distances bewtwen the elements of the list
+    """
+    if not Absolute:
+        x = 0
+        y = 0
+        for element in L:
+            x += element[0]
+            y += element[1]
+        return (x,y)#math.sqrt(float(x)**2 + float(y)**2)
+    else:
+        x = 0
+        y = 0
+        for element in L:
+            x += abs(element[0])
+            y += abs(element[1])
+        return (x,y)#math.sqrt(float(x)**2 + float(y)**2)
+
