@@ -30,6 +30,15 @@ class PyGameWindowView:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
             for trackblock in self.model.Track3[0]: #model.FinalTrack[1]:
                 pygame.draw.rect(self.screen,pygame.Color(255,0,0),trackblock.rect)
+        colors = [100,200,255]        
+        i = 0
+        for b in self.model.sensorPoints:
+
+            #print 'sensorpont', b
+            block = pygame.Rect(b[0],b[1],50,50)
+            pygame.draw.rect(self.screen,pygame.Color(255,colors[i],255),block)
+            i +=1
+
         pygame.display.update()
 
     def draw2(self):
@@ -93,6 +102,10 @@ class PyGameWindowView:
             listOuterInt = self.model.drawListOuter[0:-1]
             pygame.draw.lines(self.screen,(255,255,255),True,listInnerInt)
             pygame.draw.lines(self.screen,(255,255,255),True,listOuterInt)   
+
+        for b in self.model.sensorPoints:
+            block = pygame.Rect(b[1],b[2],20,20)
+            pygame.draw.rect(self.screen,pygame.Color(255,255,255),b)
 
 
         pygame.display.update()
