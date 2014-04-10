@@ -34,11 +34,10 @@ class Genome:
 		for chrom in self.chromosomes:
 			chrom.print_chrom()
 	
-	def live(self):
-		""" Test generation and determines the 2 most fit chromosomes
-			Sets the bestChromosomes as determined by another function
+	def random_live(self):
+		""" Randomly assigns fittnes to each chromosome of the genome 
 		"""
-		#random assignment of fittnes for now
+		#random assignment of fittnes 
 		for chrom in self.chromosomes:
 			chrom.strength = random.random()
 		self.chromosomes.sort(key=lambda chromosomes: chromosomes.strength, reverse = True)
