@@ -116,7 +116,9 @@ class Duck:
     def check_sensor(self,slope1):
         x = self.model.duck.x
         y = self.model.duck.y
-     
+        xSign = self.model.duck.dx/float(abs(self.model.duck.dx))
+        ySign = self.model.duck.dy/float(abs(self.model.duck.dx))
+        
         #sensor 1 is on the front, sensor 2 is on left, sensor 3 is on right
 
         #sensor 1 code:
@@ -132,7 +134,7 @@ class Duck:
                     hit1 = self.model.ArrayTrack[xInd][yInd] == 1
                 except IndexError:
                     hit1 = True
-                yAdd +=1
+                yAdd +=ySign
         else:
             # x dominates
             xAdd = 0
@@ -143,7 +145,7 @@ class Duck:
                     hit1 = self.model.ArrayTrack[xInd][yInd] == 1
                 except IndexError:
                     hit1 = True
-                xAdd +=1
+                xAdd +=xSign
         self.model.sensorPoints.append((xInd,yInd))
         sensor1 = math.sqrt((x-xInd)**2 + (y-yInd)**2)
         print 'slope',slope1,'sensor val',sensor1
