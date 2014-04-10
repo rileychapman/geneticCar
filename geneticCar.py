@@ -15,6 +15,14 @@ from pygame.locals import *
 import math
 
 
+#generage a genome
+genomeLength = 4
+gen = driveMatrixEvolution.Genome(genomeLength) 
+
+
+
+
+
 pygame.init()
 walls = []
 size = (500, 500)
@@ -23,10 +31,6 @@ screen = pygame.display.set_mode(size)
 model = Model.Platformer_Model(size)
 view = View.PyGameWindowView(model,screen)
 controller = Controller.PyGameController(model)
-
-
-Generation = 0
-Individual = (Generation,0)
 
 running = True
 while running:
@@ -43,6 +47,8 @@ while running:
             controller.offset_track(50)
             model.offsetMode = False
     if model.duck.FAIL:
+        model.duck.fitness
+
         model.new_individual()
         
       
@@ -53,14 +59,13 @@ pygame.quit()
 
 
 
-genomeLength = 4
-gen = driveMatrixEvolution.Genome(genomeLength) 
 
 
-gen.live() #insert chromosome, test chomosme, repeat
+
+#gen.live() #insert chromosome, test chomosme, repeat
 
 
-gen.print_genome()
+#gen.print_genome()
 
 
 

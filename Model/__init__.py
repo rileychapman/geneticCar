@@ -56,6 +56,9 @@ class Duck:
         self.pointlist = [pos,pos]
         self.model= model
         self.FAIL = False
+        self.fitness = 0
+        self.RecentMovement = []
+        self.TotalMovement = []
 
     def update(self, w1, w2):
         """ updates the position and angle of the car given the speed of rotation of the wheel. Angular veloctity of the wheel is use rather than a torque output becuase
@@ -98,6 +101,56 @@ class Duck:
             self.collision_test(self.dx, 0)
         if self.dy != 0:
             self.collision_test(0, self.dy)
+
+        self.RecentMovement.append((self.dx,self.dy))
+        if abs(distance(self.RecentMovement)[0]) >30 or abs(distance(self.RecentMovement)[0]) >30:
+            self.TotalMovement.append(distance(self.RecentMovement))
+            self.RecentMovement = []
+            print self.TotalMovement
+            self.Fitness = distance(self.TotalMovement,True)
+            print 'Fitness',self.Fitness
+
+        self.read_sensor()
+
+    def read_sensor(self):
+        x = self.model.duck.x
+        y = self.model.duck.y
+        theta = self.model.duck.theta
+
+        #sensor 1 is on the front, sensor 2 is on left, sensor 3 is on right
+
+        #sensor 1 code:
+        slope1 = math.tan(theta)
+
+        hit1 = False
+        if slope1 > .5:
+            #y dominates
+            yAdd = 0
+            while not hit1:
+                yInd = int(y+yAdd)
+                xInd = int(x + yAdd*1.0/slope1)
+                try:
+                    hit1 = self.model.ArrayTrack[xInd][yInd] == 1
+                except IndexError:
+                    hit1 = True
+                yAdd +=1
+        else:
+            # x dominates
+            xAdd = 0
+            while not hit1:
+                xInd = int(x+xAdd)
+                yInd = int(y + xAdd*slope1)
+                try:
+                    hit1 = self.model.ArrayTrack[xInd][yInd] == 1
+                except IndexError:
+                    hit1 = True
+                xAdd +=1
+
+        sensor1 = math.sqrt((x-xInd)**2 + (y-yInd)**2)
+        print 'sensor val',sensor1
+        return sensor1
+
+
         
     def collision_test(self, vx, vy):
         # Move the rect
@@ -113,3 +166,23 @@ class Duck:
             if self.rect.colliderect(wall.rect):
                 self.FAIL = True
                 print "FAIL"
+
+def distance(L,Absolute=False):
+    """returns the sum of the distances between the elements of a lists
+    Input: list
+    Output: sum of the distances bewtwen the elements of the list
+    """
+    if not Absolute:
+        x = 0
+        y = 0
+        for element in L:
+            x += element[0]
+            y += element[1]
+        return (x,y)#math.sqrt(float(x)**2 + float(y)**2)
+    else:
+        x = 0
+        y = 0
+        for element in L:
+            x += abs(element[0])
+            y += abs(element[1])
+        return (x,y)#math.sqrt(float(x)**2 + float(y)**2)
