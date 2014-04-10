@@ -4,6 +4,9 @@ Created on Thu Apr 10 13:45:16 2014
 
 @author: josh
 """
+import pygame, random, math, time
+from pygame.locals import *
+import math
 class Duck:
     """Code for moving car"""
 
