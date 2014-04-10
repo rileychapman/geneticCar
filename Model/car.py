@@ -24,6 +24,7 @@ class Duck:
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
+#        self.screen = screen
 
     def update(self, w1, w2):
         """ updates the position and angle of the car given the speed of rotation of the wheel. Angular veloctity of the wheel is use rather than a torque output becuase
@@ -76,59 +77,53 @@ class Duck:
             print 'Fitness',self.Fitness
 
         self.read_sensors()
+        
+        
+    def check_sensor(self, theta, xp, yp):
+        x = 500*math.sin(theta)
+        y = 500*math.cos(theta)
+        
+        pygame.display.update()
+        
+        collide = []
+        
+        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
+        dx = int((x-xp)/distance * 2)
+        dy = int((y-yp)/distance * 2)
+#        pygame.draw.line(self.screen,(255,0,0),(xp,yp),(x,y))
 
-    def check_sensor(self,slope1):
-        x = self.model.duck.x
-        y = self.model.duck.y
-     
-        #sensor 1 is on the front, sensor 2 is on left, sensor 3 is on right
-
-        #sensor 1 code:
-
-        hit1 = False
-        if slope1 > .5:
-            #y dominates
-            yAdd = 0
-            while not hit1:
-                yInd = int(y+yAdd)
-                xInd = int(x + yAdd*1.0/slope1)
-                try:
-                    hit1 = self.model.ArrayTrack[xInd][yInd] == 1
-                except IndexError:
-                    hit1 = True
-                yAdd +=1
-        else:
-            # x dominates
-            xAdd = 0
-            while not hit1:
-                xInd = int(x+xAdd)
-                yInd = int(y + xAdd*slope1)
-                try:
-                    hit1 = self.model.ArrayTrack[xInd][yInd] == 1
-                except IndexError:
-                    hit1 = True
-                xAdd +=1
-        self.model.sensorPoints.append((xInd,yInd))
-        sensor1 = math.sqrt((x-xInd)**2 + (y-yInd)**2)
-        print 'slope',slope1,'sensor val',sensor1
-        return sensor1
-
+        while distance >= 2:
+            xp += dx
+            yp += dy
+            
+            distance -= 2
+            
+            if self.model.ArrayTrack[xp][yp] == 1:
+                collide.append((xp,yp))
+                break
+                
+        sensor_data = collide  #tuple(map(math.mean, zip(collide)))
+        return sensor_data
+        
     def read_sensors(self):
         self.model.sensorPoints = []
-        theta = self.model.duck.theta
+        xp = int(self.model.duck.rect.x)
+        yp = int(self.model.duck.rect.y)
 
-        if theta <math.pi/2 and theta > -math.pi/2:
-            slope1 = math.tan(theta)
-            sensor1 = self.check_sensor(slope1)
-            print 'front'
-  
-        else:
-            slope1 = math.tan(theta)
-            sensor1 = self.check_sensor(-slope1)
-            print 'front'
+        print "Current car location", xp, yp
+        theta = float(self.model.duck.theta)
+        theta_back = theta + (math.pi/2)
+        print "Current car orientation", theta
         
-        return [sensor1]
+        sensor1 = self.check_sensor(theta, xp, yp)
+        sensor2 = self.check_sensor(theta_back, xp, yp)
+        sensor3 = self.check_sensor(-theta_back, xp, yp)
+        
+        print "Closest forward block", sensor1
+        print "Closest left block", sensor2
+        print "Closest right block", sensor3
 
+        return [sensor1, sensor2, sensor3]
         
     def collision_test(self, vx, vy):
         # Move the rect
