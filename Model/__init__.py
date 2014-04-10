@@ -157,24 +157,13 @@ class Duck:
             slope1 = math.tan(theta)
             sensor1 = self.check_sensor(slope1)
             print 'front'
-            slope2 = math.tan(theta+math.pi/2)
-            sensor2 = self.check_sensor(slope2)
-            print 'left'
-            slope3 = -math.tan(theta-math.pi/2)
-            sensor3 = self.check_sensor(slope3)
-            print 'right'
+  
         else:
             slope1 = math.tan(theta)
             sensor1 = self.check_sensor(-slope1)
             print 'front'
-            slope2 = math.tan(theta+math.pi/2)
-            sensor2 = self.check_sensor(-slope2)
-            print 'left'
-            slope3 = -math.tan(theta-math.pi/2)
-            sensor3 = self.check_sensor(-slope3)
-            print 'right'
-
-        return [sensor1,sensor2,sensor3]
+        
+        return [sensor1]
 
         
     def collision_test(self, vx, vy):
