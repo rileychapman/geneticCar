@@ -43,102 +43,100 @@ class Platformer_Model:
                 yInd +=1
             xInd +=1
 
-#    def distance_calculate(self):
-#        xp = float(self.duck.rect.x)
-#        yp = float(self.duck.rect.y)
-#        
-#        xp_l = xp
-#        yp_l = yp
-#        
-#        xp_r = xp
-#        yp_r = yp
-#        
-#        print "Current car location", xp, yp
-#        theta = float(self.duck.theta)
-#        theta_back = theta + (pi/2)
-#        print "Current car orientation", theta
-#        x = 500*sin(theta)
-#        y = 500*cos(theta)
-#        
-#        x_l = 500*sin(theta_back)
-#        y_l = 500*cos(theta_back)
-#        
-#        x_r = 500*sin(theta_back - pi)
-#        y_r = 500*cos(theta_back - pi)
-#        
-#        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
-#        dx = (x-xp)/distance * 2
-#        dy = (y-yp)/distance * 2
-#        pygame.draw.line(screen,(255,0,0),(xp,yp),(x,y))
-#
-#        distance = math.sqrt((x_l-xp)**2 + (y_l-yp)**2)
-#        dx_l = (x_l-xp)/distance * 2
-#        dy_l = (y_l-yp)/distance * 2
-#        pygame.draw.line(screen,(0,255,0),(xp,yp),(x_l,y_l))        
-#        
-#        distance = math.sqrt((x_r-xp)**2 + (y_r-yp)**2)
-#        dx_r = (x_r-xp)/distance * 2
-#        dy_r = (y_r-yp)/distance * 2
-#        pygame.draw.line(screen,(0,0,255),(xp,yp),(x_r,y_r))   
-#        
-#        pygame.display.update()
-#
-#        f_inner = []
-#        l_inner = []
-#        f_outer = []
-#        l_outer = []
-#        
-#        r_outer = []
-#        r_inner = []        
-#        
-#        while distance >= 2:
-#            xp += dx
-#            yp += dy
-#            
-#            xp_l += dx_l
-#            yp_l += dy_l
-#            
-#            xp_r += dx_r
-#            yp_r += dy_r
-#            
-#            distance -= 2
-#            
-#            xInd = 0
-#            yInd = 0            
-#            
-#            while xInd < len(self.ArrayTrack):
-#                while yInd < len(self.ArrayTrack[xInd]):
-#                    if yInd == 1:
-#                        f_inner.append((xInd, yInd))
-#                        break
-#                    yInd += 1
-#                xInd += 1
-#                
-##                if wall.rect.collidepoint(xp,yp):
-##                    f_inner.append((xp, yp))
-###                    print "Closest forward inner", int(xp), int(yp)
-##                if wall.rect.collidepoint(xp_l,yp_l):
-##                    l_inner.append((xp_l, yp_l))
-###                    print "Closest back inner", int(xp_b), int(yp_b)
-##                if wall.rect.collidepoint(xp_r,yp_r):
-##                    r_inner.append((xp_r, yp_r))
-###                    print "Closest back inner", int(xp_b), int(yp_b)
-##
-##            for wall in self.model.Track3[1]:
-##                if wall.rect.collidepoint(xp,yp):
-##                    f_outer.append((xp,yp))
-###                    print "Closest forward outer", int(xp), int(yp)
-##                if wall.rect.collidepoint(xp_l,yp_l):
-##                    l_outer.append((xp_l, yp_l))
-###                    print "Closest back outer", int(xp_b), int(yp_b)
-##                if wall.rect.collidepoint(xp_r,yp_r):
-##                    r_outer.append((xp_r, yp_r))
-#            
-#            print "Closest forward inner", (tuple(map(mean, zip(*f_inner))))
+    def distance_calculate(self):
+        xp = float(self.duck.rect.x)
+        yp = float(self.duck.rect.y)
+        
+        xp_l = xp
+        yp_l = yp
+        
+        xp_r = xp
+        yp_r = yp
+        
+        print "Current car location", xp, yp
+        theta = float(self.duck.theta)
+        theta_back = theta + (pi/2)
+        print "Current car orientation", theta
+        x = 500*sin(theta)
+        y = 500*cos(theta)
+        
+        x_l = 500*sin(theta_back)
+        y_l = 500*cos(theta_back)
+        
+        x_r = 500*sin(theta_back - pi)
+        y_r = 500*cos(theta_back - pi)
+        
+        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
+        dx = (x-xp)/distance * 2
+        dy = (y-yp)/distance * 2
+        pygame.draw.line(screen,(255,0,0),(xp,yp),(x,y))
 
+        distance = math.sqrt((x_l-xp)**2 + (y_l-yp)**2)
+        dx_l = (x_l-xp)/distance * 2
+        dy_l = (y_l-yp)/distance * 2
+        pygame.draw.line(screen,(0,255,0),(xp,yp),(x_l,y_l))        
+        
+        distance = math.sqrt((x_r-xp)**2 + (y_r-yp)**2)
+        dx_r = (x_r-xp)/distance * 2
+        dy_r = (y_r-yp)/distance * 2
+        pygame.draw.line(screen,(0,0,255),(xp,yp),(x_r,y_r))   
+        
+        pygame.display.update()
+
+        f_inner = []
+        l_inner = []
+        f_outer = []
+        l_outer = []
+        
+        r_outer = []
+        r_inner = []        
+        
+        while distance >= 2:
+            xp += dx
+            yp += dy
             
-
-
+            xp_l += dx_l
+            yp_l += dy_l
+            
+            xp_r += dx_r
+            yp_r += dy_r
+            
+            distance -= 2
+            
+            xInd = 0
+            yInd = 0            
+#            if self.ArrayTrack[xp][yp] == 1:
+                
+            while xInd < len(self.ArrayTrack):
+                while yInd < len(self.ArrayTrack[xInd]):
+                    if yInd == 1:
+                        f_inner.append((xInd, yInd))
+                        break
+                    yInd += 1
+                xInd += 1
+                
+#                if wall.rect.collidepoint(xp,yp):
+#                    f_inner.append((xp, yp))
+##                    print "Closest forward inner", int(xp), int(yp)
+#                if wall.rect.collidepoint(xp_l,yp_l):
+#                    l_inner.append((xp_l, yp_l))
+##                    print "Closest back inner", int(xp_b), int(yp_b)
+#                if wall.rect.collidepoint(xp_r,yp_r):
+#                    r_inner.append((xp_r, yp_r))
+##                    print "Closest back inner", int(xp_b), int(yp_b)
+#
+#            for wall in self.model.Track3[1]:
+#                if wall.rect.collidepoint(xp,yp):
+#                    f_outer.append((xp,yp))
+##                    print "Closest forward outer", int(xp), int(yp)
+#                if wall.rect.collidepoint(xp_l,yp_l):
+#                    l_outer.append((xp_l, yp_l))
+##                    print "Closest back outer", int(xp_b), int(yp_b)
+#                if wall.rect.collidepoint(xp_r,yp_r):
+#                    r_outer.append((xp_r, yp_r))
+            
+            print "Closest forward inner", (tuple(map(mean, zip(*f_inner))))
+         
         
     def update(self):
         self.duck.update(vx, vy)
@@ -335,114 +333,6 @@ class PyGameWindowView:
 
         pygame.display.update()
         
-    def distance_calculate(self):
-        xp = float(self.model.duck.rect.x)
-        yp = float(self.model.duck.rect.y)
-        
-        xp_l = xp
-        yp_l = yp
-        
-        xp_r = xp
-        yp_r = yp
-        
-        print "Current car location", xp, yp
-        theta = float(self.model.duck.theta)
-        theta_back = theta + (pi/2)
-        print "Current car orientation", theta
-        x = 500*sin(theta)
-        y = 500*cos(theta)
-        
-        x_l = 500*sin(theta_back)
-        y_l = 500*cos(theta_back)
-        
-        x_r = 500*sin(theta_back - pi)
-        y_r = 500*cos(theta_back - pi)
-        
-        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
-        dx = (x-xp)/distance * 2
-        dy = (y-yp)/distance * 2
-        pygame.draw.line(screen,(255,0,0),(xp,yp),(x,y))
-
-        distance1 = math.sqrt((x_l-xp)**2 + (y_l-yp)**2)
-        dx_l = (x_l-xp)/distance1 * 2
-        dy_l = (y_l-yp)/distance1 * 2
-        pygame.draw.line(screen,(0,255,0),(xp,yp),(x_l,y_l))        
-        
-        distance2 = math.sqrt((x_r-xp)**2 + (y_r-yp)**2)
-        dx_r = (x_r-xp)/distance2 * 2
-        dy_r = (y_r-yp)/distance2 * 2
-        pygame.draw.line(screen,(0,0,255),(xp,yp),(x_r,y_r))   
-        
-        pygame.display.update()
-
-        f_inner = []
-        l_inner = []
-        f_outer = []
-        l_outer = []
-        
-        r_outer = []
-        r_inner = []        
-        
-        while distance >= 2:
-            xp += dx
-            yp += dy
-            
-            distance -= 2
-            
-            #finds distances for inner wall
-            for wall in self.model.Track3[0]:
-                if wall.rect.collidepoint(xp,yp):
-                    f_inner.append((xp, yp))
-
-            #finds distances for outer wall
-            for wall in self.model.Track3[1]:
-                if wall.rect.collidepoint(xp,yp):
-                    f_outer.append((xp,yp))
-
-        while distance1 >= 2:         
-            xp_l += dx_l
-            yp_l += dy_l
-            
-            distance1 -= 2
-            #finds distances for inner wall
-            for wall in self.model.Track3[0]:
-                if wall.rect.collidepoint(xp_l,yp_l):
-                    l_inner.append((xp_l, yp_l))
-
-            #finds distances for outer wall
-            for wall in self.model.Track3[1]:
-                if wall.rect.collidepoint(xp_l,yp_l):
-                    l_outer.append((xp_l, yp_l))
-                    
-        while distance2 >= 2:
-            xp_r += dx_r
-            yp_r += dy_r
-            
-            distance2 -= 2
-            
-            #finds distances for inner wall
-            for wall in self.model.Track3[0]:
-                if wall.rect.collidepoint(xp_r,yp_r):
-                    r_inner.append((xp_r, yp_r))
-
-            #finds distances for outer wall
-            for wall in self.model.Track3[1]:
-                if wall.rect.collidepoint(xp_r,yp_r):
-                    r_outer.append((xp_r, yp_r))
-
-        print "Closest forward outer", tuple(map(mean, zip(*f_outer)))
-        print "Closest forward inner", (tuple(map(mean, zip(*f_inner))))
-        
-        print "Closest left outer", tuple(map(mean, zip(*l_outer)))
-        print "Closest left inner", tuple(map(mean, zip(*l_inner)))
-
-        print "Closest right outer", tuple(map(mean, zip(*r_outer)))
-        print "Closest right inner", tuple(map(mean, zip(*r_inner)))
-        
-        print "  "
-        
-
-
 class PyGameController:
     """ Manipulate game state based on keyboard input """
     def __init__(self, model):
@@ -573,7 +463,7 @@ class PyGameController:
 
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
                 xSign = (p1[0] - p2[0])/abs(p1[0]-p2[0])
-                print xSign
+#                print xSign
                 xInd = 0
                 slope = float(p1[1]-p2[1])/(p1[0]-p2[0])
                 while xInd in range(abs(p1[0]-p2[0])):
@@ -658,11 +548,7 @@ if __name__ == '__main__':
                 controller.handle_pygame_event_mouse(event)
             if event.type == KEYDOWN: 
                 controller.handle_pygame_event_key(event)
-                view.distance_calculate()
-#                
-#            if event.type == KEYDOWN or event.type == MOUSEBUTTONDOWN or event.type == MOUSEBUTTONUP:
-#                controller.handle_pygame_event(event)
-#                view.distance_calculate()              
+                model.distance_calculate()            
             if model.drawTrack == True and model.drawMode == True:
                 controller.draw_track()
             if model.drawTrack == False and model.drawMode ==False and model.offsetMode == True:

@@ -6,7 +6,8 @@
 import pygame, random, math, time
 from pygame.locals import *
 
-walls = []
+walls_inner = []
+walls_outer = []
 
 class Wall(object):
     def __init__(self, posx, posy):
@@ -59,13 +60,14 @@ def change_to_list(num):
         for row in level[num]:
             for col in row:
                 if col == "W":
-                    walls.append(Wall(x, y))
-#                if col == "I":
-#                    walls.append(Inner_wall(x,y))
+                    walls_outer.append(Wall(x, y))
+                if col == "I":
+                    walls_inner.append(Wall(x,y))
                 x += 20
             y += 20
             x = 0
-    return walls
+    Track3 = [walls_outer, walls_inner]
+    return Track3
     
 blocks = change_to_list(0)
         
@@ -96,7 +98,7 @@ class Duck:
         self.rect.y += vy
     
         # If you collide with a wall, move out based on velocity
-        for wall in blocks:
+        for wall in blocks[0]:
             if self.rect.colliderect(wall.rect):
                 if vx > 0: # Moving right; Hit the left side of the wall
                     self.rect.right = wall.rect.left
@@ -106,9 +108,18 @@ class Duck:
                     self.rect.bottom = wall.rect.top
                 if vy < 0: # Moving up; Hit the bottom side of the wall
                     self.rect.top = wall.rect.bottom
+        
+        for wall in blocks[1]:
+            if self.rect.colliderect(wall.rect):
+                if vx > 0: # Moving right; Hit the left side of the wall
+                    self.rect.right = wall.rect.left
+                if vx < 0: # Moving left; Hit the right side of the wall
+                    self.rect.left = wall.rect.right
+                if vy > 0: # Moving down; Hit the top side of the wall
+                    self.rect.bottom = wall.rect.top
+                if vy < 0: # Moving up; Hit the bottom side of the wall
+                    self.rect.top = wall.rect.bottom                
                     
-    
-
         
 class Platform:
     """ Encodes the state of a singular rectangular platform in the game """
@@ -128,52 +139,12 @@ class PyGameWindowView:
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
         pygame.draw.rect(screen, pygame.Color(0,255,0), model.duck.rect)
-        for wall in walls:
-            pygame.draw.rect(screen, pygame.Color(255, 255, 255), wall.rect)          
+        for wall in walls_outer:
+            pygame.draw.rect(screen, pygame.Color(255, 255, 255), wall.rect)  
+        for wall in walls_inner:
+            pygame.draw.rect(screen, pygame.Color(0, 255, 255), wall.rect)          
         pygame.display.update()
-    
-#    def distance_calculate(self):
-#        xp = float(self.model.duck.rect.x)
-#        yp = float(self.model.duck.rect.y)
-#        print "Current car location", xp, yp
-##        block_pos = (xp, yp)
-##        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
-##        dx = (x-xp)/distance * 2
-##        dy = (y-yp)/distance * 2
-#
-##        while distance >= 2:
-##            xp += dx
-##            yp += dy
-##            distance -= 2
-#        calcu = []
-#        xdistance = []
-#        ydistance = []
-#        
-#        for wall in self.model.level1:
-#
-#            wallx = float(wall.posx-xp)
-#            wally = float(wall.posy-yp)
-#            calcu.append((wallx, wally))
-##        print calcu
-#        for walltuple in calcu:
-#            if walltuple[0] == xp:
-##                print ydistance, "stuff"
-#                ydistance.append((walltuple[1]))
-#            #                xblocks.append(walltuple[0])
-#            if walltuple[1] == yp:
-##                print xdistance, "stuff"
-##                yblocks.append(walltuple[1])
-#                xdistance.append((walltuple[0]))
-#        if len(ydistance) == 0:
-#            raise Exception("No length on y")
-##        print ydistance    
-#        print "TOP", abs(min(x for x in ydistance if (x is not 0 and x < 0)))
-#        print "BOTTOM", min(x for x in ydistance if (x is not 0 and x > 0))
-#        print "RIGHT", min(x for x in xdistance if (x is not 0 and x > 0))
-#        print "LEFT", abs(min(x for x in xdistance if (x is not 0 and x < 0)))
-#        print " "
-##        print "distance", xdistance 
-        
+            
     def distance_calculate(self):
         xp = float(self.model.duck.rect.x)
         yp = float(self.model.duck.rect.y)
@@ -189,15 +160,12 @@ class PyGameWindowView:
         theta_back = theta + (pi/2)
         print "Current car orientation", theta
         x = 500*sin(theta)
-#        print x
         y = 500*cos(theta)
         
         x_l = 500*sin(theta_back)
-#        print x
         y_l = 500*cos(theta_back)
         
         x_r = 500*sin(theta_back - pi)
-#        print x
         y_r = 500*cos(theta_back - pi)
         
         distance = math.sqrt((x-xp)**2 + (y-yp)**2)
@@ -205,14 +173,14 @@ class PyGameWindowView:
         dy = (y-yp)/distance * 2
         pygame.draw.line(screen,(255,0,0),(xp,yp),(x,y))
 
-        distance = math.sqrt((x_l-xp)**2 + (y_l-yp)**2)
-        dx_l = (x_l-xp)/distance * 2
-        dy_l = (y_l-yp)/distance * 2
+        distance1 = math.sqrt((x_l-xp)**2 + (y_l-yp)**2)
+        dx_l = (x_l-xp)/distance1 * 2
+        dy_l = (y_l-yp)/distance1 * 2
         pygame.draw.line(screen,(0,255,0),(xp,yp),(x_l,y_l))        
         
-        distance = math.sqrt((x_r-xp)**2 + (y_r-yp)**2)
-        dx_r = (x_r-xp)/distance * 2
-        dy_r = (y_r-yp)/distance * 2
+        distance2 = math.sqrt((x_r-xp)**2 + (y_r-yp)**2)
+        dx_r = (x_r-xp)/distance2 * 2
+        dy_r = (y_r-yp)/distance2 * 2
         pygame.draw.line(screen,(0,0,255),(xp,yp),(x_r,y_r))   
         
         pygame.display.update()
@@ -229,35 +197,60 @@ class PyGameWindowView:
             xp += dx
             yp += dy
             
-            xp_l += dx_l
-            yp_l += dy_l
-            
-            xp_r += dx_r
-            yp_r += dy_r
-            
             distance -= 2
             
+            #finds distances for inner wall
             for wall in self.model.Track3[0]:
                 if wall.rect.collidepoint(xp,yp):
                     f_inner.append((xp, yp))
-#                    print "Closest forward inner", int(xp), int(yp)
-                if wall.rect.collidepoint(xp_l,yp_l):
-                    l_inner.append((xp_l, yp_l))
-#                    print "Closest back inner", int(xp_b), int(yp_b)
-                if wall.rect.collidepoint(xp_r,yp_r):
-                    r_inner.append((xp_r, yp_r))
-#                    print "Closest back inner", int(xp_b), int(yp_b)
 
+            #finds distances for outer wall
             for wall in self.model.Track3[1]:
                 if wall.rect.collidepoint(xp,yp):
                     f_outer.append((xp,yp))
-#                    print "Closest forward outer", int(xp), int(yp)
+
+        while distance1 >= 2:         
+            xp_l += dx_l
+            yp_l += dy_l
+            
+            distance1 -= 2
+            #finds distances for inner wall
+            for wall in self.model.Track3[0]:
+                if wall.rect.collidepoint(xp_l,yp_l):
+                    l_inner.append((xp_l, yp_l))
+
+            #finds distances for outer wall
+            for wall in self.model.Track3[1]:
                 if wall.rect.collidepoint(xp_l,yp_l):
                     l_outer.append((xp_l, yp_l))
-#                    print "Closest back outer", int(xp_b), int(yp_b)
+                    
+        while distance2 >= 2:
+            xp_r += dx_r
+            yp_r += dy_r
+            
+            distance2 -= 2
+            
+            #finds distances for inner wall
+            for wall in self.model.Track3[0]:
+                if wall.rect.collidepoint(xp_r,yp_r):
+                    r_inner.append((xp_r, yp_r))
+
+            #finds distances for outer wall
+            for wall in self.model.Track3[1]:
                 if wall.rect.collidepoint(xp_r,yp_r):
                     r_outer.append((xp_r, yp_r))
-    
+
+        print "Closest forward outer", tuple(map(mean, zip(*f_outer)))
+        print "Closest forward inner", (tuple(map(mean, zip(*f_inner))))
+        
+        print "Closest left outer", tuple(map(mean, zip(*l_outer)))
+        print "Closest left inner", tuple(map(mean, zip(*l_inner)))
+
+        print "Closest right outer", tuple(map(mean, zip(*r_outer)))
+        print "Closest right inner", tuple(map(mean, zip(*r_inner)))
+        
+        print "  "
+        
 class PyGameKeyboardController:
     """ Manipulate game state based on keyboard input """
     def __init__(self, model):

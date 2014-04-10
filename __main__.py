@@ -37,7 +37,7 @@ while running:
             controller.offset_track(50)
             model.offsetMode = False
       
-    view.draw3()
+    view.draw1()
     time.sleep(0.001)
 
 pygame.quit()
