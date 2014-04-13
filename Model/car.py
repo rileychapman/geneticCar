@@ -97,20 +97,22 @@ class Duck:
 
         x0 = xp #points that we're checking
         y0 = yp
+        distance1 = 0
         while (x0 < x) and (y0 < y):
 #            y = mx + b
             xp += 1
             yp = m*xp + b
             try:
                 if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
-                    distance = math.hypot(xp - x0, yp - y0)
+                    distance1 = math.hypot(xp - x0, yp - y0)
 #                collide.append((xp,yp))
-                return distance
+                else:
+                    pass
     
             except IndexError:
-                distance = 'null'
-                return distance
-                
+                distance1 = 'null'
+
+        return distance1                
 #        sensor_data = collide  #tuple(map(math.mean, zip(collide)))
 #        return sensor_data        
         
