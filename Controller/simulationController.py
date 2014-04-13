@@ -200,6 +200,8 @@ class PyGameController:
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             outerInd+=1
+    def move_car(self):
+        self.model.duck.update(50,45)
 
  
 
