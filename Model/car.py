@@ -93,12 +93,13 @@ class Duck:
 #        pygame.draw.line(self.screen,(255,0,0),(xp,yp),(x,y))
         distance = 0
         
-        while distance <= 600:
+        while distance <= 400:
             xp += dx
             yp += dy
             
-            distance += 1
-            
+            distance += 1       
+#            if int(xp) not in self.model.ArrayTrack[distance]:
+#                pass
             if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
 #                collide.append((xp,yp))
                 return distance
