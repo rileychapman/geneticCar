@@ -77,8 +77,7 @@ class Duck:
             print 'Fitness',self.Fitness
 
         self.read_sensors()
-        
-        
+     
     def check_sensor(self, theta, xp, yp):
         x = 500*math.sin(theta)
         y = 500*math.cos(theta)
@@ -86,35 +85,64 @@ class Duck:
         pygame.display.update()
         
 #        collide = []
-        m = (y-yp)/(x-xp)
-        b = y - m*x
         
-#        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
-#        dx = (x-xp)/distance
-#        dy = (y-yp)/distance
+        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
+        dx = (x-xp)/distance
+        dy = (y-yp)/distance
 #        pygame.draw.line(self.screen,(255,0,0),(xp,yp),(x,y))
-#        distance = 0
-
-        x0 = xp #points that we're checking
-        y0 = yp
-        distance1 = 0
-        while (x0 < x) and (y0 < y):
-#            y = mx + b
-            xp += 1
-            yp = m*xp + b
-            try:
-                if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
-                    distance1 = math.hypot(xp - x0, yp - y0)
+        distance = 0
+        
+        while distance <= 600:
+            xp += dx
+            yp += dy
+            
+            distance += 1
+            
+            if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
 #                collide.append((xp,yp))
-                else:
-                    pass
-    
-            except IndexError:
-                distance1 = 'null'
+                return distance
 
-        return distance1                
+        return 0
+                
 #        sensor_data = collide  #tuple(map(math.mean, zip(collide)))
 #        return sensor_data        
+#        
+#    def check_sensor(self, theta, xp, yp):
+#        x = 500*math.sin(theta)
+#        y = 500*math.cos(theta)
+#        
+#        pygame.display.update()
+#        
+##        collide = []
+#        m = (y-yp)/(x-xp)
+#        b = y - m*x
+#        
+##        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
+##        dx = (x-xp)/distance
+##        dy = (y-yp)/distance
+##        pygame.draw.line(self.screen,(255,0,0),(xp,yp),(x,y))
+##        distance = 0
+#
+#        x0 = xp #points that we're checking
+#        y0 = yp
+#        distance1 = 0
+#        while (x0 < x) and (y0 < y):
+##            y = mx + b
+#            xp += 1
+#            yp = m*xp + b
+#            try:
+#                if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
+#                    distance1 = math.hypot(xp - x0, yp - y0)
+##                collide.append((xp,yp))
+#                else:
+#                    pass
+#    
+#            except IndexError:
+#                distance1 = 'null'
+#
+#        return distance1                
+##        sensor_data = collide  #tuple(map(math.mean, zip(collide)))
+##        return sensor_data        
         
         
     def read_sensors(self):

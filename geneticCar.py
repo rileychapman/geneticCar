@@ -20,9 +20,6 @@ import math
 #gen = driveMatrixEvolution.Genome(genomeLength) 
 
 
-
-
-
 pygame.init()
 walls = []
 size = (500, 500)
