@@ -5,7 +5,7 @@ Genetic Car Algorithm
 
 @teamName: Track Bot Driver (TBD)
 """
-import driveMatrixEvolution
+#import driveMatrixEvolution
 import Model
 import View
 import Controller
@@ -16,8 +16,8 @@ import math
 
 
 #generage a genome
-genomeLength = 4
-gen = driveMatrixEvolution.Genome(genomeLength) 
+#genomeLength = 4
+#gen = driveMatrixEvolution.Genome(genomeLength) 
 
 
 
