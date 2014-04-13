@@ -150,6 +150,13 @@ class PyGameController:
                     yIndAppend = int(p1[1] - xSign*slope*xInd)
                     xIndAppend = int(p1[0] - xSign*xInd)
                     self.model.ArrayTrack[xIndAppend][yIndAppend] = 1
+#
+# Many errors wiht this code. TO-DO: Figure out how best to handle IndexErrors
+#                    try:
+#                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1
+#                    except IndexError:
+#                        self.model.ArrayTrack = [[0,0]]
+#                        
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
                     xInd +=1
             elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
