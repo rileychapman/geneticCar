@@ -86,25 +86,30 @@ class Duck:
         pygame.display.update()
         
 #        collide = []
+        m = (y-yp)/(x-xp)
+        b = y - m*x
         
-        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
-        dx = (x-xp)/distance
-        dy = (y-yp)/distance
+#        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
+#        dx = (x-xp)/distance
+#        dy = (y-yp)/distance
 #        pygame.draw.line(self.screen,(255,0,0),(xp,yp),(x,y))
-        distance = 0
-        
-        while distance <= 400:
-            xp += dx
-            yp += dy
-            
-            distance += 1       
-#            if int(xp) not in self.model.ArrayTrack[distance]:
-#                pass
-            if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
+#        distance = 0
+
+        x0 = xp #points that we're checking
+        y0 = yp
+        while (x0 < x) and (y0 < y):
+#            y = mx + b
+            xp += 1
+            yp = m*xp + b
+            try:
+                if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
+                    distance = math.hypot(xp - x0, yp - y0)
 #                collide.append((xp,yp))
                 return distance
-
-        return 0
+    
+            except IndexError:
+                distance = 'null'
+                return distance
                 
 #        sensor_data = collide  #tuple(map(math.mean, zip(collide)))
 #        return sensor_data        
