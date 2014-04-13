@@ -83,14 +83,20 @@ class PyGameWindowView:
 
 
         if pygame.font:
-            font = pygame.font.Font(None, 36)
+            font = pygame.font.Font(None, 20)
 
 
             Iter_str = str(self.model.Iteration)
-            score_text = 'Score:'+Iter_str
-            print_score = font.render(score_text, 1, (255, 255, 10))
-            score_pos = print_score.get_rect(topright = (500,50))
-            self.screen.blit(print_score,score_pos)   
+            Iter_text = 'Iteration:'+Iter_str
+            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+            Iter_pos = print_Iter.get_rect(topright = (500,25))
+            self.screen.blit(print_Iter,Iter_pos)   
+
+            Gen_str = str(self.model.Generation)
+            Gen_text = 'Iteration:'+Gen_str
+            print_Gen = font.render(Gen_text, 1, (255, 255, 255))
+            Gen_pos = print_Gen.get_rect(topright = (500,0))
+            self.screen.blit(print_Gen,Gen_pos) 
 
         pygame.display.update()
 
