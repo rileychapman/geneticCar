@@ -76,7 +76,21 @@ class PyGameWindowView:
         else:
 
             pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListInner)
-            pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListOuter)   
+            pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListOuter)
+
+
+
+
+
+        if pygame.font:
+            font = pygame.font.Font(None, 36)
+
+
+            Iter_str = str(self.model.Iteration)
+            score_text = 'Score:'+Iter_str
+            print_score = font.render(score_text, 1, (255, 255, 10))
+            score_pos = print_score.get_rect(topright = (500,50))
+            self.screen.blit(print_score,score_pos)   
 
         pygame.display.update()
 
@@ -106,6 +120,8 @@ class PyGameWindowView:
         for b in self.model.sensorPoints:
             block = pygame.Rect(b[1],b[2],20,20)
             pygame.draw.rect(self.screen,pygame.Color(255,255,255),b)
+
+
 
 
         pygame.display.update()

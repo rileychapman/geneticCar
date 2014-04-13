@@ -201,7 +201,7 @@ class PyGameController:
                     yInd +=1
             outerInd+=1
     def move_car(self):
-        self.model.duck.update(50,45)
+        self.model.duck.update(4,4.8)
 
  
 
