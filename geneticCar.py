@@ -44,9 +44,8 @@ while running:
             controller.offset_track(50)
             model.offsetMode = False
 
-        if model.Testing == True:
-            #stick the matrix to the duck
-
+        #if model.Testing == True:
+        #stick the matrix to the duck
     if model.duck.FAIL:
         model.duck.fitness #set this equal to the fitness for the chromosome that we were testing
 
