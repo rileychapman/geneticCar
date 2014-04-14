@@ -45,6 +45,7 @@ while running:
             model.offsetMode = False
 
         if model.Testing == True:
+            pass #make sure code builds before pushing
             #stick the matrix to the duck
 
     if model.duck.FAIL:
