@@ -59,13 +59,6 @@ pygame.quit()
 
 
 
-#gen.live() #insert chromosome, test chomosme, repeat
-
-
-#gen.print_genome()
-
-
-
 
 
 
