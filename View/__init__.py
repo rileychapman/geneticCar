@@ -36,6 +36,9 @@ class PyGameWindowView:
             block = pygame.Rect(b[0],b[1],2,2)
             pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
+        pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
+
+
         pygame.display.update()
 
     def draw2(self):

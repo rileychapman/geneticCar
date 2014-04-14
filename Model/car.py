@@ -44,8 +44,8 @@ class Duck:
 
         dist = float(w1+w2)/2 #calculates the forward distance by which the car travels
 
-        self.theta+=w #updates angle\
-
+        self.theta+= w #updates angle\
+        print "theta",self.theta
         #updating the position of the car
         self.dx = dist*math.cos(self.theta)
         self.dy = dist*math.sin(self.theta)
@@ -147,22 +147,23 @@ class Duck:
         
         
     def read_sensors(self):
+        self.SensorList = []
+
         self.model.sensorPoints = []
         xp = int(self.model.duck.rect.x)
         yp = int(self.model.duck.rect.y)
 
         print "Current car location", xp, yp
         theta = float(self.model.duck.theta)
-        theta_back = theta + (math.pi/2)
         print "Current car orientation", theta
         
-        sensor1 = self.check_sensor1(theta, xp, yp)
-        #sensor2 = self.check_sensor1(theta_back, xp, yp)
-        #sensor3 = self.check_sensor1(-theta_back, xp, yp)
+        sensor1 = self.check_sensor2(theta, xp, yp)
+        sensor2 = self.check_sensor2(theta+math.pi/2, xp, yp)
+        sensor3 = self.check_sensor2(theta-math.pi/2, xp, yp)
         
         print "Closest forward block", sensor1
-        #print "Closest left block", sensor2
-        #print "Closest right block", sensor3
+        print "Closest left block", sensor2
+        print "Closest right block", sensor3
 
         return [sensor1]#, sensor2, sensor3]
         
@@ -189,8 +190,8 @@ class Duck:
 
     def check_sensor1(self, theta, xp, yp):
         self.SensorList = []
-        x = 500*math.sin(theta)
-        y = 500*math.cos(theta)
+        x = 500*math.sin(theta+math.pi/2)
+        y = 500*math.cos(theta+math.pi/2)
         
 
         #calculating slopeb
@@ -234,6 +235,26 @@ class Duck:
             except IndexError:
                 print 'dist, 500'
                 return 500
+
+    def check_sensor2(self, theta, xp, yp):
+        x = 500*math.sin(theta)
+        y = 500*math.cos(theta)
+    
+        for i in range(2000):
+            i2 = i/4
+            xInd = xp + i2*math.cos(theta)
+            yInd = yp + i2*math.sin(theta)
+            self.SensorList.append((xInd,yInd))
+
+            try:
+                if self.model.ArrayTrack[int(xInd)][int(yInd)] == 1:
+
+                     return math.hypot(xp-xInd,yp-yInd)
+            except IndexError:
+                return 500
+        return 500
+
+
 
 def distance(L,Absolute=False):
     """returns the sum of the distances between the elements of a lists
