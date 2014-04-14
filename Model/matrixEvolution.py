@@ -82,8 +82,9 @@ def matrixScale(M,S):
 	"""Takes a matrix with values from zero to 1 and returns a matrix with values centered around zero scaled by value S"""
 	Mout = []
 	for i in range(len(M)):
+		Mout.append([])
 		for j in range(len(M[i])):
-			Mout[i][j] = (M[i][j] -.5)*S
+			Mout[i].append((M[i][j] -.5)*S)
 
 	return Mout
 
@@ -93,3 +94,4 @@ if __name__ == '__main__':
 	M = mixMatrix(a,b)
 	print M
 	print mutateMatrix(M,.2,.2)
+	print matrixScale(M,20)

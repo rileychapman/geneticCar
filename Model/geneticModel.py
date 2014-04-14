@@ -11,7 +11,7 @@ import random
 
 class Chromosome:
 	def __init__(self):
-		self.genes = matrixEvolution.formMatrix(3,2)
+		self.genes = matrixEvolution.matrixScale(matrixEvolution.formMatrix(3,2),.02)
 		self.strength = 0.0 
 
 	def print_chrom(self):

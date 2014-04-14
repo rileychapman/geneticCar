@@ -24,7 +24,7 @@ class Duck:
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
-        self.S = []
+        self.S = [50,50,50]
         self.SensorList = []
 #        self.screen = screen
 
@@ -46,7 +46,6 @@ class Duck:
         dist = float(w1+w2)/2 #calculates the forward distance by which the car travels
 
         self.theta+= w #updates angle\
-        print "theta",self.theta
         #updating the position of the car
         self.dx = dist*math.cos(self.theta)
         self.dy = dist*math.sin(self.theta)
@@ -73,7 +72,7 @@ class Duck:
         if abs(distance(self.RecentMovement)[0]) >30 or abs(distance(self.RecentMovement)[0]) >30:
             self.TotalMovement.append(distance(self.RecentMovement))
             self.RecentMovement = []
-            print self.TotalMovement
+            #print self.TotalMovement
             self.Fitness = distance(self.TotalMovement,True)
             print 'Fitness',self.Fitness
 
@@ -153,17 +152,17 @@ class Duck:
         xp = int(self.rect.x)
         yp = int(self.rect.y)
 
-        print "Current car location", xp, yp
+        #print "Current car location", xp, yp
         theta = float(self.theta)
-        print "Current car orientation", theta
+        #print "Current car orientation", theta
         
         sensor1 = self.check_sensor2(theta, xp, yp)
         sensor2 = self.check_sensor2(theta+math.pi/2, xp, yp)
         sensor3 = self.check_sensor2(theta-math.pi/2, xp, yp)
         
-        print "Closest forward block", sensor1
-        print "Closest left block", sensor2
-        print "Closest right block", sensor3
+        #print "Closest forward block", sensor1
+        #print "Closest left block", sensor2
+        #print "Closest right block", sensor3
 
         return [sensor1, sensor2, sensor3]
         
@@ -180,7 +179,7 @@ class Duck:
         for wall in self.model.Track3[0]:
             if self.rect.colliderect(wall.rect):
                 self.FAIL = True
-                print "FAIL"
+                #print "FAIL"
 
 
 
@@ -230,26 +229,23 @@ class Duck:
             try:
                 if self.model.ArrayTrack[int(xInd)][int(yInd)] == 1:
                     dist = math.hypot(xp-xInd,yp-yInd)
-                    print 'dist', dist
                     return dist 
             except IndexError:
-                print 'dist, 500'
                 return 500
 
     def check_sensor2(self, theta, xp, yp):
         x = 500*math.sin(theta)
         y = 500*math.cos(theta)
     
-        for i in range(2000):
-            i2 = i/4
+        for i in range(20000):
+            i2 = i/40.0
             xInd = xp + i2*math.cos(theta)
             yInd = yp + i2*math.sin(theta)
             self.SensorList.append((xInd,yInd))
 
             try:
                 if self.model.ArrayTrack[int(xInd)][int(yInd)] == 1:
-
-                     return math.hypot(xp-xInd,yp-yInd)
+                    return math.hypot(xp-xInd,yp-yInd)
             except IndexError:
                 return 500
         return 500
@@ -274,5 +270,5 @@ def distance(L,Absolute=False):
         for element in L:
             x += abs(element[0])
             y += abs(element[1])
-        return (x,y)#math.sqrt(float(x)**2 + float(y)**2)
+        return math.sqrt(float(x)**2 + float(y)**2)
 
