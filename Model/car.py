@@ -24,7 +24,11 @@ class Duck:
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
+<<<<<<< HEAD
         self.S = read_sensors()
+=======
+        self.SensorList = []
+>>>>>>> upstream2/master
 #        self.screen = screen
 
     def update(self, w1, w2):
@@ -44,8 +48,8 @@ class Duck:
 
         dist = float(w1+w2)/2 #calculates the forward distance by which the car travels
 
-        self.theta+=w #updates angle\
-
+        self.theta+= w #updates angle\
+        print "theta",self.theta
         #updating the position of the car
         self.dx = dist*math.cos(self.theta)
         self.dy = dist*math.sin(self.theta)
@@ -146,24 +150,25 @@ class Duck:
         
         
     def read_sensors(self):
+        self.SensorList = []
+
         self.model.sensorPoints = []
         xp = int(self.model.duck.rect.x)
         yp = int(self.model.duck.rect.y)
 
         print "Current car location", xp, yp
         theta = float(self.model.duck.theta)
-        theta_back = theta + (math.pi/2)
         print "Current car orientation", theta
         
-        sensor1 = self.check_sensor(theta, xp, yp)
-        sensor2 = self.check_sensor(theta_back, xp, yp)
-        sensor3 = self.check_sensor(-theta_back, xp, yp)
+        sensor1 = self.check_sensor2(theta, xp, yp)
+        sensor2 = self.check_sensor2(theta+math.pi/2, xp, yp)
+        sensor3 = self.check_sensor2(theta-math.pi/2, xp, yp)
         
         print "Closest forward block", sensor1
         print "Closest left block", sensor2
         print "Closest right block", sensor3
 
-        return [sensor1, sensor2, sensor3]
+        return [sensor1]#, sensor2, sensor3]
         
     def collision_test(self, vx, vy):
         # Move the rect
@@ -179,6 +184,80 @@ class Duck:
             if self.rect.colliderect(wall.rect):
                 self.FAIL = True
                 print "FAIL"
+
+
+
+
+
+
+
+    def check_sensor1(self, theta, xp, yp):
+        self.SensorList = []
+        x = 500*math.sin(theta+math.pi/2)
+        y = 500*math.cos(theta+math.pi/2)
+        
+
+        #calculating slopeb
+        if abs(x) >= abs(y):
+            functionOf  = 'X'
+            if x != 0:
+                slope = y/float(x)
+            else:
+                slope = 9999
+        else:
+            functionOf = 'Y'
+            if y != 0:
+                slope = x/float(y)
+            else:
+                slope = 9999
+
+        #calculating direction of travel along the slope
+
+        if functionOf == 'X':
+            dirTravel = x/abs(x)
+        else:
+            dirTravel = y/abs(y)
+
+        #iterating through that slope
+
+        for i in range(500):
+            if functionOf == 'X':
+                xInd = i + xp
+                yInd = i*slope + yp
+            else:
+                yInd = i + yp
+                xInd = i*slope + xp
+
+            self.SensorList.append((xInd,yInd))
+
+            try:
+                if self.model.ArrayTrack[int(xInd)][int(yInd)] == 1:
+                    dist = math.hypot(xp-xInd,yp-yInd)
+                    print 'dist', dist
+                    return dist 
+            except IndexError:
+                print 'dist, 500'
+                return 500
+
+    def check_sensor2(self, theta, xp, yp):
+        x = 500*math.sin(theta)
+        y = 500*math.cos(theta)
+    
+        for i in range(2000):
+            i2 = i/4
+            xInd = xp + i2*math.cos(theta)
+            yInd = yp + i2*math.sin(theta)
+            self.SensorList.append((xInd,yInd))
+
+            try:
+                if self.model.ArrayTrack[int(xInd)][int(yInd)] == 1:
+
+                     return math.hypot(xp-xInd,yp-yInd)
+            except IndexError:
+                return 500
+        return 500
+
+
 
 def distance(L,Absolute=False):
     """returns the sum of the distances between the elements of a lists
