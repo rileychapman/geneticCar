@@ -31,13 +31,10 @@ class PyGameWindowView:
             for trackblock in self.model.Track3[0]: #model.FinalTrack[1]:
                 pygame.draw.rect(self.screen,pygame.Color(255,0,0),trackblock.rect)
         colors = [100,200,255]        
-        i = 0
-        for b in self.model.sensorPoints:
+        for b in self.model.duck.SensorList:
 
-            #print 'sensorpont', b
-            block = pygame.Rect(b[0],b[1],50,50)
-            pygame.draw.rect(self.screen,pygame.Color(255,colors[i],255),block)
-            i +=1
+            block = pygame.Rect(b[0],b[1],2,2)
+            pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
         pygame.display.update()
 

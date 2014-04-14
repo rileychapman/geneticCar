@@ -24,6 +24,7 @@ class Duck:
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
+        self.SensorList = []
 #        self.screen = screen
 
     def update(self, w1, w2):
@@ -155,15 +156,15 @@ class Duck:
         theta_back = theta + (math.pi/2)
         print "Current car orientation", theta
         
-        sensor1 = self.check_sensor(theta, xp, yp)
-        sensor2 = self.check_sensor(theta_back, xp, yp)
-        sensor3 = self.check_sensor(-theta_back, xp, yp)
+        sensor1 = self.check_sensor1(theta, xp, yp)
+        #sensor2 = self.check_sensor1(theta_back, xp, yp)
+        #sensor3 = self.check_sensor1(-theta_back, xp, yp)
         
         print "Closest forward block", sensor1
-        print "Closest left block", sensor2
-        print "Closest right block", sensor3
+        #print "Closest left block", sensor2
+        #print "Closest right block", sensor3
 
-        return [sensor1, sensor2, sensor3]
+        return [sensor1]#, sensor2, sensor3]
         
     def collision_test(self, vx, vy):
         # Move the rect
@@ -179,6 +180,60 @@ class Duck:
             if self.rect.colliderect(wall.rect):
                 self.FAIL = True
                 print "FAIL"
+
+
+
+
+
+
+
+    def check_sensor1(self, theta, xp, yp):
+        self.SensorList = []
+        x = 500*math.sin(theta)
+        y = 500*math.cos(theta)
+        
+
+        #calculating slopeb
+        if abs(x) >= abs(y):
+            functionOf  = 'X'
+            if x != 0:
+                slope = y/float(x)
+            else:
+                slope = 9999
+        else:
+            functionOf = 'Y'
+            if y != 0:
+                slope = x/float(y)
+            else:
+                slope = 9999
+
+        #calculating direction of travel along the slope
+
+        if functionOf == 'X':
+            dirTravel = x/abs(x)
+        else:
+            dirTravel = y/abs(y)
+
+        #iterating through that slope
+
+        for i in range(500):
+            if functionOf == 'X':
+                xInd = i + xp
+                yInd = i*slope + yp
+            else:
+                yInd = i + yp
+                xInd = i*slope + xp
+
+            self.SensorList.append((xInd,yInd))
+
+            try:
+                if self.model.ArrayTrack[int(xInd)][int(yInd)] == 1:
+                    dist = math.hypot(xp-xInd,yp-yInd)
+                    print 'dist', dist
+                    return dist 
+            except IndexError:
+                print 'dist, 500'
+                return 500
 
 def distance(L,Absolute=False):
     """returns the sum of the distances between the elements of a lists
