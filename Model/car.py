@@ -24,6 +24,7 @@ class Duck:
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
+        self.S = read_sensors()
 #        self.screen = screen
 
     def update(self, w1, w2):
@@ -61,7 +62,6 @@ class Duck:
 
         print """
         self.pointlist.append((self.x,self.y))
-    
 
         if self.dx != 0:
             self.collision_test(self.dx, 0)
@@ -76,7 +76,7 @@ class Duck:
             self.Fitness = distance(self.TotalMovement,True)
             print 'Fitness',self.Fitness
 
-        self.read_sensors()
+        self.S=self.read_sensors()
      
     def check_sensor(self, theta, xp, yp):
         x = 500*math.sin(theta)

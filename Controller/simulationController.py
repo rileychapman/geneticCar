@@ -207,8 +207,19 @@ class PyGameController:
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             outerInd+=1
-    def move_car(self):
-        self.model.duck.update(4,4.8)
+    def Drive(self,S):
+        """Creates w1 and w2 values for the car based on sensor values"""
+        w1 = 0
+        w2 = 0
+        if len(self.M) != len(S):
+		raise Exception("Number of Parameters does not Match Number of sensors")
+        for i in range(len(self.M)):
+		w1 += self.M[i][0]*S[i]
+		w2 += self.M[i][1]*S[i]
+
+        self.w1 = w1
+        self.w2 = w2
+        self.model.duck.update(w1,w2)
 
  
 
