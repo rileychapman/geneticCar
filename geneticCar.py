@@ -23,11 +23,13 @@ import math
 pygame.init()
 walls = []
 size = (500, 500)
+cheomNum = 0
 
 screen = pygame.display.set_mode(size)
 model = Model.Platformer_Model(size)
 view = View.PyGameWindowView(model,screen)
 controller = Controller.PyGameController(model)
+genome = Controller.Genome()
 
 running = True
 while running:
@@ -43,6 +45,44 @@ while running:
         if model.drawTrack == False and model.drawMode ==False and model.offsetMode == True:
             controller.offset_track(50)
             model.offsetMode = False
+<<<<<<< HEAD
+    while not model.duck.FAIL:
+        
+            
+        
+      
+      view.draw1()
+      time.sleep(0.001)
+    model.new_individual()
+    
+    genome.chromosomes[chromNum].stregnth = model.duck.fitness
+    
+    #changes to next chromosome
+    chromNum =+1
+    if chromnum == 20:
+        genome.evolve()
+        chromNum = 0      
+    
+    
+      
+pygame.quit()
+
+
+
+
+
+
+#gen.live() #insert chromosome, test chomosme, repeat
+
+
+#gen.print_genome()
+
+
+
+
+
+
+=======
 
         if model.Testing == True:
             pass #make sure code builds before pushing
@@ -59,3 +99,4 @@ while running:
     time.sleep(0.001)
 
 pygame.quit()
+>>>>>>> upstream2/master
