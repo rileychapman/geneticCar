@@ -6,4 +6,4 @@ import pygame, random, math, time
 from pygame.locals import *
 import math
 from simulationController import *
-
+from geneticController import *
