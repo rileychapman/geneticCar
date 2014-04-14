@@ -24,7 +24,7 @@ class Duck:
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
-        self.S = self.read_sensors()
+        self.S = []
         self.SensorList = []
 #        self.screen = screen
 
@@ -150,11 +150,11 @@ class Duck:
         self.SensorList = []
 
         self.model.sensorPoints = []
-        xp = int(self.model.duck.rect.x)
-        yp = int(self.model.duck.rect.y)
+        xp = int(self.rect.x)
+        yp = int(self.rect.y)
 
         print "Current car location", xp, yp
-        theta = float(self.model.duck.theta)
+        theta = float(self.theta)
         print "Current car orientation", theta
         
         sensor1 = self.check_sensor2(theta, xp, yp)
@@ -165,7 +165,7 @@ class Duck:
         print "Closest left block", sensor2
         print "Closest right block", sensor3
 
-        return [sensor1]#, sensor2, sensor3]
+        return [sensor1, sensor2, sensor3]
         
     def collision_test(self, vx, vy):
         # Move the rect

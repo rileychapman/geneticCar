@@ -29,11 +29,15 @@ screen = pygame.display.set_mode(size)
 model = Model.Platformer_Model(size)
 view = View.PyGameWindowView(model,screen)
 controller = Controller.PyGameController(model)
-genome = Controller.Genome()
 
 running = True
 while running:
        
+
+
+  
+
+
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
@@ -46,13 +50,9 @@ while running:
             controller.offset_track(50)
             model.offsetMode = False
 
-    while not model.duck.FAIL:
-        
-            
-        
-      
-      view.draw1()
-      time.sleep(0.001)
+    view.draw1()
+    time.sleep(0.001)
+
     model.new_individual()
     
     genome.chromosomes[chromNum].stregnth = model.duck.fitness

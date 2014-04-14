@@ -7,6 +7,8 @@ from pygame.locals import *
 from geneticModel import *
 import math
 from car import *
+from geneticModel import *
+
 class Platformer_Model:
     """ Encodes the game state """
     """TO-DO: Clean up these level lists"""
