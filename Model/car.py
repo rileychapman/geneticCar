@@ -24,11 +24,8 @@ class Duck:
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
-<<<<<<< HEAD
         self.S = read_sensors()
-=======
         self.SensorList = []
->>>>>>> upstream2/master
 #        self.screen = screen
 
     def update(self, w1, w2):
