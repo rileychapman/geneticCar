@@ -14,6 +14,7 @@ class Wall(object):
         #walls.append(self)
         self.rect = pygame.Rect(pos[0], pos[1], 10, 10)
         self.pos = pos
+        
 
 class PyGameController:
     """ Manipulate game state based on keyboard input """
@@ -207,8 +208,9 @@ class PyGameController:
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             outerInd+=1
-    def Drive(self,S):
+    def Drive(self):
         """Creates w1 and w2 values for the car based on sensor values"""
+        S=self.model.duck.S
         w1 = 0
         w2 = 0
         if len(self.M) != len(S):

@@ -24,7 +24,7 @@ class Duck:
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
-        self.S = read_sensors()
+        self.S = self.read_sensors()
         self.SensorList = []
 #        self.screen = screen
 
