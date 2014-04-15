@@ -53,13 +53,14 @@ while running:
 
         if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
             controller.Drive(chromNum)
+        if model.duck.FAIL:
+            model.Iteration +=1
+            chromNum +=1
+            if chromNum == 20:
+                model.genome.evolve()
+                chromNum = 0     
 
-        chromNum =+1
-        if chromNum == 20:
-            model.genome.evolve()
-            chromNum = 0     
-
-        view.draw1()
+        view.draw3()
         time.sleep(0.001)
 
     model.new_individual()
