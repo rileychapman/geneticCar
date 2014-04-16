@@ -93,10 +93,17 @@ class PyGameWindowView:
             self.screen.blit(print_Iter,Iter_pos)   
 
             Gen_str = str(self.model.Generation)
-            Gen_text = 'Iteration:'+Gen_str
+            Gen_text = 'Generation:'+Gen_str
             print_Gen = font.render(Gen_text, 1, (255, 255, 255))
             Gen_pos = print_Gen.get_rect(topright = (500,0))
             self.screen.blit(print_Gen,Gen_pos) 
+            
+            Gen_time = str(self.model.duck.last_fail_time)
+            Gen_time = 'Current generation runtime:'+Gen_time
+            print_Gen = font.render(Gen_text, 1, (255, 255, 255))
+            Gen_pos = print_Gen.get_rect(topright = (500, 50))
+            self.screen.blit(print_Gen,Gen_pos) 
+            
 
         pygame.display.update()
 
