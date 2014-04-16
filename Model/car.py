@@ -80,7 +80,7 @@ class Duck:
 
         self.S=self.read_sensors()
         self.time_limit()
-        self.success_check()
+#        self.success_check()
     
     
     def time_limit(self):
@@ -89,10 +89,7 @@ class Duck:
         yp = self.rect.y
         
         if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15):
-            if (time.time() - self.last_fail_time) > 15:
-                print "Time expired"
-            else:
-                print "Distance expired"
+            print "Time expired"
             self.FAIL = True
     
     def success_check(self):
