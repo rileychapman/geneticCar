@@ -56,7 +56,7 @@ while running:
         if model.duck.FAIL:
             model.Iteration +=1
             chromNum +=1
-            if chromNum == 20:
+            if chromNum == 19:
                 model.genome.evolve()
                 chromNum = 0     
 

@@ -101,8 +101,12 @@ class Duck:
         
         if (yp == 100) and (50 <= xp <= 200):
             print "SUCCESS!"
-            print "Time to complete", time.time() - self.last_fail_time
+            time_taken=time.time() - self.last_fail_time
+            print "Time to complete", time_taken
+            self.Fitness = 10000-time_taken
             self.FAIL = True
+
+            
     
      
     def check_sensor(self, theta, xp, yp):
