@@ -22,7 +22,7 @@ class Duck:
         self.pointlist = [pos,pos]
         self.model= model
         self.FAIL = False
-        self.last_fail_time = 0
+        self.last_fail_time = time.time()
         self.fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
@@ -83,11 +83,15 @@ class Duck:
     
     
     def time_limit(self):
+#        print "in time limit"
         xp = self.rect.x
         yp = self.rect.y
         
-        if (math.hypot(50-xp, 50-yp) < 100) and (self.last_fail_time - time.time()) > 15:
-            print "Time expired"
+        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15):
+            if (time.time() - self.last_fail_time) > 15:
+                print "Time expired"
+            else:
+                print "Distance expired"
             self.FAIL = True
         
      
@@ -146,19 +150,16 @@ class Duck:
         # If you collide with a wall, move out based on velocity
         for wall in self.model.Track3[1]:
             if self.rect.colliderect(wall.rect):
-                self.FAIL = True
                 self.last_fail_time = time.time()
-                print "FAIL"
+#                print self.last_fail_time
+                self.FAIL = True                
+#                print "FAIL"
         for wall in self.model.Track3[0]:
             if self.rect.colliderect(wall.rect):
-                self.FAIL = True
                 self.last_fail_time = time.time()
+#                print self.last_fail_time
+                self.FAIL = True
                 #print "FAIL"
-
-
-
-
-
 
 
     def check_sensor1(self, theta, xp, yp):

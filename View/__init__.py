@@ -78,10 +78,6 @@ class PyGameWindowView:
             pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListInner)
             pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListOuter)
 
-
-
-
-
         if pygame.font:
             font = pygame.font.Font(None, 20)
 
@@ -99,10 +95,10 @@ class PyGameWindowView:
             self.screen.blit(print_Gen,Gen_pos) 
             
             Gen_time = str(self.model.duck.last_fail_time)
-            Gen_time = 'Current generation runtime:'+Gen_time
-            print_Gen = font.render(Gen_text, 1, (255, 255, 255))
-            Gen_pos = print_Gen.get_rect(topright = (500, 50))
-            self.screen.blit(print_Gen,Gen_pos) 
+            Time_text = 'Current iteration runtime:'+Gen_time
+            print_time = font.render(Time_text, 1, (255, 255, 255))
+            Time_pos = print_time.get_rect(topright = (500, 50))
+            self.screen.blit(print_time,Time_pos) 
             
 
         pygame.display.update()
