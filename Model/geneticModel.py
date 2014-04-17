@@ -52,8 +52,10 @@ class Genome:
             bestChrom2=self.chromosomes[1]
             for chrom in self.chromosomes:
                 if chrom.strength > bestChrom1.strength:
+                    print 'strength1',chrom.strength
                     bestChrom1=chrom
                 elif chrom.strength > bestChrom2.strength:
+                    print 'strength 2',chrom.strength
                     bestChrom2=chrom
             self.bestChromosomes=[bestChrom1,bestChrom2]
             # Create 20 mutations of each of the 2 best chromosomes
