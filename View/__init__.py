@@ -100,6 +100,12 @@ class PyGameWindowView:
             Time_pos = print_time.get_rect(topright = (500, 50))
             self.screen.blit(print_time,Time_pos) 
             
+            Iter_Fit = str(self.model.duck.Fitness)
+            Fit_text = 'Fitness'+Iter_Fit
+            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+            Fit_pos = print_Fit.get_rect(topright = (500, 75))
+            self.screen.blit(print_Fit,Fit_pos) 
+            
 
         pygame.display.update()
 
