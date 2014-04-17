@@ -88,7 +88,7 @@ class PyGameWindowView:
             Iter_pos = print_Iter.get_rect(topright = (500,25))
             self.screen.blit(print_Iter,Iter_pos)   
 
-            Gen_str = str(self.model.Generation)
+            Gen_str = str(self.model.genome.generation)
             Gen_text = 'Generation:'+Gen_str
             print_Gen = font.render(Gen_text, 1, (255, 255, 255))
             Gen_pos = print_Gen.get_rect(topright = (500,0))

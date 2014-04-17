@@ -57,9 +57,11 @@ while running:
             model.Iteration +=1
             chromNum +=1
             if chromNum == 19:
+                print "iteration",chromNum
                 model.genome.evolve()
                 chromNum = 0     
-
+                model.Iteration =1
+                
         view.draw3()
         time.sleep(0.001)
 
