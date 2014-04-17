@@ -76,7 +76,7 @@ class Duck:
             self.RecentMovement = []
             #print self.TotalMovement
             self.Fitness = distance(self.TotalMovement,True)
-            print 'Fitness',self.Fitness
+            #print 'Fitness',self.Fitness
 
         self.S=self.read_sensors()
         self.time_limit()
@@ -89,7 +89,7 @@ class Duck:
         yp = self.rect.y
         
         if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15):
-            print "Time expired"
+            #print "Time expired"
             self.FAIL = True
     
     def success_check(self):
@@ -97,9 +97,9 @@ class Duck:
         yp = self.rect.y
         
         if (yp == 100) and (50 <= xp <= 200) and self.Fitness<50:
-            print "SUCCESS!"
+            #print "SUCCESS!"
             time_taken=time.time() - self.last_fail_time
-            print "Time to complete", time_taken
+            #print "Time to complete", time_taken
             self.Fitness = 10000-time_taken
             self.FAIL = True
 

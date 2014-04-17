@@ -65,7 +65,7 @@ while running:
         view.draw3()
         time.sleep(0.001)
 
-    print 'Final Fitness',model.duck.Fitness
+    #print 'Final Fitness',model.duck.Fitness
     model.genome.chromosomes[chromNum].strength = model.duck.Fitness
     model.new_individual()
 
