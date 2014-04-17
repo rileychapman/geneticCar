@@ -23,7 +23,6 @@ class Duck:
         self.model= model
         self.FAIL = False
         self.last_fail_time = time.time()
-        self.fitness = 0
         self.Fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []

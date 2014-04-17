@@ -59,7 +59,7 @@ class Genome:
                     bestChrom2=chrom
             self.bestChromosomes=[bestChrom1,bestChrom2]
             # Create 20 mutations of each of the 2 best chromosomes
-            i = self.population-1
+            i = self.population-3
             nextGenChromosomesA = []
             nextGenChromosomesB = []
             while i >= 0:
@@ -72,7 +72,7 @@ class Genome:
                 i -= 1
     
             #combine the two groups to form the next generation genome
-            nextGenChromos = []
+            nextGenChromos = [bestChrom1,bestChrom2]
             for i in range(len(nextGenChromosomesA)):
                 chrom = Chromosome()
                 chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
