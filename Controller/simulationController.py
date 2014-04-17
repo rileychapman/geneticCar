@@ -32,6 +32,8 @@ class PyGameController:
                 self.model.duck.update(5,5)
             if event.key == pygame.K_DOWN:
                 self.model.duck.update(-5,-5)
+            if event.key ==   K_k:
+                self.model.duck.FAIL = True
         if event.type == MOUSEBUTTONDOWN:
             self.model.drawTrack = True
     
@@ -211,7 +213,8 @@ class PyGameController:
     def Drive(self,chromNum):
         """Creates w1 and w2 values for the car based on sensor values"""
         S=self.model.duck.S
-        M=self.model.genome.chromosomes[chromNum].genes
+        M0=self.model.genome.chromosomes[chromNum].genes
+        M = matrixScale(M0,.04)
         w1 = 0
         w2 = 0
         if len(M) != len(S):
@@ -225,7 +228,16 @@ class PyGameController:
         self.model.duck.update(w1,w2)
 
  
+def matrixScale(M,S):
+    """Takes a matrix with values from zero to 1 and returns a matrix with values centered around zero scaled by value S
+    code is copied and pasted here such that we can use this function in a different folder than the one in which the original file is in"""
+    Mout = []
+    for i in range(len(M)):
+        Mout.append([])
+        for j in range(len(M[i])):
+            Mout[i].append((M[i][j] -.5)*S)
 
+    return Mout
 
 
 def dist_walls(wall1,wall2):

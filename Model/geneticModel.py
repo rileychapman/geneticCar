@@ -11,14 +11,14 @@ import random
 
 class Chromosome:
     def __init__(self):
-        self.genes = matrixEvolution.matrixScale(matrixEvolution.formMatrix(3,2),.02)
+        self.genes = matrixEvolution.formMatrix(3,2)
         self.strength = 0.0 
 
     def print_chrom(self):
         print "   chromosome: " + str(self.genes) + '   strength: ' + str(self.strength)
 
 class Genome:
-    def __init__(self,population = 20,mutationRate = .5, mutationRange = .2):
+    def __init__(self,population = 20,mutationRate = .05, mutationRange = .2):
         chrom = []
         for i in range(population):
             chrom.append(Chromosome())

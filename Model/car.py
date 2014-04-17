@@ -24,6 +24,7 @@ class Duck:
         self.FAIL = False
         self.last_fail_time = time.time()
         self.fitness = 0
+        self.Fitness = 0
         self.RecentMovement = []
         self.TotalMovement = []
         self.S = [50,50,50]

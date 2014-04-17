@@ -62,10 +62,10 @@ while running:
 
         view.draw3()
         time.sleep(0.001)
-
+    print model.duck.Fitness
     model.new_individual()
     
-    model.genome.chromosomes[chromNum].strength = model.duck.fitness
+    model.genome.chromosomes[chromNum].strength = model.duck.Fitness
     
     #changes to next chromosome
  
