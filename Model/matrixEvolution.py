@@ -20,7 +20,7 @@ def formMatrix(x,y):
 		L.append(Lint)
 
 	return L
-
+	#return [[-.1,-.1],[-.1,-.1],[-.1,-1]]
 def mixMatrix(M1,M2):
 	"""Checks if two matricies are of equal size and then mixes them randomly."""
 	if len(M1) != len(M2): #checks if the x coordinates are equal

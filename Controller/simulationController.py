@@ -214,16 +214,19 @@ class PyGameController:
         """Creates w1 and w2 values for the car based on sensor values"""
         S=self.model.duck.S
         M0=self.model.genome.chromosomes[chromNum].genes
-        M = matrixScale(M0,.04)
+        M = matrixScale(M0,.03)
         w1 = 0
         w2 = 0
         if len(M) != len(S):
             print 'len(M)',len(M),'S',len(S)
             raise Exception("Number of Parameters does not Match Number of sensors")
         for i in range(len(M)):
-    		w1 += M[i][0]*S[i]
-    		w2 += M[i][1]*S[i]
-
+    		#w1 += M[i][0]/int(S[i])
+    		#w2 += M[i][1]/int(S[i])
+            w1 += M[i][0]*(int(S[i])-40)
+            w2 += M[i][1]*(int(S[i])-40)
+            #w1 += int(S[i])**M[i][0]
+            #w2 += int(S[i])**M[i][1]
 
         self.model.duck.update(w1,w2)
 
