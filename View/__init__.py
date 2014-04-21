@@ -37,7 +37,34 @@ class PyGameWindowView:
             pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
+        if pygame.font:
+            font = pygame.font.Font(None, 20)
 
+
+            Iter_str = str(self.model.Iteration)
+            Iter_text = 'Iteration:'+Iter_str
+            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+            Iter_pos = print_Iter.get_rect(topright = (500,25))
+            self.screen.blit(print_Iter,Iter_pos)   
+
+            Gen_str = str(self.model.genome.generation)
+            Gen_text = 'Generation:'+Gen_str
+            print_Gen = font.render(Gen_text, 1, (255, 255, 255))
+            Gen_pos = print_Gen.get_rect(topright = (500,0))
+            self.screen.blit(print_Gen,Gen_pos) 
+            
+            Gen_time = str(int(time.time() - self.model.duck.last_fail_time))
+            Time_text = 'Current iteration runtime:'+Gen_time
+            print_time = font.render(Time_text, 1, (255, 255, 255))
+            Time_pos = print_time.get_rect(topright = (500, 50))
+            self.screen.blit(print_time,Time_pos) 
+            
+            Iter_Fit = str(self.model.duck.Fitness)
+            Fit_text = 'Fitness'+Iter_Fit
+            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+            Fit_pos = print_Fit.get_rect(topright = (500, 75))
+            self.screen.blit(print_Fit,Fit_pos) 
+        
 
         pygame.display.update()
 
