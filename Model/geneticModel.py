@@ -77,13 +77,13 @@ class Genome:
             
             #combine the two groups to form the next generation genome
             nextGenChromos = [bestChrom1,bestChrom2]
-            print nextGenChromos[0].strength, nextGenChromos[1].strength
             for i in range(len(nextGenChromosomesA)):
                 chrom = Chromosome()
                 chrom.identification = self.generation
                 chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
                 nextGenChromos.append(chrom)
-                
+            print nextGenChromos[0].strength, nextGenChromos[1].strength
+  
     
             self.chromosomes = nextGenChromos
-            
+            print "You should use more print statements Reilly"

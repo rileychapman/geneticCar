@@ -71,7 +71,7 @@ class Duck:
             self.collision_test(0, self.dy)
 
         self.RecentMovement.append((self.dx,self.dy))
-        if abs(distance(self.RecentMovement)[0]) >30 or abs(distance(self.RecentMovement)[0]) >30:
+        if abs(distance(self.RecentMovement)) >30 or abs(distance(self.RecentMovement)) >30:
             self.TotalMovement.append(distance(self.RecentMovement))
             self.RecentMovement = []
             #print self.TotalMovement
@@ -249,12 +249,13 @@ def distance(L,Absolute=False):
         for element in L:
             x += element[0]
             y += element[1]
-        return (x,y)#math.sqrt(float(x)**2 + float(y)**2)
+        return math.hypot(x,y)
     else:
-        x = 0
-        y = 0
+        distance = 0
         for element in L:
-            x += abs(element[0])
-            y += abs(element[1])
-        return math.sqrt(float(x)**2 + float(y)**2)
+            distance += element
 
+        return distance
+
+if __name__ == '__main__':
+    print abs(distance([(1,1),(2,2)]))
