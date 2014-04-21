@@ -13,6 +13,7 @@ class Chromosome:
     def __init__(self):
         self.genes = matrixEvolution.formMatrix(3,2)
         self.strength = 0.0 
+        self.identification = 0;
 
     def print_chrom(self):
         print "   chromosome: " + str(self.genes) + '   strength: ' + str(self.strength)
@@ -71,15 +72,18 @@ class Genome:
                 nextGenChromosomesA.append(AChrom)
                 nextGenChromosomesB.append(BChrom)
                 i -= 1
-    
+                
+            self.generation += 1
+            
             #combine the two groups to form the next generation genome
             nextGenChromos = [bestChrom1,bestChrom2]
             print nextGenChromos[0].strength, nextGenChromos[1].strength
             for i in range(len(nextGenChromosomesA)):
                 chrom = Chromosome()
+                chrom.identification = self.generation
                 chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
                 nextGenChromos.append(chrom)
                 
     
             self.chromosomes = nextGenChromos
-            self.generation += 1
+            
