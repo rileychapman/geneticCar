@@ -368,7 +368,7 @@ class PyGameController:
                     xInd +=1
             elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
                 ySign = (p1[1] - p2[1])/abs(p1[1]-p2[1])
-                print ySign
+                #print ySign
                 yInd = 0
                 if p1[1]-p2[1] !=0:
                     slope = float(p1[0]-p2[0])/(p1[1]-p2[1]) #note: different from the slope above. assumes a fucntion in y
