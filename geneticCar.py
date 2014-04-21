@@ -62,7 +62,7 @@ while running:
                 chromNum = 0     
                 model.Iteration =1
                 
-        view.draw3()
+        view.draw1()
         time.sleep(0.001)
 
     #print 'Final Fitness',model.duck.Fitness
