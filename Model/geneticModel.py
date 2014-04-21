@@ -48,9 +48,10 @@ class Genome:
     def evolve(self):
             """ Takes the best genes and creates a new genome for the next generation
             """
+            print self.chromosomes[0].strength, self.chromosomes[1].strength
             bestChrom1=self.chromosomes[0]
             bestChrom2=self.chromosomes[1]
-            for chrom in self.chromosomes:
+            for chrom in self.chromosomes[2:]:
                 if chrom.strength > bestChrom1.strength:
                     print 'strength1',chrom.strength
                     bestChrom1=chrom
@@ -73,10 +74,12 @@ class Genome:
     
             #combine the two groups to form the next generation genome
             nextGenChromos = [bestChrom1,bestChrom2]
+            print nextGenChromos[0].strength, nextGenChromos[1].strength
             for i in range(len(nextGenChromosomesA)):
                 chrom = Chromosome()
                 chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
                 nextGenChromos.append(chrom)
+                
     
             self.chromosomes = nextGenChromos
             self.generation += 1
