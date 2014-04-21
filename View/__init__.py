@@ -59,11 +59,17 @@ class PyGameWindowView:
             Time_pos = print_time.get_rect(topright = (500, 50))
             self.screen.blit(print_time,Time_pos) 
             
-            Iter_Fit = str(self.model.duck.Fitness)
-            Fit_text = 'Fitness'+Iter_Fit
+            Fit_str = str(self.model.duck.Fitness)
+            Fit_text = 'Fitness:'+Fit_str
             print_Fit = font.render(Fit_text, 1, (255, 255, 255))
             Fit_pos = print_Fit.get_rect(topright = (500, 75))
             self.screen.blit(print_Fit,Fit_pos) 
+            
+            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
+            Fit_text = 'Id:'+Id_str
+            print_Id = font.render(Fit_text, 1, (255, 255, 255))
+            Id_pos = print_Id.get_rect(topright = (500, 100))
+            self.screen.blit(print_Id,Id_pos) 
         
 
         pygame.display.update()
