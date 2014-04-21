@@ -358,7 +358,7 @@ class PyGameController:
 
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
                 xSign = (p1[0] - p2[0])/abs(p1[0]-p2[0])
-                print xSign
+                #print xSign
                 xInd = 0
                 slope = float(p1[1]-p2[1])/(p1[0]-p2[0])
                 while xInd in range(abs(p1[0]-p2[0])):
