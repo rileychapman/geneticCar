@@ -155,7 +155,7 @@ class PyGameController:
                     try:
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     except IndexError:
-                        print 'too big, fixed'
+                        #print 'too big, fixed'
                         if xIndAppend > 499:
                             xIndAppend = 499
                         if yIndAppend >499:
@@ -184,7 +184,7 @@ class PyGameController:
                     try:
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     except IndexError:
-                        print 'too big, fixed'
+                        #print 'too big, fixed'
                         if xIndAppend > 499:
                             xIndAppend = 499
                         if yIndAppend >499:
