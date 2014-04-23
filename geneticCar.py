@@ -54,19 +54,24 @@ while running:
         if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
             controller.Drive(chromNum)
         if model.duck.FAIL:
+            try:
+                print "Current Best Chrom 1  ID", model.genome.bestChromosomes[0].identification
+            except IndexError:
+                print "No best Chrom yet"
+            model.genome.chromosomes[chromNum].strength = model.duck.Fitness
             model.Iteration +=1
             chromNum +=1
             if chromNum == 19:
-                #print "iteration",chromNum
                 model.genome.evolve()
+                for element in model.genome.chromosomes:
+                    print element.identification
                 chromNum = 0     
-                model.Iteration =1
+                model.Iteration =0
                 
         view.draw1()
         time.sleep(0.001)
 
     #print 'Final Fitness',model.duck.Fitness
-    model.genome.chromosomes[chromNum].strength = model.duck.Fitness
     model.new_individual()
 
     

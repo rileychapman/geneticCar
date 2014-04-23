@@ -10,10 +10,11 @@ import matrixEvolution
 import random
 
 class Chromosome:
-    def __init__(self):
+    def __init__(self,Iteration):
         self.genes = matrixEvolution.formMatrix(3,2)
         self.strength = 0.0 
-        self.identification = 0;
+        self.identification = [0,Iteration]
+        self.Iteration = Iteration
 
     def print_chrom(self):
         print "   chromosome: " + str(self.genes) + '   strength: ' + str(self.strength)
@@ -22,7 +23,7 @@ class Genome:
     def __init__(self,population = 20,mutationRate = .05, mutationRange = .2):
         chrom = []
         for i in range(population):
-            chrom.append(Chromosome())
+            chrom.append(Chromosome(i))
         self.population = population
         self.chromosomes = chrom
         self.bestChromosomes = []
@@ -65,8 +66,8 @@ class Genome:
             nextGenChromosomesA = []
             nextGenChromosomesB = []
             while i >= 0:
-                AChrom = Chromosome()
-                BChrom = Chromosome()
+                AChrom = Chromosome(500)
+                BChrom = Chromosome(500)
                 AChrom.genes = matrixEvolution.mutateMatrix(self.bestChromosomes[0].genes,self.mutationRate,self.mutationRange)
                 BChrom.genes = matrixEvolution.mutateMatrix(self.bestChromosomes[1].genes,self.mutationRate,self.mutationRange)
                 nextGenChromosomesA.append(AChrom)
@@ -78,12 +79,11 @@ class Genome:
             #combine the two groups to form the next generation genome
             nextGenChromos = [bestChrom1,bestChrom2]
             for i in range(len(nextGenChromosomesA)):
-                chrom = Chromosome()
-                chrom.identification = self.generation
+                chrom = Chromosome(i+2)
+                chrom.identification[0] = self.generation
                 chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
                 nextGenChromos.append(chrom)
             print nextGenChromos[0].strength, nextGenChromos[1].strength
   
     
             self.chromosomes = nextGenChromos
-            print "You should use more print statements Reilly"

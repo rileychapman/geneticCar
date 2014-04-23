@@ -214,7 +214,7 @@ class PyGameController:
         """Creates w1 and w2 values for the car based on sensor values"""
         S=self.model.duck.S
         M0=self.model.genome.chromosomes[chromNum].genes
-        M = matrixScale(M0,.03)
+        M = matrixScale(M0,.05)
         w1 = 0
         w2 = 0
         if len(M) != len(S):
