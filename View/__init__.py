@@ -53,7 +53,7 @@ class PyGameWindowView:
             self.screen.blit(print_Iter,Iter_pos)   
             
             Gen_time = str(int(time.time() - self.model.duck.last_fail_time))
-            Time_text = 'Current iteration runtime: '+Gen_time
+            Time_text = 'Iteration runtime: '+Gen_time
             print_time = font.render(Time_text, 1, (255, 255, 255))
             Time_pos = print_time.get_rect(bottomleft = (0,450))
             self.screen.blit(print_time,Time_pos) 

@@ -88,7 +88,8 @@ class Duck:
         xp = self.rect.x
         yp = self.rect.y
         
-        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15):
+#        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15):
+        if abs(distance(self.RecentMovement)) < 50 and ((time.time() - self.last_fail_time) > 15):
             #print "Time expired"
             self.FAIL = True
     
