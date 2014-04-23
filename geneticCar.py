@@ -55,16 +55,15 @@ while running:
             controller.Drive(chromNum)
         if model.duck.FAIL:
             try:
-                print "Current Best Chrom 1  ID", model.genome.bestChromosomes[0].identification
+                pass#print "Current Best Chrom 1  ID", model.genome.bestChromosomes[0].identification
             except IndexError:
-                print "No best Chrom yet"
+                pass
+                #print "No best Chrom yet"
             model.genome.chromosomes[chromNum].strength = model.duck.Fitness
             model.Iteration +=1
             chromNum +=1
             if chromNum == 19:
                 model.genome.evolve()
-                for element in model.genome.chromosomes:
-                    print element.identification
                 chromNum = 0     
                 model.Iteration =0
                 
