@@ -30,6 +30,7 @@ class Platformer_Model:
         self.sensorPoints = []
         self.Generation = 0
         self.Iteration = 0
+        self.screen_size = screen_size
         #making the track be an array instead of pair of lists
         xInd = 0
         while xInd in range(screen_size[0]):

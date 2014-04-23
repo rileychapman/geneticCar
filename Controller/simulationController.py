@@ -156,10 +156,10 @@ class PyGameController:
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     except IndexError:
                         #print 'too big, fixed'
-                        if xIndAppend > 499:
-                            xIndAppend = 499
-                        if yIndAppend >499:
-                            yIndAppend = 499
+                        if xIndAppend > self.model.screen_size[0]-1: #499:
+                            xIndAppend = self.model.screen_size[0]-1
+                        if yIndAppend >self.model.screen_size[1]-1:
+                            yIndAppend = self.model.screen_size[1]-1
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
 #
 # Many errors wiht this code. TO-DO: Figure out how best to handle IndexErrors
@@ -185,10 +185,10 @@ class PyGameController:
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     except IndexError:
                         #print 'too big, fixed'
-                        if xIndAppend > 499:
-                            xIndAppend = 499
-                        if yIndAppend >499:
-                            yIndAppend = 499
+                        if xIndAppend > self.model.screen_size[0]-1:
+                            xIndAppend = self.model.screen_size[0]-1
+                        if yIndAppend >self.model.screen_size[1]-1:
+                            yIndAppend = self.model.screen_size[1]-1
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                             
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
