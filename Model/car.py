@@ -91,8 +91,10 @@ class Duck:
         xp = self.rect.x
         yp = self.rect.y
         
+
         if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15) and self.Fitness < 50:
             print "Time expired"
+
             self.FAIL = True
 
     def movement_limit(self):
