@@ -28,6 +28,7 @@ class Duck:
         self.TotalMovement = []
         self.S = [50,50,50]
         self.SensorList = []
+
 #        self.screen = screen
 
     def update(self, w1, w2):
@@ -80,6 +81,8 @@ class Duck:
 
         self.S=self.read_sensors()
         self.time_limit()
+        self.movement_limit()
+        self.success_check()
 #        self.success_check()
     
     
@@ -88,16 +91,29 @@ class Duck:
         xp = self.rect.x
         yp = self.rect.y
         
-        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15):
-            #print "Time expired"
+        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15) and self.Fitness < 50:
+            print "Time expired"
             self.FAIL = True
+
+    def movement_limit(self):
+        positions = self.pointlist
+        try:
+            point1 = self.pointlist[-50]
+            point2 = self.pointlist[-1]
+            xDist = point1[0]-point2[0]
+            yDist = point1[1]-point2[1]
+            if math.hypot(xDist,yDist) < 10:
+                self.FAIL = True
+                print "Too Slow"
+        except IndexError:
+            pass
     
     def success_check(self):
         xp = self.rect.x
         yp = self.rect.y
         
-        if (yp == 100) and (50 <= xp <= 200) and self.Fitness<50:
-            #print "SUCCESS!"
+        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15):
+            print "SUCCESS!"
             time_taken=time.time() - self.last_fail_time
             #print "Time to complete", time_taken
             self.Fitness = 10000-time_taken

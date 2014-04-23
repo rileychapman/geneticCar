@@ -152,7 +152,15 @@ class PyGameController:
                 while xInd in range(abs(p1[0]-p2[0])):
                     yIndAppend = int(p1[1] - xSign*slope*xInd)
                     xIndAppend = int(p1[0] - xSign*xInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1
+                    try:
+                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    except IndexError:
+                        print 'too big, fixed'
+                        if xIndAppend > 499:
+                            xIndAppend = 499
+                        if yIndAppend >499:
+                            yIndAppend = 499
+                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
 #
 # Many errors wiht this code. TO-DO: Figure out how best to handle IndexErrors
 #                    try:
@@ -173,7 +181,16 @@ class PyGameController:
                 while yInd in range(abs(p1[1]-p2[1])):
                     xIndAppend = int(p1[0] - ySign*slope*yInd)
                     yIndAppend = int(p1[1] - ySign*yInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    try:
+                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    except IndexError:
+                        print 'too big, fixed'
+                        if xIndAppend > 499:
+                            xIndAppend = 499
+                        if yIndAppend >499:
+                            yIndAppend = 499
+                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                            
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             innerInd+=1
