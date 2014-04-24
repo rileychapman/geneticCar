@@ -11,6 +11,10 @@ class PyGameWindowView:
     def __init__(self,model,screen):
         self.model = model
         self.screen = screen
+    
+    def update_car(self):
+        pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
+        pygame.display.update(self.model.duck.rect)
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
@@ -20,6 +24,7 @@ class PyGameWindowView:
         pygame.display.update()
 
     def draw1(self):
+        now = time.time()
         self.screen.fill(pygame.Color(0,0,0))
         pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
         if self.model.drawMode == True:
@@ -35,8 +40,9 @@ class PyGameWindowView:
 
             block = pygame.Rect(b[0],b[1],2,2)
             pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
-
+            
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
+        
         if pygame.font:
             font = pygame.font.Font(None, 20)
 
@@ -69,9 +75,12 @@ class PyGameWindowView:
             print_Id = font.render(Fit_text, 1, (255, 255, 255))
             Id_pos = print_Id.get_rect(bottomleft = (0, 500))
             self.screen.blit(print_Id,Id_pos) 
-        
-
+        #pygame.display.flip()
+        #self.update_car()
+        print "before update " + str(time.time()-now)
+        now = time.time()
         pygame.display.update()
+        print time.time() - now
 
     def draw2(self):
         drawListInner  = []
@@ -138,7 +147,6 @@ class PyGameWindowView:
             Fit_pos = print_Fit.get_rect(topright = (500, 75))
             self.screen.blit(print_Fit,Fit_pos) 
             
-
         pygame.display.update()
 
     def draw4(self):
