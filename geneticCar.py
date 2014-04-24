@@ -50,6 +50,8 @@ while running:
             if model.drawTrack == False and model.drawMode ==False and model.offsetMode == True:
                 controller.offset_track(50)
                 model.offsetMode = False
+                view.drawTrack()
+                pygame.image.save(view.screen, "Track.jpg")
 
         if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
             controller.Drive(chromNum)
@@ -66,9 +68,13 @@ while running:
                 model.genome.evolve()
                 chromNum = 0     
                 model.Iteration =0
-                
-        view.draw5()
-        time.sleep(0.001)
+        
+        if not model.drawMode:
+            view.draw5()
+            time.sleep(0.001)
+        else:
+            view.draw4()
+            time.sleep(0.001)
 
     #print 'Final Fitness',model.duck.Fitness
     model.new_individual()

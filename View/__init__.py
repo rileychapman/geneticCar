@@ -11,6 +11,7 @@ class PyGameWindowView:
     def __init__(self,model,screen):
         self.model = model
         self.screen = screen
+        
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
@@ -172,16 +173,11 @@ class PyGameWindowView:
     def draw5(self):
         self.screen.fill(pygame.Color(0,0,0))
         
+        img=pygame.image.load("Track.jpg")
+        self.screen.blit(img,(0,0))        
+        
         pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
-        if self.model.drawMode == True:
-            for trackblock in self.model.Track:
-                pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
-        else:
-            for trackblock in self.model.Track3[1]:
-                pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
-            for trackblock in self.model.Track3[0]: #model.FinalTrack[1]:
-                pygame.draw.rect(self.screen,pygame.Color(255,0,0),trackblock.rect)
-        colors = [100,200,255]        
+        
         for b in self.model.duck.SensorList:
 
             block = pygame.Rect(b[0],b[1],2,2)
@@ -220,8 +216,22 @@ class PyGameWindowView:
             Fit_text = 'Id: '+Id_str
             print_Id = font.render(Fit_text, 1, (255, 255, 255))
             Id_pos = print_Id.get_rect(bottomleft = (0, 500))
-            self.screen.blit(print_Id,Id_pos) 
+            self.screen.blit(print_Id,Id_pos)
         
+        pygame.display.flip()
+            
+            
+    def drawTrack(self):
+        self.screen.fill(pygame.Color(0,0,0))
+        
+        if self.model.drawMode == True:
+            for trackblock in self.model.Track:
+                pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
+        else:
+            for trackblock in self.model.Track3[1]:
+                pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
+            for trackblock in self.model.Track3[0]: #model.FinalTrack[1]:
+                pygame.draw.rect(self.screen,pygame.Color(255,0,0),trackblock.rect)
 
 
         pygame.display.flip()
