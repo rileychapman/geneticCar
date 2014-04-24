@@ -247,6 +247,24 @@ class PyGameController:
 
         self.model.duck.update(w1,w2)
 
+    def Drive_Squared(self,chromNum):
+        """Creates w1 and w2 values for the car based on sensor values"""
+        S=self.model.duck.S
+        M0=self.model.genome.chromosomes[chromNum].genes
+        M = matrixScale(M0,.05)
+        w1 = 0
+        w2 = 0
+        if len(M) != 2*len(S):
+            print 'len(M)',len(M),'S',len(S)
+            raise Exception("Number of Parameters does not Match Twice Number of sensors")
+        i = 0
+        while i < range(len(M)):
+            w1 += M[i][0]*int(S[i])**2 + M[i+1][0]*int(S[i])
+            w2 += M[i][1]*int(S[i])**2 + M[i+1][1]*int(S[i])
+            i += 2
+
+        self.model.duck.update(w1,w2)
+
  
 def matrixScale(M,S):
     """Takes a matrix with values from zero to 1 and returns a matrix with values centered around zero scaled by value S
