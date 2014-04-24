@@ -52,7 +52,7 @@ while running:
                 model.offsetMode = False
 
         if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
-            controller.Drive(chromNum)
+            controller.Drive_Squared(chromNum)
         if model.duck.FAIL:
             try:
                 pass#print "Current Best Chrom 1  ID", model.genome.bestChromosomes[0].identification
