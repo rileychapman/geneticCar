@@ -69,7 +69,7 @@ class Duck:
         if self.dx != 0:
             self.collision_test(self.dx, 0)
         if self.dy != 0:
-            self.collision_test(0, self.dy)
+            self.collision_test(0, self.dy )
 
         self.RecentMovement.append((self.dx,self.dy))
         if abs(distance(self.RecentMovement)) >30 or abs(distance(self.RecentMovement)) >30:
@@ -113,8 +113,8 @@ class Duck:
     def success_check(self):
         xp = self.rect.x
         yp = self.rect.y
-        
-        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15):
+            
+        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15) and self.Fitness >500:
             print "SUCCESS!"
             time_taken=time.time() - self.last_fail_time
             #print "Time to complete", time_taken

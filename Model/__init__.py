@@ -14,6 +14,7 @@ class Platformer_Model:
     """TO-DO: Clean up these level lists"""
     def __init__(self,screen_size):
         #self.level1 = change_to_list(0)
+        self.ducks = [Duck(self,(100,100)) for i in range(6)]
         self.duck = Duck(self,(100,100))
         self.genome = Genome()
         self.drawTrack = False
@@ -50,6 +51,9 @@ class Platformer_Model:
     def new_individual(self):
         if self.duck.FAIL:
             self.duck = Duck(self,(100,100))
+    def new_generation(self):
+        self.ducks = [Duck(self,(100,100)) for i in range(len(self.ducks))]
+
 
 
 
@@ -73,3 +77,7 @@ def distance(L,Absolute=False):
             y += abs(element[1])
         return (x,y)#math.sqrt(float(x)**2 + float(y)**2)
 
+if __name__ == '__main__':
+    thing = Platformer_Model((500,500))
+    print thing
+    print thing.ducks
