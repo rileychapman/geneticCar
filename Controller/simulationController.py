@@ -227,7 +227,7 @@ class PyGameController:
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             outerInd+=1
-    def Drive(self,chromNum):
+    def Drive(self):
         """Creates w1 and w2 values for the car based on sensor values"""
         """
         i = 0
@@ -251,23 +251,27 @@ class PyGameController:
             duck.update(w1,w2)
             i +=1
         """
-        S=self.model.ducks[chromNum].S
-        M0=self.model.genome.chromosomes[chromNum].genes
-        M = matrixScale(M0,.05)
-        w1 = 0
-        w2 = 0
-        if len(M) != len(S):
-            print 'len(M)',len(M),'S',len(S)
-            raise Exception("Number of Parameters does not Match Number of sensors")
-        for i in range(len(M)):
-            #w1 += M[i][0]/int(S[i])
-            #w2 += M[i][1]/int(S[i])
-            w1 += M[i][0]*(int(S[i])-40)
-            w2 += M[i][1]*(int(S[i])-40)
-            #w1 += int(S[i])**M[i][0]
-            #w2 += int(S[i])**M[i][1]
+        for chromNum in range(len(self.model.ducks)):
+            if not self.model.ducks[chromNum].FAIL:
+                S=self.model.ducks[chromNum].S
+                M0=self.model.genome.chromosomes[chromNum].genes
+                M = matrixScale(M0,.05)
+                w1 = 0
+                w2 = 0
+                if len(M) != len(S):
+                    print 'len(M)',len(M),'S',len(S)
+                    raise Exception("Number of Parameters does not Match Number of sensors")
+                for i in range(len(M)):
+                    #w1 += M[i][0]/int(S[i])
+                    #w2 += M[i][1]/int(S[i])
+                    w1 += M[i][0]*(int(S[i])-40)
+                    w2 += M[i][1]*(int(S[i])-40)
+                    #w1 += int(S[i])**M[i][0]
+                    #w2 += int(S[i])**M[i][1]
 
-        self.model.ducks[chromNum].update(w1,w2)
+                self.model.ducks[chromNum].update(w1,w2)
+            else:
+                self.model.genome.chromosomes[chromNum].strength = self.model.ducks[chromNum].Fitness
  
 def matrixScale(M,S):
     """Takes a matrix with values from zero to 1 and returns a matrix with values centered around zero scaled by value S

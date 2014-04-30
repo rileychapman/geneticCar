@@ -46,6 +46,7 @@ while running:
         if model.drawTrack == False and model.drawMode ==False and model.offsetMode == True:
             controller.offset_track(50)
             model.offsetMode = False
+    """
     for i in range(len(model.ducks)):
         if not model.ducks[i].FAIL:
 
@@ -69,7 +70,21 @@ while running:
 
     #print 'Final Fitness',model.duck.Fitness
     #model.new_individual()
+    """
 
+
+    if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
+        controller.Drive()
+
+    view.draw6()
+    time.sleep(0.001)
+    if not False in [element.FAIL for element in model.ducks]:
+        model.new_generation()
+        print "new generation"
+        model.genome.evolve()
+        print "evolved",model.genome.chromosomes[0].genes
+        chromNum = 0     
+        model.Iteration =0
     
     #changes to next chromosome
  
