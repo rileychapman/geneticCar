@@ -7,6 +7,7 @@ from pygame.locals import *
 from geneticModel import *
 import math
 from car import *
+from car_sprite import *
 from geneticModel import *
 
 class Platformer_Model:
@@ -15,6 +16,7 @@ class Platformer_Model:
     def __init__(self,screen_size):
         #self.level1 = change_to_list(0)
         self.duck = Duck(self,(100,100))
+        self.duck_sprite = Duck_sprite(self,(100,100))
         self.genome = Genome()
         self.drawTrack = False
         self.drawMode = True

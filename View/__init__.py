@@ -3,7 +3,8 @@
 """
 
 import pygame, random, math, time
-from pygame.locals import *
+from pygame.locals import *       # Create an image of the block, and fill it with a color.
+
 import math
 
 class PyGameWindowView:

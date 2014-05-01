@@ -51,7 +51,7 @@ while running:
                 controller.offset_track(50)
                 model.offsetMode = False
 
-x        if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
+        if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
             controller.Drive(chromNum)
         if model.duck.FAIL:
             try:
