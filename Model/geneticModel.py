@@ -11,7 +11,7 @@ import random
 
 class Chromosome:
     def __init__(self,Iteration):
-        self.genes = matrixEvolution.formMatrix(3,2)
+        self.genes = matrixEvolution.formMatrix(6,2) #makes a matrix of sprecefied size
         self.strength = 0.0 
         self.identification = [0,Iteration]
         self.Iteration = Iteration

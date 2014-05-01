@@ -38,6 +38,8 @@ class PyGameWindowView:
             pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
+
+        #if not pygame.font: print 'Warning, fonts disabled: draw1'
         if pygame.font:
             font = pygame.font.Font(None, 20)
 
@@ -110,6 +112,8 @@ class PyGameWindowView:
 
             pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListInner)
             pygame.draw.lines(self.screen,(255,255,255),True,self.model.drawListOuter)
+
+        if not pygame.font: print 'Warning, fonts disabled: draw3'
 
         if pygame.font:
             font = pygame.font.Font(None, 20)
@@ -236,6 +240,8 @@ class PyGameWindowView:
 
 
         pygame.display.flip()
+
     def drawDuck(self):
         pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
         pygame.display.update()
+
