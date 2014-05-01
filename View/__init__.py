@@ -4,6 +4,7 @@
 
 import pygame, random, math, time
 from pygame.locals import *
+import pygame.locals.font
 import math
 
 class PyGameWindowView:
@@ -37,6 +38,7 @@ class PyGameWindowView:
             pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
+
         #if not pygame.font: print 'Warning, fonts disabled: draw1'
         if pygame.font:
             font = pygame.font.Font(None, 20)
