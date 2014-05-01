@@ -281,7 +281,7 @@ class PyGameController:
             w2 = -max_wheel_velocity
 
 
-        print "w1: " + str(w1) + "     w2: " + str(w2)
+        #print "w1: " + str(w1) + "     w2: " + str(w2)
 
         self.model.duck.update(w1,w2)
 
