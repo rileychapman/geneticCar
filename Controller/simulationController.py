@@ -258,10 +258,23 @@ class PyGameController:
             print 'len(M)',len(M),'S',len(S)
             raise Exception("Number of Parameters does not Match Twice Number of sensors")
         i = 0
-        while i < range(len(M)):
-            w1 += M[i][0]*int(S[i])**2 + M[i+1][0]*int(S[i])
-            w2 += M[i][1]*int(S[i])**2 + M[i+1][1]*int(S[i])
-            i += 2
+        j = 0
+        while i < len(S):
+            w1 += M[j][0]*int(S[i])**2 + M[j+1][0]*int(S[i])
+            w2 += M[j][1]*int(S[i])**2 + M[j+1][1]*int(S[i])
+            i += 1
+            j += 2
+
+        max_wheel_velocity = 0#limit the wheel velocity
+        if w1 > max_wheel_velocity:
+            w1 = max_wheel_velocity
+        if w1 < -max_wheel_velocity:
+            w1 = -max_wheel_velocity
+
+        if w2 > max_wheel_velocity:
+            w2 = max_wheel_velocity
+        if w2 < -max_wheel_velocity:
+            w2 = -max_wheel_velocity
 
         self.model.duck.update(w1,w2)
 
