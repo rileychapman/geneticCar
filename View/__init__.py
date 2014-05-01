@@ -258,7 +258,6 @@ class PyGameWindowView:
             pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
-        print 'drew frame'
         if False:
             font = pygame.font.Font(None, 20)
 

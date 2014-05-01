@@ -123,17 +123,18 @@ class PyGameController:
                         numPopped +=1
 
             if not popped:
-                self.model.Track3[0].append(innerElement)
+                self.model.TrackRemove[0].append(innerElement)
             j+=1
 
         for element in self.model.Track2[1]:
-            self.model.Track3[1].append(element)
+            self.model.TrackRemove[1].append(element)
+     
 
-
+        
         drawInd = 0
-        for trackblock in self.model.Track3[1]:
+        for trackblock in self.model.TrackRemove[1]:
             self.model.drawListInner.append((int(trackblock.pos[0]),int(trackblock.pos[1])))
-        for trackblock in self.model.Track3[0]: 
+        for trackblock in self.model.TrackRemove[0]: 
             self.model.drawListOuter.append((int(trackblock.pos[0]),int(trackblock.pos[1])))
 
         self.model.drawListInner.append(self.model.drawListInner[0])
@@ -156,17 +157,12 @@ class PyGameController:
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     except IndexError:
                         #print 'too big, fixed'
-                        if xIndAppend > self.model.screen_size[0]-1: #499:
-                            xIndAppend = self.model.screen_size[0]-1
-                        if yIndAppend >self.model.screen_size[1]-1:
-                            yIndAppend = self.model.screen_size[1]-1
+                        if xIndAppend > 499: #499:
+                            xIndAppend = 499
+                        if yIndAppend >499:
+                            yIndAppend = 499
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
-#
-# Many errors wiht this code. TO-DO: Figure out how best to handle IndexErrors
-#                    try:
-#                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1
-#                    except IndexError:
-#                        self.model.ArrayTrack = [[0,0]]
+
 #                        
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
                     xInd +=1
@@ -184,11 +180,12 @@ class PyGameController:
                     try:
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     except IndexError:
+
                         #print 'too big, fixed'
-                        if xIndAppend > self.model.screen_size[0]-1:
-                            xIndAppend = self.model.screen_size[0]-1
-                        if yIndAppend >self.model.screen_size[1]-1:
-                            yIndAppend = self.model.screen_size[1]-1
+                        if xIndAppend > 499:
+                            xIndAppend = 499
+                        if yIndAppend >499:
+                            yIndAppend = 499
                         self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                             
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
@@ -209,7 +206,16 @@ class PyGameController:
                 while xInd in range(abs(p1[0]-p2[0])):
                     yIndAppend = int(p1[1] - xSign*slope*xInd)
                     xIndAppend = int(p1[0] - xSign*xInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+
+                    try:
+                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    except IndexError:
+                        #print 'too big, fixed'
+                        if xIndAppend > 499:
+                            xIndAppend = 499
+                        if yIndAppend >499:
+                            yIndAppend = 499
+                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     xInd +=1
             elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
@@ -223,7 +229,15 @@ class PyGameController:
                 while yInd in range(abs(p1[1]-p2[1])):
                     xIndAppend = int(p1[0] - ySign*slope*yInd)
                     yIndAppend = int(p1[1] - ySign*yInd)
-                    self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    try:
+                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                    except IndexError:
+                        #print 'too big, fixed'
+                        if xIndAppend > 499:
+                            xIndAppend = 499
+                        if yIndAppend >499:
+                            yIndAppend = 499
+                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1                     
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             outerInd+=1

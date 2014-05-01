@@ -25,6 +25,7 @@ class Platformer_Model:
         self.Track1 = [[],[]]
         self.Track2 = [[],[]]
         self.Track3 = [[],[]]
+        self.TrackRemove = [[],[]]
         self.ArrayTrack = []
         self.drawListInner = []
         self.drawListOuter = []
@@ -34,11 +35,11 @@ class Platformer_Model:
         self.screen_size = screen_size
         #making the track be an array instead of pair of lists
         xInd = 0
-        while xInd in range(screen_size[0]):
+        while xInd in range(500):
             yInd = 0
 
             self.ArrayTrack.append([])
-            while yInd in range(screen_size[1]):
+            while yInd in range(500):
                 self.ArrayTrack[xInd].append(0)
                 yInd +=1
             xInd +=1

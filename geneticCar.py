@@ -22,7 +22,7 @@ import math
 
 pygame.init()
 walls = []
-size = (500, 500)
+size = (700, 500)
 chromNum = 0
 
 screen = pygame.display.set_mode(size)
