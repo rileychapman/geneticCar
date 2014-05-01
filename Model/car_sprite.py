@@ -8,10 +8,11 @@ import pygame, random, math, time
 from pygame.locals import *
 import math
 import time
+import os
 
 
 def load_image(name, colorkey=None):
-    fullname = os.path.join('data', name)
+    fullname = os.path.join(name)
     try:
         image = pygame.image.load(fullname)
     except pygame.error, message:
@@ -28,7 +29,7 @@ class Block(pygame.sprite.Sprite):
 
     # Constructor. Pass in the color of the block,
     # and its x and y position
-    def __init__(self, color, width, height):
+    def __init__(self):
        # Call the parent class (Sprite) constructor
        pygame.sprite.Sprite.__init__(self)
 
@@ -75,11 +76,11 @@ def main():
 #    punch_sound = load_sound('punch.wav')
 #    chimp = Chimp()
 #    fist = Fist()
-    allsprites = pygame.sprite.RenderPlain((Block))
+    block = Block()
+    allsprites = pygame.sprite.RenderPlain(block)
 
 #Main Loop
     while 1:
-        clock.tick(60)
 
     #Handle Input Events
         for event in pygame.event.get():
