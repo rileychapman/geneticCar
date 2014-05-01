@@ -70,11 +70,12 @@ while running:
                 chromNum = 0     
                 model.Iteration =0
         
-        if not model.drawMode:
+        if not model.drawTrack and not model.drawMode:
             view.draw5()
             time.sleep(0.001)
         else:
-            view.draw4()
+            view.drawTrack()
+            view.drawDuck()
             time.sleep(0.001)
 
     #print 'Final Fitness',model.duck.Fitness

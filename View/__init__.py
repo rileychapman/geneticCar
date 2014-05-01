@@ -169,7 +169,8 @@ class PyGameWindowView:
         for b in self.model.sensorPoints:
             block = pygame.Rect(b[1],b[2],20,20)
             pygame.draw.rect(self.screen,pygame.Color(255,255,255),b)
-
+        
+        pygame.display.update()
 
     def draw5(self):
         
@@ -235,3 +236,6 @@ class PyGameWindowView:
 
 
         pygame.display.flip()
+    def drawDuck(self):
+        pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
+        pygame.display.update()
