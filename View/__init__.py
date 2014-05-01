@@ -4,7 +4,6 @@
 
 import pygame, random, math, time
 from pygame.locals import *
-import pygame.locals.font
 import math
 
 class PyGameWindowView:
