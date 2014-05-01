@@ -67,9 +67,9 @@ class Duck:
         self.pointlist.append((self.x,self.y))
 
         if self.dx != 0:
-            self.collision_test(self.dx, 0)
+            self.collision_test(self.dx,0)
         if self.dy != 0:
-            self.collision_test(0, self.dy )
+            self.collision_test(0, self.dy)
 
         self.RecentMovement.append((self.dx,self.dy))
         if abs(distance(self.RecentMovement)) >30 or abs(distance(self.RecentMovement)) >30:
@@ -80,11 +80,15 @@ class Duck:
             #print 'Fitness',self.Fitness
 
         self.S=self.read_sensors()
+
         self.time_limit()
+
         self.movement_limit()
+
         self.success_check()
+
 #        self.success_check()
-    
+
     
     def time_limit(self):
 #        print "in time limit"
@@ -125,30 +129,31 @@ class Duck:
     
      
     def check_sensor(self, theta, xp, yp):
+
         x = 500*math.sin(theta)
         y = 500*math.cos(theta)
         
-        pygame.display.update()
-        
-#        collide = []
-        
+        pygame.display.update()        
+#        collide = []        
         distance = math.sqrt((x-xp)**2 + (y-yp)**2)
         dx = (x-xp)/distance
         dy = (y-yp)/distance
 #        pygame.draw.line(self.screen,(255,0,0),(xp,yp),(x,y))
         distance = 0
-        
+        time1 = time.time()     
         while distance <= 600:
+            print time.time()
             xp += dx
-            yp += dy
-            
-            distance += 1
-            
+            yp += dy            
+            distance += 1            
             if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
 #                collide.append((xp,yp))
+                print 'time',time.time()-time1
                 return distance
-
         return 0
+
+
+
                 
     def read_sensors(self):
         self.SensorList = []
@@ -241,8 +246,8 @@ class Duck:
         x = 500*math.sin(theta)
         y = 500*math.cos(theta)
     
-        for i in range(20000):
-            i2 = i/40.0
+        for i in range(1000):
+            i2 = i/2
             xInd = xp + i2*math.cos(theta)
             yInd = yp + i2*math.sin(theta)
             self.SensorList.append((xInd,yInd))
