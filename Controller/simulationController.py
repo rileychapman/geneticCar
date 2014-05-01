@@ -265,7 +265,11 @@ class PyGameController:
             i += 1
             j += 2
 
-        max_wheel_velocity = 0#limit the wheel velocity
+        velocity_scale = .003
+        w1 = w1 * velocity_scale
+        w2 = w2*velocity_scale
+
+        max_wheel_velocity = 2 #limit the wheel velocity
         if w1 > max_wheel_velocity:
             w1 = max_wheel_velocity
         if w1 < -max_wheel_velocity:
@@ -275,6 +279,9 @@ class PyGameController:
             w2 = max_wheel_velocity
         if w2 < -max_wheel_velocity:
             w2 = -max_wheel_velocity
+
+
+        print "w1: " + str(w1) + "     w2: " + str(w2)
 
         self.model.duck.update(w1,w2)
 
