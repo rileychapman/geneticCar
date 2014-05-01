@@ -142,7 +142,8 @@ class PyGameWindowView:
 
         pygame.display.update()
 
-    def draw4(self):
+    def draw4(self): 
+        print "hi"
         self.screen.fill(pygame.Color(0,0,0))
         xInd = 0
         thing = pygame.Rect(20,20,5,5)
@@ -171,20 +172,20 @@ class PyGameWindowView:
 
 
     def draw5(self):
+        
         self.screen.fill(pygame.Color(0,0,0))
-        
-        img=pygame.image.load("Track.jpg")
-        self.screen.blit(img,(0,0))        
-        
+       
+        self.screen.blit(self.image,(0,0))        
+ 
         pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
         
-        for b in self.model.duck.SensorList:
-
-            block = pygame.Rect(b[0],b[1],2,2)
-            pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
+#        for b in self.model.duck.SensorList:
+#
+#            block = pygame.Rect(b[0],b[1],2,2)
+#            pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
-        
+
         if pygame.font:
             font = pygame.font.Font(None, 20)
 
@@ -217,10 +218,9 @@ class PyGameWindowView:
             print_Id = font.render(Fit_text, 1, (255, 255, 255))
             Id_pos = print_Id.get_rect(bottomleft = (0, 500))
             self.screen.blit(print_Id,Id_pos)
-        
         pygame.display.flip()
-            
-            
+ 
+        
     def drawTrack(self):
         self.screen.fill(pygame.Color(0,0,0))
         

@@ -52,6 +52,7 @@ while running:
                 model.offsetMode = False
                 view.drawTrack()
                 pygame.image.save(view.screen, "Track.jpg")
+                view.image=pygame.image.load("Track.jpg")
 
         if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
             controller.Drive(chromNum)
