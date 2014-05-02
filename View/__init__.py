@@ -52,26 +52,25 @@ class PyGameWindowView:
             Time_pos = print_time.get_rect(bottomleft = (600,35))
             self.screen.blit(print_time,Time_pos) 
 
-#            Iter_str = str(self.model.Iteration)
-#            Iter_text = 'Iteration: '+Iter_str
-#            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
-#            Iter_pos = print_Iter.get_rect(bottomleft = (0, 425))
-#            self.screen.blit(print_Iter,Iter_pos)   
-#            
-#
-#            
-#            Fit_str = str(self.model.duck.Fitness)
-#            Fit_text = 'Fitness: '+Fit_str
-#            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
-#            Fit_pos = print_Fit.get_rect(bottomleft = (0, 475))
-#            self.screen.blit(print_Fit,Fit_pos) 
-#            
-#            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
-#            Fit_text = 'Id: '+Id_str
-#            print_Id = font.render(Fit_text, 1, (255, 255, 255))
-#            Id_pos = print_Id.get_rect(bottomleft = (0, 500))
-#            self.screen.blit(print_Id,Id_pos) 
-#        
+            Iter_str = str(self.model.Iteration)
+            Iter_text = 'Iteration: '+Iter_str
+            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+            Iter_pos = print_Iter.get_rect(bottomleft = (0, 425))
+            self.screen.blit(print_Iter,Iter_pos)   
+            
+            
+            Fit_str = str(self.model.duck.Fitness)
+            Fit_text = 'Fitness: '+Fit_str
+            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+            Fit_pos = print_Fit.get_rect(bottomleft = (0, 475))
+            self.screen.blit(print_Fit,Fit_pos) 
+            
+            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
+            Fit_text = 'Id: '+Id_str
+            print_Id = font.render(Fit_text, 1, (255, 255, 255))
+            Id_pos = print_Id.get_rect(bottomleft = (0, 500))
+            self.screen.blit(print_Id,Id_pos) 
+        
 
         pygame.display.update()
 
@@ -231,7 +230,7 @@ class PyGameWindowView:
 
 
 
-    def draw6(self):
+    def draw_sophie(self):
         self.screen.fill(pygame.Color(0,0,0))
         
         i = 0
