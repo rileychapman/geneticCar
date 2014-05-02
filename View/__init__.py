@@ -43,33 +43,35 @@ class PyGameWindowView:
             Gen_str = str(self.model.genome.generation)
             Gen_text = 'Generation: '+Gen_str
             print_Gen = font.render(Gen_text, 1, (255, 255, 255))
-            Gen_pos = print_Gen.get_rect(bottomleft = (0, 400))
+            Gen_pos = print_Gen.get_rect(bottomleft = (600, 10))
             self.screen.blit(print_Gen,Gen_pos) 
-
-            Iter_str = str(self.model.Iteration)
-            Iter_text = 'Iteration: '+Iter_str
-            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
-            Iter_pos = print_Iter.get_rect(bottomleft = (0, 425))
-            self.screen.blit(print_Iter,Iter_pos)   
             
-            Gen_time = str(int(time.time() - self.model.duck.last_fail_time))
-            Time_text = 'Iteration runtime: '+Gen_time
+            Gen_time = str(int(time.time() - self.model.last_generation_time))
+            Time_text = 'Generation runtime: '+Gen_time
             print_time = font.render(Time_text, 1, (255, 255, 255))
-            Time_pos = print_time.get_rect(bottomleft = (0,450))
+            Time_pos = print_time.get_rect(bottomleft = (600,35))
             self.screen.blit(print_time,Time_pos) 
-            
-            Fit_str = str(self.model.duck.Fitness)
-            Fit_text = 'Fitness: '+Fit_str
-            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
-            Fit_pos = print_Fit.get_rect(bottomleft = (0, 475))
-            self.screen.blit(print_Fit,Fit_pos) 
-            
-            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
-            Fit_text = 'Id: '+Id_str
-            print_Id = font.render(Fit_text, 1, (255, 255, 255))
-            Id_pos = print_Id.get_rect(bottomleft = (0, 500))
-            self.screen.blit(print_Id,Id_pos) 
-        
+
+#            Iter_str = str(self.model.Iteration)
+#            Iter_text = 'Iteration: '+Iter_str
+#            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+#            Iter_pos = print_Iter.get_rect(bottomleft = (0, 425))
+#            self.screen.blit(print_Iter,Iter_pos)   
+#            
+#
+#            
+#            Fit_str = str(self.model.duck.Fitness)
+#            Fit_text = 'Fitness: '+Fit_str
+#            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+#            Fit_pos = print_Fit.get_rect(bottomleft = (0, 475))
+#            self.screen.blit(print_Fit,Fit_pos) 
+#            
+#            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
+#            Fit_text = 'Id: '+Id_str
+#            print_Id = font.render(Fit_text, 1, (255, 255, 255))
+#            Id_pos = print_Id.get_rect(bottomleft = (0, 500))
+#            self.screen.blit(print_Id,Id_pos) 
+#        
 
         pygame.display.update()
 
@@ -258,39 +260,40 @@ class PyGameWindowView:
             pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
-        if False:
+        pygame.draw.line(self.screen,(255,255,255), (500,0), (500,500))
+        if True:
             font = pygame.font.Font(None, 20)
 
             Gen_str = str(self.model.genome.generation)
             Gen_text = 'Generation: '+Gen_str
             print_Gen = font.render(Gen_text, 1, (255, 255, 255))
-            Gen_pos = print_Gen.get_rect(bottomleft = (0, 400))
+            Gen_pos = print_Gen.get_rect(bottomleft = (525,25))
             self.screen.blit(print_Gen,Gen_pos) 
-
-            Iter_str = str(self.model.Iteration)
-            Iter_text = 'Iteration: '+Iter_str
-            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
-            Iter_pos = print_Iter.get_rect(bottomleft = (0, 425))
-            self.screen.blit(print_Iter,Iter_pos)   
             
-            Gen_time = str(int(time.time() - self.model.duck.last_fail_time))
-            Time_text = 'Iteration runtime: '+Gen_time
+            Gen_time = str(int(time.time() - self.model.last_generation_time))
+            Time_text = 'Generation runtime: '+Gen_time
             print_time = font.render(Time_text, 1, (255, 255, 255))
-            Time_pos = print_time.get_rect(bottomleft = (0,450))
-            self.screen.blit(print_time,Time_pos) 
+            Time_pos = print_time.get_rect(bottomleft = (525,50))
+            self.screen.blit(print_time,Time_pos)
             
-            Fit_str = str(self.model.duck.Fitness)
-            Fit_text = 'Fitness: '+Fit_str
-            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
-            Fit_pos = print_Fit.get_rect(bottomleft = (0, 475))
-            self.screen.blit(print_Fit,Fit_pos) 
-            
-            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
-            Fit_text = 'Id: '+Id_str
-            print_Id = font.render(Fit_text, 1, (255, 255, 255))
-            Id_pos = print_Id.get_rect(bottomleft = (0, 500))
-            self.screen.blit(print_Id,Id_pos) 
-        
+#            Iter_str = str(self.model.Iteration)
+#            Iter_text = 'Iteration: '+Iter_str
+#            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+#            Iter_pos = print_Iter.get_rect(bottomleft = (550, 425))
+#            self.screen.blit(print_Iter,Iter_pos)               
+#            
+#            Fit_str = str(self.model.duck.Fitness)
+#            Fit_text = 'Fitness: '+Fit_str
+#            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+#            Fit_pos = print_Fit.get_rect(bottomleft = (550, 475))
+#            self.screen.blit(print_Fit,Fit_pos) 
+#            
+#            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
+#            Fit_text = 'Id: '+Id_str
+#            print_Id = font.render(Fit_text, 1, (255, 255, 255))
+#            Id_pos = print_Id.get_rect(bottomleft = (550, 500))
+#            self.screen.blit(print_Id,Id_pos) 
+#        
 
 
         pygame.display.update()
