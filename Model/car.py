@@ -38,7 +38,7 @@ class Duck:
 
 
     def assign_color(self):
-        print "assigning color"
+#        print "assigning color"
         color1 = random.randint(50,255)
         color2 = random.randint(50,255)
         color3 = random.randint(50,255)
