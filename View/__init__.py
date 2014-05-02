@@ -286,19 +286,30 @@ class PyGameWindowView:
             Fit_pos = print_Fit.get_rect(bottomleft = (625, 100))
             self.screen.blit(print_Fit,Fit_pos)
             
+            Time_text = 'Runtime'
+            print_time = font.render(Time_text, 1, (255, 255, 255))
+            Time_pos = print_time.get_rect(bottomleft = (725, 100))
+            self.screen.blit(print_time,Time_pos)             
+            
             for i in range(20):
                                
-                Iter_str = str(i)
+                Iter_str = str(i+1)
                 Iter_text = Iter_str
                 print_Iter = font.render(Iter_text, 1, self.model.ducks[i].color)
                 Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 15*i))
                 self.screen.blit(print_Iter,Iter_pos)               
                 
-                Fit_str = str(int(self.model.ducks[i].Fitness))
+                Fit_str = str(round(self.model.ducks[i].Fitness, 2))
                 Fit_text = Fit_str
                 print_Fit = font.render(Fit_text, 1, self.model.ducks[i].color)
                 Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 15*i))
                 self.screen.blit(print_Fit,Fit_pos) 
+                
+                Gen_time = str(round(time.time() - self.model.ducks[i].last_fail_time, 2))
+                Time_text = Gen_time
+                print_time = font.render(Time_text, 1, self.model.ducks[i].color)
+                Time_pos = print_time.get_rect(bottomleft = (725, 125 + 15*i))
+                self.screen.blit(print_time,Time_pos) 
 ##            
 #            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
 #            Fit_text = 'Id: '+Id_str
