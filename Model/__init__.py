@@ -8,14 +8,15 @@ from geneticModel import *
 import math
 from car import *
 from geneticModel import *
+import time
 
 class Platformer_Model:
     """ Encodes the game state """
-    """TO-DO: Clean up these level lists"""
     def __init__(self,screen_size):
         #self.level1 = change_to_list(0)
         self.ducks = [Duck(self,(100,100)) for i in range(20)]
         self.duck = Duck(self,(100,100))
+        self.last_generation_time = time.time()
         self.genome = Genome()
         self.drawTrack = False
         self.drawMode = True
@@ -53,6 +54,7 @@ class Platformer_Model:
         if self.duck.FAIL:
             self.duck = Duck(self,(100,100))
     def new_generation(self):
+        self.last_generation_time = time.time()
         self.ducks = [Duck(self,(100,100)) for i in range(len(self.ducks))]
 
 
