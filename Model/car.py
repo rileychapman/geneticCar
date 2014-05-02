@@ -8,6 +8,8 @@ import pygame, random, math, time
 from pygame.locals import *
 import math
 import time
+from geneticModel import *
+
 class Duck:
     """Code for moving car"""
 
@@ -43,6 +45,9 @@ class Duck:
         Car angle, x and y updated
         Car angle is determined from the reference frame of the car
         """
+
+        self.S=self.read_sensors()
+
         t=(w2-w1)*self.radius #distance around the turning circle that the wheels have traveled against each other
         w = math.atan(float(t)/self.rect.width)
 
@@ -79,7 +84,6 @@ class Duck:
             self.Fitness = distance(self.TotalMovement,True)
             #print 'Fitness',self.Fitness
 
-        self.S=self.read_sensors()
 
         self.time_limit()
 
