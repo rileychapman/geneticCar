@@ -5,13 +5,15 @@
 import pygame, random, math, time
 from pygame.locals import *
 import math
+import os
 
 class PyGameWindowView:
     """ Draws our game in a Pygame window """
     def __init__(self,model,screen):
         self.model = model
         self.screen = screen
-        
+        self.car_image = pygame.image.load('car.png')
+        self.car_image = pygame.transform.scale(self.car_image, (30, 20))
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
@@ -182,7 +184,9 @@ class PyGameWindowView:
        
         self.screen.blit(self.image,(0,0))        
  
-        pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
+        #pygame.draw.rect(self.screen, pygame.Color(0,200,200), self.model.duck.rect)
+        rotatedImage = pygame.transform.rotate(self.car_image,self.model.duck.theta * -57.2957)
+        self.screen.blit(rotatedImage, self.model.duck.rect)
         
 #        for b in self.model.duck.SensorList:
 #
@@ -242,6 +246,7 @@ class PyGameWindowView:
         pygame.display.flip()
 
     def drawDuck(self):
-        pygame.draw.rect(self.screen, pygame.Color(0,255,0), self.model.duck.rect)
+        #pygame.draw.rect(self.screen, pygame.Color(0,200,200), self.model.duck.rect)
+        self.screen.blit(self.car_image, self.model.duck.rect)
         pygame.display.update()
 
