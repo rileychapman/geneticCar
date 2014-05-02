@@ -30,9 +30,21 @@ class Duck:
         self.TotalMovement = []
         self.S = [50,50,50]
         self.SensorList = []
+        self.color = color
+        self.assign_color()
+
 
 #        self.screen = screen
 
+
+    def assign_color(self):
+        print "assigning color"
+        color1 = random.randint(50,255)
+        color2 = random.randint(50,255)
+        color3 = random.randint(50,255)
+
+        self.color = pygame.Color(color1, color2, color3)
+            
     def update(self, w1, w2):
         """ updates the position and angle of the car given the speed of rotation of the wheel. Angular veloctity of the wheel is use rather than a torque output becuase
         the only way to reasonable simuulate a torque output would be to calcualte the loading curve of the motor. At this point in the project it is 
@@ -113,6 +125,7 @@ class Duck:
             xDist = point1[0]-point2[0]
             yDist = point1[1]-point2[1]
             if math.hypot(xDist,yDist) < 10:
+                self.color = pygame.Color(255, 0, 0)
                 self.FAIL = True
                 print "Too Slow"
         except IndexError:

@@ -9,6 +9,7 @@ import math
 from car import *
 from geneticModel import *
 import time
+import random
 
 class Platformer_Model:
     """ Encodes the game state """
@@ -46,12 +47,12 @@ class Platformer_Model:
             xInd +=1
 
 
-        
     def update(self):
         self.duck.update(vx, vy)
 
     def new_individual(self):
         if self.duck.FAIL:
+            self.duck.color = pygame.Color(255, 0, 0)
             self.duck = Duck(self,(100,100))
     def new_generation(self):
         self.last_generation_time = time.time()
