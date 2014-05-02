@@ -237,7 +237,7 @@ class PyGameWindowView:
         for element in self.model.ducks:
 
             #print "drawing rect",i,element.rect.center
-            if not self.model.ducks[i].FAIL:
+            if not element.FAIL:
                 pygame.draw.rect(self.screen, pygame.Color(0,255,0), element.rect)
             else:
                 pygame.draw.rect(self.screen, pygame.Color(255,0,0), element.rect)

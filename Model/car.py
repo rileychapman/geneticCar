@@ -122,7 +122,7 @@ class Duck:
         xp = self.rect.x
         yp = self.rect.y
             
-        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15) and self.Fitness >500:
+        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15) and self.Fitness >800:
             print "SUCCESS!"
             time_taken=time.time() - self.last_fail_time
             #print "Time to complete", time_taken
