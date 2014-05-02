@@ -14,7 +14,6 @@ import pygame, random, math, time
 from pygame.locals import *
 import math
 
-
 #generage a genome
 #genomeLength = 4
 #gen = driveMatrixEvolution.Genome(genomeLength) 
@@ -22,7 +21,7 @@ import math
 
 pygame.init()
 walls = []
-size = (700, 500)
+size = (800, 500)
 chromNum = 0
 
 screen = pygame.display.set_mode(size)
@@ -55,7 +54,7 @@ while running:
     if not False in [element.FAIL for element in model.ducks]:
         time.sleep(2)
         model.genome.evolve()
-
+        time.sleep(5)
         model.new_generation()
         print "new generation"
         print "evolved",model.genome.chromosomes[0].genes
