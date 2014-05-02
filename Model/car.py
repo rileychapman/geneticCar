@@ -209,6 +209,7 @@ class Duck:
         for wall in self.model.Track3[0]:
             if self.rect.colliderect(wall.rect):
                 self.last_fail_time = time.time()
+                self.color = pygame.Color(255, 0, 0)
 #                print self.last_fail_time
                 self.FAIL = True
                 #print "FAIL"
