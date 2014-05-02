@@ -276,18 +276,29 @@ class PyGameWindowView:
             Time_pos = print_time.get_rect(bottomleft = (525,50))
             self.screen.blit(print_time,Time_pos)
             
-#            Iter_str = str(self.model.Iteration)
-#            Iter_text = 'Iteration: '+Iter_str
-#            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
-#            Iter_pos = print_Iter.get_rect(bottomleft = (550, 425))
-#            self.screen.blit(print_Iter,Iter_pos)               
-#            
-#            Fit_str = str(self.model.duck.Fitness)
-#            Fit_text = 'Fitness: '+Fit_str
-#            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
-#            Fit_pos = print_Fit.get_rect(bottomleft = (550, 475))
-#            self.screen.blit(print_Fit,Fit_pos) 
-#            
+            Iter_text = 'Iteration'
+            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+            Iter_pos = print_Iter.get_rect(bottomleft = (525, 100))
+            self.screen.blit(print_Iter,Iter_pos)               
+            
+            Fit_text = 'Fitness'
+            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+            Fit_pos = print_Fit.get_rect(bottomleft = (625, 100))
+            self.screen.blit(print_Fit,Fit_pos)
+            
+            for i in range(20):                                
+                Iter_str = str(i)
+                Iter_text = Iter_str
+                print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+                Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 15*i))
+                self.screen.blit(print_Iter,Iter_pos)               
+                
+                Fit_str = str(self.model.ducks[i].Fitness)
+                Fit_text = 'Fitness: '+Fit_str
+                print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+                Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 15*i))
+                self.screen.blit(print_Fit,Fit_pos) 
+##            
 #            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
 #            Fit_text = 'Id: '+Id_str
 #            print_Id = font.render(Fit_text, 1, (255, 255, 255))
