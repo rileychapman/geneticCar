@@ -50,7 +50,7 @@ while running:
     if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
         controller.Drive()
 
-    view.draw6()
+    view.draw_sophie()
     time.sleep(0.001)
     if not False in [element.FAIL for element in model.ducks]:
         model.genome.evolve()
