@@ -287,18 +287,16 @@ class PyGameWindowView:
             self.screen.blit(print_Fit,Fit_pos)
             
             for i in range(20):
-#                rect = Rect(125 + 15*i, 525, 16, 16)
-#                pygame.draw.rect(self.screen, self.model.ducks[i].color, rect)
-#                                
+                               
                 Iter_str = str(i)
                 Iter_text = Iter_str
-                print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+                print_Iter = font.render(Iter_text, 1, self.model.ducks[i].color)
                 Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 15*i))
                 self.screen.blit(print_Iter,Iter_pos)               
                 
                 Fit_str = str(int(self.model.ducks[i].Fitness))
                 Fit_text = Fit_str
-                print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+                print_Fit = font.render(Fit_text, 1, self.model.ducks[i].color)
                 Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 15*i))
                 self.screen.blit(print_Fit,Fit_pos) 
 ##            
