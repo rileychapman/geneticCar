@@ -180,7 +180,7 @@ class PyGameWindowView:
 
     def draw5(self):
         
-        self.screen.fill(pygame.Color(0,0,0))
+        self.screen.fill(pygame.Color(95,95,95))
        
         self.screen.blit(self.image,(0,0))        
  
@@ -231,16 +231,16 @@ class PyGameWindowView:
  
         
     def drawTrack(self):
-        self.screen.fill(pygame.Color(0,0,0))
+        self.screen.fill(pygame.Color(55,55,55))
         
         if self.model.drawMode == True:
             for trackblock in self.model.Track:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
         else:
             for trackblock in self.model.Track3[1]:
-                pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
+                pygame.draw.rect(self.screen,pygame.Color(242,242,242),trackblock.rect)
             for trackblock in self.model.Track3[0]: #model.FinalTrack[1]:
-                pygame.draw.rect(self.screen,pygame.Color(255,0,0),trackblock.rect)
+                pygame.draw.rect(self.screen,pygame.Color(255,200,0),trackblock.rect)
 
 
         pygame.display.flip()
