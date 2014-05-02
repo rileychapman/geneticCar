@@ -15,7 +15,7 @@ class Platformer_Model:
     """ Encodes the game state """
     def __init__(self,screen_size):
         #self.level1 = change_to_list(0)
-        self.ducks = [Duck(self,(100,100)) for i in range(20)]
+        self.ducks = [Duck(self,(100,100)) for i in range(3)]
         self.duck = Duck(self,(100,100))
         self.last_generation_time = time.time()
         self.genome = Genome()

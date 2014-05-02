@@ -53,6 +53,7 @@ while running:
     view.draw_sophie()
     time.sleep(0.001)
     if not False in [element.FAIL for element in model.ducks]:
+        time.sleep(2)
         model.genome.evolve()
 
         model.new_generation()

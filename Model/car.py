@@ -124,7 +124,7 @@ class Duck:
             point2 = self.pointlist[-1]
             xDist = point1[0]-point2[0]
             yDist = point1[1]-point2[1]
-            if math.hypot(xDist,yDist) < 10:
+            if math.hypot(xDist,yDist) < 5:
                 self.color = pygame.Color(255, 0, 0)
                 self.FAIL = True
                 print "Too Slow"

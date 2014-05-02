@@ -286,7 +286,7 @@ class PyGameWindowView:
             Fit_pos = print_Fit.get_rect(bottomleft = (625, 100))
             self.screen.blit(print_Fit,Fit_pos)
             
-            for i in range(20):
+            for i in range(len(self.model.ducks)):
                                
                 Iter_str = str(i)
                 Iter_text = Iter_str
