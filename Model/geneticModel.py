@@ -85,7 +85,7 @@ class Genome:
             for i in range(len(nextGenChromosomesA)):
                 chrom = Chromosome(i+2)
                 chrom.identification[0] = self.generation
-                chrom.genes = matrixEvolution.mixMatrix2(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
+                chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
                 nextGenChromos.append(chrom)
             #print nextGenChromos[0].strength, nextGenChromos[1].strength
   

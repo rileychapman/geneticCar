@@ -144,7 +144,7 @@ class PyGameController:
         while innerInd in range(len(self.model.drawListInner)-1):
             p1 = self.model.drawListInner[innerInd] #first point
             p2 = self.model.drawListInner[innerInd+1] #second point
-
+            self.model.ArrayTrack[self.model.drawListInner[innerInd][0]][self.model.drawListInner[innerInd][1]] = 1 #!!!!!!!!!!
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
                 xSign = (p1[0] - p2[0])/abs(p1[0]-p2[0])
                 #print xSign
@@ -196,6 +196,8 @@ class PyGameController:
         while outerInd in range(len(self.model.drawListOuter)-1):
             p1 = self.model.drawListOuter[outerInd] #first point
             p2 = self.model.drawListOuter[outerInd+1] #second point
+            self.model.ArrayTrack[self.model.drawListOuter[outerInd][0]][self.model.drawListOuter[outerInd][1]] = 1 #!!!!!!!!!!
+
 
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
                 xSign = (p1[0] - p2[0])/abs(p1[0]-p2[0])
@@ -246,7 +248,7 @@ class PyGameController:
             if not self.model.ducks[chromNum].FAIL:
                 S=self.model.ducks[chromNum].S
                 M0=self.model.genome.chromosomes[chromNum].genes
-                M = matrixScale(M0,.05)
+                M = matrixScale(M0,.5)
 
                 w1 = 0
                 w2 = 0

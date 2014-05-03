@@ -133,6 +133,8 @@ class Duck:
             self.FAIL = True
 
     def movement_limit(self):
+        pass
+        """
         positions = self.pointlist
         try:
             point1 = self.pointlist[-50]
@@ -147,7 +149,7 @@ class Duck:
                 print "Too Slow"
         except IndexError:
             pass
-    
+        """
     def success_check(self):
         xp = self.rect.x
         yp = self.rect.y
