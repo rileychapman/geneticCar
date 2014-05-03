@@ -11,8 +11,17 @@ class PyGameWindowView:
     def __init__(self,model,screen):
         self.model = model
         self.screen = screen
-        self.car_image = pygame.image.load('car.png')
-        self.car_image = pygame.transform.scale(self.car_image, (30, 20))
+        self.car_images = []
+        i = 0
+        while i < 20:
+        	fileName = 'car' + str(i) + '.png'
+        	self.car_image = pygame.image.load(fileName)
+        	self.car_image = pygame.transform.scale(self.car_image, (30, 17))
+        	self.car_images.append(self.car_image)
+        	i += 1
+       	self.car_colors = [pygame.Color(240,163,10),pygame.Color(27,161,226),pygame.Color(0,80,239),pygame.Color(162,0,37),pygame.Color(130,90,44),pygame.Color(216,0,15),pygame.Color(164,196,0),pygame.Color(106,0,255),pygame.Color(96,169,23),pygame.Color(0,138,0),pygame.Color(118,96,138),pygame.Color(109,135,100),pygame.Color(250,104,0),pygame.Color(244,114,208),pygame.Color(229,20,0),pygame.Color(122,59,63),pygame.Color(0,171,169),pygame.Color(170,0,255),pygame.Color(216,193,0),pygame.Color(255,255,255)]
+        self.dead_car_image = pygame.transform.scale(pygame.image.load('dead_car.png'), (25,10))
+
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
@@ -236,10 +245,10 @@ class PyGameWindowView:
         #print 'drew frame'
         self.screen.fill(pygame.Color(60,60,60))
         
-        i = 0
+        i = 14
         for element in self.model.ducks:
             #pygame.draw.rect(self.screen, self.model.ducks[i].color, element.rect)
-            rotatedImage = pygame.transform.rotate(self.car_image,self.model.ducks[i].theta * -57.2957)
+            rotatedImage = pygame.transform.rotate(self.car_images[i],self.model.ducks[i].theta * -57.2957)
             self.screen.blit(rotatedImage, self.model.ducks[i].rect)
             #print "drawing rect",i,element.rect.center
 #            if not self.model.ducks[i].FAIL:
@@ -247,7 +256,7 @@ class PyGameWindowView:
 #            else:
 #                pygame.draw.rect(self.screen, pygame.Color(255,0,0), element.rect)
 
-            i+=1
+            i-=1
 
         if self.model.drawMode == True:
             for trackblock in self.model.Track:
@@ -302,19 +311,19 @@ class PyGameWindowView:
                                
                 Iter_str = str(i+1)
                 Iter_text = Iter_str
-                print_Iter = font.render(Iter_text, 1, self.model.ducks[i].color)
+                print_Iter = font.render(Iter_text, 1, self.car_colors[i])
                 Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 15*i))
                 self.screen.blit(print_Iter,Iter_pos)               
                 
                 Fit_str = str(round(self.model.ducks[i].Fitness, 2))
                 Fit_text = Fit_str
-                print_Fit = font.render(Fit_text, 1, self.model.ducks[i].color)
+                print_Fit = font.render(Fit_text, 1, self.car_colors[i])
                 Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 15*i))
                 self.screen.blit(print_Fit,Fit_pos) 
                 
                 Gen_time = str(round(time.time() - self.model.ducks[i].last_fail_time, 2))
                 Time_text = Gen_time
-                print_time = font.render(Time_text, 1, self.model.ducks[i].color)
+                print_time = font.render(Time_text, 1, self.car_colors[i])
                 Time_pos = print_time.get_rect(bottomleft = (725, 125 + 15*i))
                 self.screen.blit(print_time,Time_pos) 
 ##            

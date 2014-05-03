@@ -269,9 +269,7 @@ class PyGameController:
 		        M = matrixScale(M0,.05)
 		        w1 = 0
 		        w2 = 0
-		        if len(M) != 2*len(S):
-		            print 'len(M)',len(M),'S',len(S)
-		            raise Exception("Number of Parameters does not Match Twice Number of sensors")
+		        
 		        i = 0
 		        j = 0
 		        while i < len(S):
@@ -279,6 +277,10 @@ class PyGameController:
 		            w2 += M[j][1]*int(S[i])**2 + M[j+1][1]*int(S[i])
 		            i += 1
 		            j += 2
+
+		        movement_push = 0
+		        w1 += M[6][0] * movement_push
+		        w2 += M[6][1] * movement_push
 
 		        velocity_scale = .003
 		        w1 = w1 * velocity_scale
