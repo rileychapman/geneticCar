@@ -99,7 +99,7 @@ class Duck:
             self.Fitness = distance(self.TotalMovement,True)
             #print 'Fitness',self.Fitness
 
-        print 'total time', time.time()-time2
+        #print 'total time', time.time()-time2
 
         self.time_limit()
 
