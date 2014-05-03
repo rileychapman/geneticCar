@@ -243,11 +243,9 @@ class PyGameWindowView:
 
     def draw_sophie(self):
         #print 'drew frame'
-<<<<<<< HEAD
+
         self.screen.fill(pygame.Color(60,60,60))
-=======
-        self.screen.fill(pygame.Color(0,0,0))
->>>>>>> adding graph
+
         
         i = 14
         for element in self.model.ducks:
@@ -336,7 +334,7 @@ class PyGameWindowView:
 #            if i == len(self.model.ducks):
 #                totalfitness = []
             
-<<<<<<< HEAD
+
         best_text = "Highest fitness is  " +str(max(totalfitness))
         print_best = font.render(best_text, 1, (255,255,255))
         best_pos = print_best.get_rect(bottomleft = (600, 75))
@@ -344,39 +342,12 @@ class PyGameWindowView:
         
         pygame.display.update()
 
-
-=======
-        for i in range(len(self.model.ducks)):
-                           
-            Iter_str = str(i+1)
-            Iter_text = Iter_str
-            print_Iter = font.render(Iter_text, 1, self.model.ducks[i].color)
-            Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 15*i))
-            self.screen.blit(print_Iter,Iter_pos)               
-            
-            Fit_str = str(round(self.model.ducks[i].Fitness, 2))
-            Fit_text = Fit_str
-            print_Fit = font.render(Fit_text, 1, self.model.ducks[i].color)
-            Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 15*i))
-            self.screen.blit(print_Fit,Fit_pos) 
-            
-            Gen_time = str(round(time.time() - self.model.ducks[i].last_fail_time, 2))
-            Time_text = Gen_time
-            print_time = font.render(Time_text, 1, self.model.ducks[i].color)
-            Time_pos = print_time.get_rect(bottomleft = (725, 125 + 15*i))
-            self.screen.blit(print_time,Time_pos) 
-##            
-#            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
-#            Fit_text = 'Id: '+Id_str
-#            print_Id = font.render(Fit_text, 1, (255, 255, 255))
-#            Id_pos = print_Id.get_rect(bottomleft = (550, 500))
-#            self.screen.blit(print_Id,Id_pos) 
-#        
+        
         pygame.draw.line(self.screen, (255,255,255), (500,340),(800,340)) 
         for i in range(0,7,2):            
             y_str = str(i*100)
             print_y = font.render(y_str, 1, (255,255,255))
-            y_pos = print_y.get_rect(bottomleft = (525, 475-20*i))
+            y_pos = print_y.get_rect(bottomleft = (525, 480-20*i))
             self.screen.blit(print_y,y_pos) 
         
         
@@ -386,18 +357,18 @@ class PyGameWindowView:
         y=yi            
         
         for fit in self.model.genome.bestFitness:
-            print "fit", fit
-            xnew=x+20
+            
+            xnew=x+5
             ynew=yi-.2*fit
-            print "cood", xnew,ynew                    
+                           
             pygame.draw.line(self.screen, (255,255,255), (x,y),(xnew,ynew)) 
             #pygame.display.update()                
             
             y = ynew
             x=xnew
-        print "end"
-    pygame.display.update()
->>>>>>> adding graph
+
+        pygame.display.update()
+
 
 
 
