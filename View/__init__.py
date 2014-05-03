@@ -299,7 +299,7 @@ class PyGameWindowView:
         Fit_pos = print_Fit.get_rect(bottomleft = (625, 100))
         self.screen.blit(print_Fit,Fit_pos)
         
-        Fit_text = 'DEAD??'
+        Fit_text = 'Status'
         print_Fit = font.render(Fit_text, 1, (255, 255, 255))
         Fit_pos = print_Fit.get_rect(bottomleft = (725, 100))
         self.screen.blit(print_Fit,Fit_pos)
