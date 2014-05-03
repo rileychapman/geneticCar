@@ -268,7 +268,6 @@ class PyGameWindowView:
             for trackblock in self.model.Track3[0]: #model.FinalTrack[1]
 
                 pygame.draw.rect(self.screen,pygame.Color(255,200,0),trackblock.rect)
-        colors = [100,200,255]        
         for b in self.model.duck.SensorList:
 
             block = pygame.Rect(b[0],b[1],2,2)
@@ -276,71 +275,68 @@ class PyGameWindowView:
 
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
         pygame.draw.line(self.screen,(255,255,255), (500,0), (500,500))
-        if True:
-            font = pygame.font.Font(None, 20)
+        font = pygame.font.Font(None, 20)
 
-            Gen_str = str(self.model.genome.generation)
-            Gen_text = 'Generation: '+Gen_str
-            print_Gen = font.render(Gen_text, 1, (255, 255, 255))
-            Gen_pos = print_Gen.get_rect(bottomleft = (525,25))
-            self.screen.blit(print_Gen,Gen_pos) 
-            
-            Gen_time = str(int(time.time() - self.model.last_generation_time))
-            Time_text = 'Generation runtime: '+Gen_time
-            print_time = font.render(Time_text, 1, (255, 255, 255))
-            Time_pos = print_time.get_rect(bottomleft = (525,50))
-            self.screen.blit(print_time,Time_pos)
-            
-            Iter_text = 'Iteration'
-            print_Iter = font.render(Iter_text, 1, (255, 255, 255))
-            Iter_pos = print_Iter.get_rect(bottomleft = (525, 100))
+        Gen_str = str(self.model.genome.generation)
+        Gen_text = 'Generation: '+Gen_str
+        print_Gen = font.render(Gen_text, 1, (255, 255, 255))
+        Gen_pos = print_Gen.get_rect(bottomleft = (525,25))
+        self.screen.blit(print_Gen,Gen_pos) 
+        
+        Gen_time = str(int(time.time() - self.model.last_generation_time))
+        Time_text = 'Generation runtime: '+Gen_time
+        print_time = font.render(Time_text, 1, (255, 255, 255))
+        Time_pos = print_time.get_rect(bottomleft = (525,50))
+        self.screen.blit(print_time,Time_pos)
+        
+        Iter_text = 'Iteration'
+        print_Iter = font.render(Iter_text, 1, (255, 255, 255))
+        Iter_pos = print_Iter.get_rect(bottomleft = (525, 100))
+        self.screen.blit(print_Iter,Iter_pos)               
+        
+        Fit_text = 'Fitness'
+        print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+        Fit_pos = print_Fit.get_rect(bottomleft = (625, 100))
+        self.screen.blit(print_Fit,Fit_pos)
+        
+        Fit_text = 'DEAD??'
+        print_Fit = font.render(Fit_text, 1, (255, 255, 255))
+        Fit_pos = print_Fit.get_rect(bottomleft = (725, 100))
+        self.screen.blit(print_Fit,Fit_pos)
+        
+        totalfitness = []
+        
+        for i in range(len(self.model.ducks)):
+                                     
+            Iter_text = str(i+1)
+            print_Iter = font.render(Iter_text, 1, self.car_colors[i])
+            Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 20*i))
             self.screen.blit(print_Iter,Iter_pos)               
             
-            Fit_text = 'Fitness'
-            print_Fit = font.render(Fit_text, 1, (255, 255, 255))
-            Fit_pos = print_Fit.get_rect(bottomleft = (625, 100))
+            totalfitness.append(self.model.ducks[i].Fitness)
+            Fit_text = str(round(self.model.ducks[i].Fitness, 2))
+            print_Fit = font.render(Fit_text, 1, self.car_colors[i])
+            Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 20*i))
             self.screen.blit(print_Fit,Fit_pos)
-            
-#            Time_text = 'Runtime'
-#            print_time = font.render(Time_text, 1, (255, 255, 255))
-#            Time_pos = print_time.get_rect(bottomleft = (725, 100))
-#            self.screen.blit(print_time,Time_pos)             
-            
-            for i in range(len(self.model.ducks)):
-                
-                totalfitness = []
-                               
-                Iter_text = str(i+1)
-                print_Iter = font.render(Iter_text, 1, self.car_colors[i])
-                Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 15*i))
-                self.screen.blit(print_Iter,Iter_pos)               
-                
-                totalfitness.append(self.model.ducks[i].Fitness)
-                Fit_text = str(round(self.model.ducks[i].Fitness, 2))
-                print_Fit = font.render(Fit_text, 1, self.car_colors[i])
-                Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 15*i))
-                self.screen.blit(print_Fit,Fit_pos) 
-                
-                best_text = str(max(totalfitness))
-                print_best = font.render(best_text, 1, (255,255,255))
-                best_pos = print_best.get_rect(bottomleft = (600, 475))
-                self.screen.blit(print_best,best_pos)
-#                print max(totalfitness)
-            
-#                Gen_time = str(round(time.time() - self.model.ducks[i].last_fail_time, 2))
-#                Time_text = Gen_time
-#                print_time = font.render(Time_text, 1, self.car_colors[i])
-#                Time_pos = print_time.get_rect(bottomleft = (725, 125 + 15*i))
-#                self.screen.blit(print_time,Time_pos) 
-##            
-#            Id_str = str(self.model.genome.chromosomes[self.model.Iteration].identification)
-#            Fit_text = 'Id: '+Id_str
-#            print_Id = font.render(Fit_text, 1, (255, 255, 255))
-#            Id_pos = print_Id.get_rect(bottomleft = (550, 500))
-#            self.screen.blit(print_Id,Id_pos) 
-#          
 
+            if self.model.ducks[i].FAIL:
+                Fit_text = "dead )x"
+                color = (255, 0, 0)
+            elif self.model.ducks[i].FAIL == False:
+                Fit_text = "still alive!"
+                color = self.car_colors[i]           
+            print_Fit = font.render(Fit_text, 1, color)
+            Fit_pos = print_Fit.get_rect(bottomleft = (725, 125 + 20*i))
+            self.screen.blit(print_Fit,Fit_pos)
+                        
+#            if i == len(self.model.ducks):
+#                totalfitness = []
             
+        best_text = "Highest fitness is  " +str(max(totalfitness))
+        print_best = font.render(best_text, 1, (255,255,255))
+        best_pos = print_best.get_rect(bottomleft = (600, 475))
+        self.screen.blit(print_best,best_pos)
+        
         pygame.display.update()
 
 
