@@ -255,8 +255,16 @@ class PyGameWindowView:
 #                pygame.draw.rect(self.screen, pygame.Color(0,255,0), element.rect)
 #            else:
 #                pygame.draw.rect(self.screen, pygame.Color(255,0,0), element.rect)
-
+            
             i-=1
+            for b in element.SensorList:
+                try:
+                    c = [b[0],b[-1]]
+                    #pygame.draw.lines(self.screen,pygame.Color(255,255,255),False,c)
+                except:
+                    pass    
+                 
+
 
         if self.model.drawMode == True:
             for trackblock in self.model.Track:
@@ -269,10 +277,7 @@ class PyGameWindowView:
 
                 pygame.draw.rect(self.screen,pygame.Color(255,200,0),trackblock.rect)
         colors = [100,200,255]        
-        for b in self.model.duck.SensorList:
 
-            block = pygame.Rect(b[0],b[1],2,2)
-            pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
 
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
         pygame.draw.line(self.screen,(255,255,255), (500,0), (500,500))

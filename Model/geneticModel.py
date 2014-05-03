@@ -20,7 +20,7 @@ class Chromosome:
         print "   chromosome: " + str(self.genes) + '   strength: ' + str(self.strength)
 
 class Genome:
-    def __init__(self,population = 20,mutationRate = .1, mutationRange = .2):
+    def __init__(self,population = 20,mutationRate = .5, mutationRange = .2):
         chrom = []
         for i in range(population):
             chrom.append(Chromosome(i))
@@ -54,7 +54,7 @@ class Genome:
             bestChrom2=self.chromosomes[1]
             for chrom in self.chromosomes:
                 print 'best1',bestChrom1.strength,'best2',bestChrom2.strength,'this',chrom.strength
-                if chrom.strength == bestChrom1.strength:
+                if abs(chrom.strength - bestChrom1.strength) <5:
                     pass
                 elif chrom.strength > bestChrom1.strength:
                     bestChrom2=bestChrom1
