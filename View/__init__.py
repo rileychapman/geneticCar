@@ -340,7 +340,6 @@ class PyGameWindowView:
         best_pos = print_best.get_rect(bottomleft = (600, 75))
         self.screen.blit(print_best,best_pos)
         
-        pygame.display.update()
 
         
         pygame.draw.line(self.screen, (255,255,255), (500,340),(800,340)) 
