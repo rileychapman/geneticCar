@@ -45,6 +45,7 @@ class Platformer_Model:
                 self.ArrayTrack[xInd].append(0)
                 yInd +=1
             xInd +=1
+        self.Killed = False
 
 
     def update(self):

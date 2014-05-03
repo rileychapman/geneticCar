@@ -14,7 +14,7 @@ class Duck:
     """Code for moving car"""
 
     def __init__(self,model,pos):
-        self.rect = pygame.Rect(pos[0], pos[1], 30, 20)
+        self.rect = pygame.Rect(pos[0], pos[1], 30, 15)
         self.x = pos[0]       #x position
         self.y = pos[1]        #y position
         self.dx = 0        

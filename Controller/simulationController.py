@@ -33,7 +33,7 @@ class PyGameController:
             if event.key == pygame.K_DOWN:
                 self.model.duck.update(-5,-5)
             if event.key ==   K_k:
-                self.model.duck.FAIL = True
+                self.model.Killed = True
         if event.type == MOUSEBUTTONDOWN:
             self.model.drawTrack = True
     
