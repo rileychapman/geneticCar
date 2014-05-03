@@ -35,6 +35,8 @@ class Platformer_Model:
         self.Generation = 0
         self.Iteration = 0
         self.screen_size = screen_size
+#        self.best_fitness = 0
+#        self.find_best_fitness()
         #making the track be an array instead of pair of lists
         xInd = 0
         while xInd in range(500):
@@ -58,9 +60,12 @@ class Platformer_Model:
         self.last_generation_time = time.time()
         self.ducks = [Duck(self,(100,100)) for i in range(len(self.ducks))]
 
-
-
-
+    def find_best_fitness(self):
+        total_fitness = []
+        for i in self.ducks:
+            total_fitness.append(self.ducks[i].Duck.Fitness)
+        self.best_fitness = max(total_fitness)
+        
 def distance(L,Absolute=False):
     """returns the sum of the distances between the elements of a lists
     Input: list
