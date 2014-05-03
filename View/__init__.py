@@ -289,7 +289,7 @@ class PyGameWindowView:
         Time_pos = print_time.get_rect(bottomleft = (525,50))
         self.screen.blit(print_time,Time_pos)
         
-        Iter_text = 'Iteration'
+        Iter_text = 'Car'
         print_Iter = font.render(Iter_text, 1, (255, 255, 255))
         Iter_pos = print_Iter.get_rect(bottomleft = (525, 100))
         self.screen.blit(print_Iter,Iter_pos)               
@@ -314,7 +314,7 @@ class PyGameWindowView:
             self.screen.blit(print_Iter,Iter_pos)               
             
             totalfitness.append(self.model.ducks[i].Fitness)
-            Fit_text = str(round(self.model.ducks[i].Fitness, 2))
+            Fit_text = str(self.model.ducks[i].Fitness)
             print_Fit = font.render(Fit_text, 1, self.car_colors[i])
             Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 20*i))
             self.screen.blit(print_Fit,Fit_pos)
@@ -334,7 +334,7 @@ class PyGameWindowView:
             
         best_text = "Highest fitness is  " +str(max(totalfitness))
         print_best = font.render(best_text, 1, (255,255,255))
-        best_pos = print_best.get_rect(bottomleft = (600, 475))
+        best_pos = print_best.get_rect(bottomleft = (600, 75))
         self.screen.blit(print_best,best_pos)
         
         pygame.display.update()
