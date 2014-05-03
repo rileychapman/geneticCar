@@ -11,6 +11,8 @@ class PyGameWindowView:
     def __init__(self,model,screen):
         self.model = model
         self.screen = screen
+        self.car_image = pygame.image.load('car.png')
+        self.car_image = pygame.transform.scale(self.car_image, (30, 20))
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
@@ -231,12 +233,14 @@ class PyGameWindowView:
 
 
     def draw_sophie(self):
-        print 'drew frame'
-        self.screen.fill(pygame.Color(0,0,0))
+        #print 'drew frame'
+        self.screen.fill(pygame.Color(60,60,60))
         
         i = 0
         for element in self.model.ducks:
-            pygame.draw.rect(self.screen, self.model.ducks[i].color, element.rect)
+            #pygame.draw.rect(self.screen, self.model.ducks[i].color, element.rect)
+            rotatedImage = pygame.transform.rotate(self.car_image,self.model.ducks[i].theta * -57.2957)
+            self.screen.blit(rotatedImage, self.model.ducks[i].rect)
             #print "drawing rect",i,element.rect.center
 #            if not self.model.ducks[i].FAIL:
 #                pygame.draw.rect(self.screen, pygame.Color(0,255,0), element.rect)
@@ -245,7 +249,6 @@ class PyGameWindowView:
 
             i+=1
 
-        colorInd = 0
         if self.model.drawMode == True:
             for trackblock in self.model.Track:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
@@ -255,11 +258,7 @@ class PyGameWindowView:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
             for trackblock in self.model.Track3[0]: #model.FinalTrack[1]
 
-                pygame.draw.rect(self.screen,pygame.Color(colorInd,0,0),trackblock.rect)
-                if colorInd <255:
-                    colorInd +=1
-                else:
-                    colorInd =0
+                pygame.draw.rect(self.screen,pygame.Color(255,200,0),trackblock.rect)
         colors = [100,200,255]        
         for b in self.model.duck.SensorList:
 
