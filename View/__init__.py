@@ -310,13 +310,13 @@ class PyGameWindowView:
                                      
             Iter_text = str(i+1)
             print_Iter = font.render(Iter_text, 1, self.car_colors[i])
-            Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 20*i))
+            Iter_pos = print_Iter.get_rect(bottomleft = (525, 125 + 15*i))
             self.screen.blit(print_Iter,Iter_pos)               
             
             totalfitness.append(self.model.ducks[i].Fitness)
             Fit_text = str(self.model.ducks[i].Fitness)
             print_Fit = font.render(Fit_text, 1, self.car_colors[i])
-            Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 20*i))
+            Fit_pos = print_Fit.get_rect(bottomleft = (625, 125 + 15*i))
             self.screen.blit(print_Fit,Fit_pos)
 
             if self.model.ducks[i].FAIL:
@@ -326,7 +326,7 @@ class PyGameWindowView:
                 Fit_text = "still alive!"
                 color = self.car_colors[i]           
             print_Fit = font.render(Fit_text, 1, color)
-            Fit_pos = print_Fit.get_rect(bottomleft = (725, 125 + 20*i))
+            Fit_pos = print_Fit.get_rect(bottomleft = (725, 125 + 15*i))
             self.screen.blit(print_Fit,Fit_pos)
                         
 #            if i == len(self.model.ducks):
