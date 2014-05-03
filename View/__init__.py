@@ -321,7 +321,7 @@ class PyGameWindowView:
 
             if self.model.ducks[i].FAIL:
                 Fit_text = "dead )x"
-                color = (255, 0, 0)
+                color = (184, 184, 184)
             elif self.model.ducks[i].FAIL == False:
                 Fit_text = "still alive!"
                 color = self.car_colors[i]           
