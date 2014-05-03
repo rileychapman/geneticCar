@@ -19,7 +19,7 @@ class PyGameWindowView:
         	self.car_image = pygame.transform.scale(self.car_image, (30, 17))
         	self.car_images.append(self.car_image)
         	i += 1
-       	self.car_colors = [pygame.Color(240,163,10),pygame.Color(27,161,226),pygame.Color(0,80,239),pygame.Color(162,0,37),pygame.Color(130,90,44),pygame.Color(216,0,15),pygame.Color(164,196,0),pygame.Color(106,0,255),pygame.Color(96,169,23),pygame.Color(0,138,0),pygame.Color(118,96,138),pygame.Color(109,135,100),pygame.Color(250,104,0),pygame.Color(244,114,208),pygame.Color(229,20,0),pygame.Color(122,59,63),pygame.Color(0,171,169),pygame.Color(170,0,255),pygame.Color(216,193,0),pygame.Color(255,255,255)]
+       	self.car_colors = [pygame.Color(240,163,10),pygame.Color(27,161,226),pygame.Color(0,80,239),pygame.Color(162,0,37),pygame.Color(130,90,44),pygame.Color(216,0,115),pygame.Color(164,196,0),pygame.Color(106,0,255),pygame.Color(96,169,23),pygame.Color(0,138,0),pygame.Color(118,96,138),pygame.Color(109,135,100),pygame.Color(250,104,0),pygame.Color(244,114,208),pygame.Color(229,20,0),pygame.Color(122,59,63),pygame.Color(0,171,169),pygame.Color(170,0,255),pygame.Color(216,193,0),pygame.Color(255,255,255)]
         self.dead_car_image = pygame.transform.scale(pygame.image.load('dead_car.png'), (25,10))
 
                    
