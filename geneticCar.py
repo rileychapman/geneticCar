@@ -47,7 +47,7 @@ while running:
             model.offsetMode = False
 
     if model.drawTrack == False and model.drawMode == False and model.offsetMode == False:
-        controller.Drive()
+        controller.Drive_Squared()
 
     view.draw_sophie()
     time.sleep(0.001)

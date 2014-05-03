@@ -1,5 +1,5 @@
 """
-@author: Sophie Li and Paul Titchener
+@authors: Sophie Li, Paul Titchener, and Riley Chapman
 """
 
 import pygame, random, math, time
@@ -258,6 +258,47 @@ class PyGameController:
                     w2 += M[i][1]*(int(S[i])-40)
 
                 self.model.ducks[chromNum].update(w1,w2)
+                self.model.genome.chromosomes[chromNum].strength = self.model.ducks[chromNum].Fitness
+
+    def Drive_Squared(self):
+        """Creates w1 and w2 values for the car based on sensor values"""
+        for chromNum in range(len(self.model.ducks)):
+        	if not self.model.ducks[chromNum].FAIL:
+		        S=self.model.ducks[chromNum].S
+		        M0=self.model.genome.chromosomes[chromNum].genes
+		        M = matrixScale(M0,.05)
+		        w1 = 0
+		        w2 = 0
+		        if len(M) != 2*len(S):
+		            print 'len(M)',len(M),'S',len(S)
+		            raise Exception("Number of Parameters does not Match Twice Number of sensors")
+		        i = 0
+		        j = 0
+		        while i < len(S):
+		            w1 += M[j][0]*int(S[i])**2 + M[j+1][0]*int(S[i])
+		            w2 += M[j][1]*int(S[i])**2 + M[j+1][1]*int(S[i])
+		            i += 1
+		            j += 2
+
+		        velocity_scale = .003
+		        w1 = w1 * velocity_scale
+		        w2 = w2*velocity_scale
+
+		        max_wheel_velocity = 2 #limit the wheel velocity
+		        if w1 > max_wheel_velocity:
+		            w1 = max_wheel_velocity
+		        if w1 < -max_wheel_velocity:
+		            w1 = -max_wheel_velocity
+
+		        if w2 > max_wheel_velocity:
+		            w2 = max_wheel_velocity
+		        if w2 < -max_wheel_velocity:
+		            w2 = -max_wheel_velocity
+
+
+		        #print "w1: " + str(w1) + "     w2: " + str(w2)
+
+		        self.model.ducks[chromNum].update(w1,w2)
                 self.model.genome.chromosomes[chromNum].strength = self.model.ducks[chromNum].Fitness
 
  
