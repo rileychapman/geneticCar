@@ -258,7 +258,6 @@ class PyGameController:
                     w2 += M[i][1]*(int(S[i])-40)
 
                 self.model.ducks[chromNum].update(w1,w2)
-            else:
                 self.model.genome.chromosomes[chromNum].strength = self.model.ducks[chromNum].Fitness
 
  

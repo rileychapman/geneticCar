@@ -21,7 +21,7 @@ def formMatrix(x,y):
 
 	return L
 	#return [[-.1,-.1],[-.1,-.1],[-.1,-1]]
-def mixMatrix(M1,M2):
+def mixMatrix1(M1,M2):
 	"""Checks if two matricies are of equal size and then mixes them randomly."""
 	if len(M1) != len(M2): #checks if the x coordinates are equal
 		raise Exception("Matricies must be equal size")
@@ -42,6 +42,21 @@ def mixMatrix(M1,M2):
 				Lint.append((M2[i][j] + M1[i][j])/2)
 		MOut.append(Lint)
 	return MOut
+
+def mixMatrix(M1,M2):
+	"""Checks if two matricies are of equal size and then mixes them randomly."""
+	if len(M1) != len(M2): #checks if the x coordinates are equal
+		raise Exception("Matricies must be equal size")
+
+	for i in range(len(M1)-1): #checks if the y coordinates are equal
+		if len(M1[i]) != len(M2[i]):
+			raise Exception("Matricies must be equal size")
+	a = random.random()
+	if a >.5:
+		return M1
+	else:
+		return M2
+
 
 def mutateMatrix(M,r,rangeMutate):
 	"""Takes a matrix that has been mixed and then randomly changes values to simulate mutation

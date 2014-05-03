@@ -20,7 +20,7 @@ class Chromosome:
         print "   chromosome: " + str(self.genes) + '   strength: ' + str(self.strength)
 
 class Genome:
-    def __init__(self,population = 20,mutationRate = .1, mutationRange = .2):
+    def __init__(self,population = 20,mutationRate = .3, mutationRange = .2):
         chrom = []
         for i in range(population):
             chrom.append(Chromosome(i))
@@ -50,17 +50,21 @@ class Genome:
     def evolve(self):
             """ Takes the best genes and creates a new genome for the next generation
             """
-            print self.chromosomes[0].strength, self.chromosomes[1].strength
             bestChrom1=self.chromosomes[0]
             bestChrom2=self.chromosomes[1]
-            for chrom in self.chromosomes[2:]:
-                if chrom.strength > bestChrom1.strength:
+            for chrom in self.chromosomes:
+                print 'best1',bestChrom1.strength,'best2',bestChrom2.strength,'this',chrom.strength
+                if chrom.strength == bestChrom1.strength:
+                    pass
+                elif chrom.strength > bestChrom1.strength:
                     bestChrom2=bestChrom1
                     bestChrom1=chrom
                 elif chrom.strength > bestChrom2.strength:
                     bestChrom2=chrom
             self.bestChromosomes=[bestChrom1,bestChrom2]
             print 'best chromosomes',[bestChrom1.strength,bestChrom2.strength]
+
+
             # Create 20 mutations of each of the 2 best chromosomes
             i = self.population-3
             nextGenChromosomesA = []

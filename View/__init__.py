@@ -231,6 +231,7 @@ class PyGameWindowView:
 
 
     def draw_sophie(self):
+        print 'drew frame'
         self.screen.fill(pygame.Color(0,0,0))
         
         i = 0
@@ -244,15 +245,21 @@ class PyGameWindowView:
 
             i+=1
 
-
+        colorInd = 0
         if self.model.drawMode == True:
             for trackblock in self.model.Track:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
+                
         else:
             for trackblock in self.model.Track3[1]:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
-            for trackblock in self.model.Track3[0]: #model.FinalTrack[1]:
-                pygame.draw.rect(self.screen,pygame.Color(255,0,0),trackblock.rect)
+            for trackblock in self.model.Track3[0]: #model.FinalTrack[1]
+
+                pygame.draw.rect(self.screen,pygame.Color(colorInd,0,0),trackblock.rect)
+                if colorInd <255:
+                    colorInd +=1
+                else:
+                    colorInd =0
         colors = [100,200,255]        
         for b in self.model.duck.SensorList:
 
@@ -286,16 +293,13 @@ class PyGameWindowView:
             Fit_pos = print_Fit.get_rect(bottomleft = (625, 100))
             self.screen.blit(print_Fit,Fit_pos)
             
-<<<<<<< HEAD
-            for i in range(len(self.model.ducks)):
-=======
+
             Time_text = 'Runtime'
             print_time = font.render(Time_text, 1, (255, 255, 255))
             Time_pos = print_time.get_rect(bottomleft = (725, 100))
             self.screen.blit(print_time,Time_pos)             
             
-            for i in range(20):
->>>>>>> 6a01a0f965ddad47519dc3aaf349d1d6d91122e1
+            for i in range(len(self.model.ducks)):
                                
                 Iter_str = str(i+1)
                 Iter_text = Iter_str

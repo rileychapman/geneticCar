@@ -32,6 +32,8 @@ class Duck:
         self.SensorList = []
         self.color = color
         self.assign_color()
+        self.Fitness2 = 0
+        self.FitnessNew = 0
 
 
 #        self.screen = screen
@@ -46,6 +48,7 @@ class Duck:
         self.color = pygame.Color(color1, color2, color3)
             
     def update(self, w1, w2):
+        time2 = time.time()
         """ updates the position and angle of the car given the speed of rotation of the wheel. Angular veloctity of the wheel is use rather than a torque output becuase
         the only way to reasonable simuulate a torque output would be to calcualte the loading curve of the motor. At this point in the project it is 
         more reasonable to assume an ideal motor that does not respond to differenct loading conditions, or a motor with a well tuned PID loop and feedback
@@ -96,6 +99,7 @@ class Duck:
             self.Fitness = distance(self.TotalMovement,True)
             #print 'Fitness',self.Fitness
 
+        print 'total time', time.time()-time2
 
         self.time_limit()
 
@@ -103,9 +107,20 @@ class Duck:
 
         self.success_check()
 
-#        self.success_check()
+        if True:
+            distances = [math.hypot((self.x-element.pos[0]) , (self.y-element.pos[1])) for element in self.model.Track3[0]]
+            distInt = 500
+            for i in range(len(distances)):
+                if distances[i] < distInt :
+                    distInt = distances[i]
+                    self.Fitnessnew = i
+            diff = self.Fitnessnew - self.Fitness
+            if diff >500:
+                self.Fitness = -(len(self.model.Track3[0]) - self.Fitnessnew)
+            else:
+                self.Fitness = self.Fitnessnew
 
-    
+
     def time_limit(self):
 #        print "in time limit"
         xp = self.rect.x
@@ -124,8 +139,8 @@ class Duck:
             point2 = self.pointlist[-1]
             xDist = point1[0]-point2[0]
             yDist = point1[1]-point2[1]
-            
-            if math.hypot(xDist,yDist) < 5:
+
+            if math.hypot(xDist,yDist) < 1:
 
                 self.color = pygame.Color(255, 0, 0)
                 self.FAIL = True
@@ -137,7 +152,7 @@ class Duck:
         xp = self.rect.x
         yp = self.rect.y
             
-        if (math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15) and self.Fitness >800:
+        if False:#(math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15) and self.Fitness >800:
             print "SUCCESS!"
             time_taken=time.time() - self.last_fail_time
             #print "Time to complete", time_taken
