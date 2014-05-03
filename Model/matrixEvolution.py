@@ -21,7 +21,7 @@ def formMatrix(x,y):
 
 	return L
 	#return [[-.1,-.1],[-.1,-.1],[-.1,-1]]
-def mixMatrix1(M1,M2):
+def mixMatrix(M1,M2):
 	"""Checks if two matricies are of equal size and then mixes them randomly."""
 	if len(M1) != len(M2): #checks if the x coordinates are equal
 		raise Exception("Matricies must be equal size")
@@ -36,14 +36,14 @@ def mixMatrix1(M1,M2):
 			mutationType = random.random() #randomly decides if it will use the value from M1, M2, or average them randint is not used so the probability distribution can be changed
 			if mutationType<1.0/3:
 				Lint.append(M1[i][j])
-			elif mutationType <2.0/3:
+			else:# mutationType <2.0/3:
 				Lint.append(M2[i][j])
-			else:
-				Lint.append((M2[i][j] + M1[i][j])/2)
+
 		MOut.append(Lint)
+	print 'lenmout',len(MOut)
 	return MOut
 
-def mixMatrix(M1,M2):
+def mixMatrix1(M1,M2):
 	"""Checks if two matricies are of equal size and then mixes them randomly."""
 	if len(M1) != len(M2): #checks if the x coordinates are equal
 		raise Exception("Matricies must be equal size")
@@ -56,6 +56,38 @@ def mixMatrix(M1,M2):
 		return M1
 	else:
 		return M2
+
+def mixMatrix2(M1,M2):
+	"""Checks if two matricies are of equal size and then mixes them randomly."""
+	if len(M1) != len(M2): #checks if the x coordinates are equal
+		raise Exception("Matricies must be equal size")
+
+	for i in range(len(M1)-1): #checks if the y coordinates are equal
+		if len(M1[i]) != len(M2[i]):
+			raise Exception("Matricies must be equal size")
+	#pick one matrix
+	print 'lenm1',len(M1)
+	print 'lenm2',len(M2)
+	pickMatrix = random.random()
+	if pickMatrix > .5:
+		MOut = M1
+		MInt = M2
+	else:
+		MOut = M2
+		MInt = M1
+
+	#replace one of the parameters in that matrix. 
+	c = 0
+	print len(MOut)
+	pickElement = random.randint(1,12)
+	for i in range(len(M1)): #iterates through x coordinates to mix
+		for j in range(len(M1[0])): #iterates through y coordinates
+			c +=1
+			if c == pickElement:
+				MOut[i][j] = MInt[i][j]
+	print len(MOut)
+	return MOut
+
 
 
 def mutateMatrix(M,r,rangeMutate):

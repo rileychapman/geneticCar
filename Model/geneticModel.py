@@ -20,7 +20,7 @@ class Chromosome:
         print "   chromosome: " + str(self.genes) + '   strength: ' + str(self.strength)
 
 class Genome:
-    def __init__(self,population = 20,mutationRate = .3, mutationRange = .2):
+    def __init__(self,population = 20,mutationRate = .1, mutationRange = .2):
         chrom = []
         for i in range(population):
             chrom.append(Chromosome(i))
@@ -85,7 +85,7 @@ class Genome:
             for i in range(len(nextGenChromosomesA)):
                 chrom = Chromosome(i+2)
                 chrom.identification[0] = self.generation
-                chrom.genes = matrixEvolution.mixMatrix(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
+                chrom.genes = matrixEvolution.mixMatrix2(nextGenChromosomesA[i].genes,nextGenChromosomesB[i].genes)
                 nextGenChromos.append(chrom)
             #print nextGenChromos[0].strength, nextGenChromos[1].strength
   

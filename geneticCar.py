@@ -51,15 +51,15 @@ while running:
 
     view.draw_sophie()
     time.sleep(0.001)
-    if not False in [element.FAIL for element in model.ducks]:
-        time.sleep(2)
+    if not False in [element.FAIL for element in model.ducks] or model.Killed:
         model.genome.evolve()
-        time.sleep(5)
+        time.sleep(.5)
         model.new_generation()
         print "new generation"
         print "evolved",model.genome.chromosomes[0].genes
         chromNum = 0     
         model.Iteration =0
+        model.Killed = False
     
     #changes to next chromosome
  
