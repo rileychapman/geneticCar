@@ -25,17 +25,19 @@ class PyGameWindowView:
         if self.model.drawMode == True:
             for trackblock in self.model.Track:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
+
         else:
             for trackblock in self.model.Track3[1]:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
             for trackblock in self.model.Track3[0]: #model.FinalTrack[1]:
                 pygame.draw.rect(self.screen,pygame.Color(255,0,0),trackblock.rect)
-        colors = [100,200,255]        
+        colors = [100,200,255]       
+        """ 
         for b in self.model.duck.SensorList:
 
             block = pygame.Rect(b[0],b[1],2,2)
             pygame.draw.rect(self.screen,pygame.Color(255,0,255),block)
-
+            """
         pygame.draw.lines(self.screen,(255,255,255),False,self.model.duck.pointlist)
         if pygame.font:
             font = pygame.font.Font(None, 20)
