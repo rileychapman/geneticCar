@@ -56,11 +56,11 @@ while running:
         model.genome.evolve()
         time.sleep(5)
         model.new_generation()
-        print "new generation"
-        print "evolved",model.genome.chromosomes[0].genes
+#        print "new generation"
+#        print "evolved",model.genome.chromosomes[0].genes
         chromNum = 0     
         model.Iteration =0
-    
+        
     #changes to next chromosome
  
     

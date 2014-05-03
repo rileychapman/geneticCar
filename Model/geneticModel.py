@@ -27,6 +27,7 @@ class Genome:
         self.population = population
         self.chromosomes = chrom
         self.bestChromosomes = []
+        self.bestFitness=[]
         self.generation = 1
         self.mutationRate = mutationRate
         self.mutationRange = mutationRange
@@ -53,7 +54,7 @@ class Genome:
             bestChrom1=self.chromosomes[0]
             bestChrom2=self.chromosomes[1]
             for chrom in self.chromosomes:
-                print 'best1',bestChrom1.strength,'best2',bestChrom2.strength,'this',chrom.strength
+#                print 'best1',bestChrom1.strength,'best2',bestChrom2.strength,'this',chrom.strength
                 if chrom.strength == bestChrom1.strength:
                     pass
                 elif chrom.strength > bestChrom1.strength:
@@ -62,8 +63,9 @@ class Genome:
                 elif chrom.strength > bestChrom2.strength:
                     bestChrom2=chrom
             self.bestChromosomes=[bestChrom1,bestChrom2]
-            print 'best chromosomes',[bestChrom1.strength,bestChrom2.strength]
-
+#            print 'best chromosomes',[bestChrom1.strength,bestChrom2.strength]
+            
+            self.bestFitness.append(bestChrom1.strength)
 
             # Create 20 mutations of each of the 2 best chromosomes
             i = self.population-3
