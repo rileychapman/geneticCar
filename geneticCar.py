@@ -54,7 +54,7 @@ while running:
     if not False in [element.FAIL for element in model.ducks] or model.Killed:
         timeStart = time.time()
         timeElapsed = 0
-        while timeElapsed <5:
+        while False:#timeElapsed <5:
             print timeElapsed
             view.evolution_animation(timeElapsed)
             timeElapsed = time.time()-timeStart
