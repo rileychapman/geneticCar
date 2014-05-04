@@ -301,7 +301,7 @@ class PyGameWindowView:
         Fit_pos = print_Fit.get_rect(bottomleft = (625, 100))
         self.screen.blit(print_Fit,Fit_pos)
         
-        Fit_text = 'DEAD??'
+        Fit_text = 'Status'
         print_Fit = font.render(Fit_text, 1, (255, 255, 255))
         Fit_pos = print_Fit.get_rect(bottomleft = (725, 100))
         self.screen.blit(print_Fit,Fit_pos)
@@ -333,9 +333,11 @@ class PyGameWindowView:
                         
 #            if i == len(self.model.ducks):
 #                totalfitness = []
-            
+        
+        res = sorted(range(len(totalfitness)), key=lambda i: totalfitness[i])[-2:]
+        mostfit = [totalfitness[res[0]], totalfitness[res[1]]]
+        best_text = "Two most fit  " +str(mostfit)
 
-        best_text = "Highest fitness is  " +str(max(totalfitness))
         print_best = font.render(best_text, 1, (255,255,255))
         best_pos = print_best.get_rect(bottomleft = (600, 75))
         self.screen.blit(print_best,best_pos)
