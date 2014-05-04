@@ -366,6 +366,9 @@ class PyGameWindowView:
         
         for fit in self.model.genome.bestFitness:
             
+            if fit>1600:
+                fit = fit -10000+1600
+            
             xnew=x+5
             ynew=yi-.075*fit
                            

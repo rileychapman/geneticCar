@@ -28,7 +28,7 @@ screen = pygame.display.set_mode(size)
 model = Model.Platformer_Model(size)
 view = View.PyGameWindowView(model,screen)
 controller = Controller.PyGameController(model)
-
+    
 
 
 running = True
