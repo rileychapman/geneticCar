@@ -12,7 +12,7 @@ class Wall(object):
     def __init__(self, pos):
 
         #walls.append(self)
-        self.rect = pygame.Rect(pos[0], pos[1], 10, 10)
+        self.rect = pygame.Rect(pos[0], pos[1], 2, 2)
         self.pos = pos
         
 
@@ -144,7 +144,6 @@ class PyGameController:
         while innerInd in range(len(self.model.drawListInner)-1):
             p1 = self.model.drawListInner[innerInd] #first point
             p2 = self.model.drawListInner[innerInd+1] #second point
-            self.model.ArrayTrack[self.model.drawListInner[innerInd][0]][self.model.drawListInner[innerInd][1]] = 1 #!!!!!!!!!!
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
                 xSign = (p1[0] - p2[0])/abs(p1[0]-p2[0])
                 #print xSign
@@ -154,14 +153,18 @@ class PyGameController:
                     yIndAppend = int(p1[1] - xSign*slope*xInd)
                     xIndAppend = int(p1[0] - xSign*xInd)
                     try:
-                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                        for i in range(5):
+                            for j in range(5):
+                                self.model.ArrayTrack[xIndAppend+i-2][yIndAppend+j-2] = 1 
                     except IndexError:
                         #print 'too big, fixed'
                         if xIndAppend > 499: #499:
                             xIndAppend = 499
                         if yIndAppend >499:
                             yIndAppend = 499
-                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                        for i in range(5):
+                            for j in range(5):
+                                self.model.ArrayTrack[xIndAppend-i][yIndAppend-j] = 1 
 
 #                        
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
@@ -178,7 +181,9 @@ class PyGameController:
                     xIndAppend = int(p1[0] - ySign*slope*yInd)
                     yIndAppend = int(p1[1] - ySign*yInd)
                     try:
-                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                        for i in range(5):
+                            for j in range(5):
+                                self.model.ArrayTrack[xIndAppend+i-2][yIndAppend+j-2] = 1 
                     except IndexError:
 
                         #print 'too big, fixed'
@@ -186,7 +191,9 @@ class PyGameController:
                             xIndAppend = 499
                         if yIndAppend >499:
                             yIndAppend = 499
-                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                        for i in range(5):
+                            for j in range(5):
+                                self.model.ArrayTrack[xIndAppend-i][yIndAppend-j] = 1 
                             
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
@@ -196,7 +203,6 @@ class PyGameController:
         while outerInd in range(len(self.model.drawListOuter)-1):
             p1 = self.model.drawListOuter[outerInd] #first point
             p2 = self.model.drawListOuter[outerInd+1] #second point
-            self.model.ArrayTrack[self.model.drawListOuter[outerInd][0]][self.model.drawListOuter[outerInd][1]] = 1 #!!!!!!!!!!
 
 
             if abs(p1[0]-p2[0]) > abs(p1[1]-p2[1]):
@@ -210,14 +216,18 @@ class PyGameController:
                     xIndAppend = int(p1[0] - xSign*xInd)
 
                     try:
-                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                        for i in range(5):
+                            for j in range(5):
+                                self.model.ArrayTrack[xIndAppend+i-2][yIndAppend+j-2] = 1 
                     except IndexError:
                         #print 'too big, fixed'
                         if xIndAppend > 499:
                             xIndAppend = 499
                         if yIndAppend >499:
                             yIndAppend = 499
-                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                        for i in range(5):
+                            for j in range(5):
+                                self.model.ArrayTrack[xIndAppend-i][yIndAppend-j] = 1 
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     xInd +=1
             elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
@@ -232,14 +242,18 @@ class PyGameController:
                     xIndAppend = int(p1[0] - ySign*slope*yInd)
                     yIndAppend = int(p1[1] - ySign*yInd)
                     try:
-                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1 
+                        for i in range(5):
+                            for j in range(5):
+                                self.model.ArrayTrack[xIndAppend+i-2][yIndAppend+j-2] = 1 
                     except IndexError:
                         #print 'too big, fixed'
                         if xIndAppend > 499:
                             xIndAppend = 499
                         if yIndAppend >499:
                             yIndAppend = 499
-                        self.model.ArrayTrack[xIndAppend][yIndAppend] = 1                     
+                        for i in range(5):
+                            for j in range(5):
+                                self.model.ArrayTrack[xIndAppend-i][yIndAppend-j] = 1 
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             outerInd+=1
@@ -268,7 +282,7 @@ class PyGameController:
         	if not self.model.ducks[chromNum].FAIL:
 		        S=self.model.ducks[chromNum].S
 		        M0=self.model.genome.chromosomes[chromNum].genes
-		        M = matrixScale(M0,.05)
+		        M = matrixScale(M0,.5)
 		        w1 = 0
 		        w2 = 0
 		        
