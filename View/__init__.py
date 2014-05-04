@@ -12,16 +12,19 @@ class PyGameWindowView:
         self.model = model
         self.screen = screen
         self.car_images = []
+        self.car_images_unScaled = []
         i = 0
         while i < 20:
-        	fileName = 'car' + str(i) + '.png'
-        	self.car_image = pygame.image.load(fileName)
-        	self.car_image = pygame.transform.scale(self.car_image, (30, 17))
-        	self.car_images.append(self.car_image)
-        	i += 1
-       	self.car_colors = [pygame.Color(240,163,10),pygame.Color(27,161,226),pygame.Color(0,80,239),pygame.Color(162,0,37),pygame.Color(130,90,44),pygame.Color(216,0,115),pygame.Color(164,196,0),pygame.Color(106,0,255),pygame.Color(96,169,23),pygame.Color(0,138,0),pygame.Color(118,96,138),pygame.Color(109,135,100),pygame.Color(250,104,0),pygame.Color(244,114,208),pygame.Color(0,171,169),pygame.Color(122,59,63),pygame.Color(229,20,0),pygame.Color(170,0,255),pygame.Color(216,193,0),pygame.Color(255,255,255)]
+            fileName = 'car' + str(i) + '.png'
+            self.car_image = pygame.image.load(fileName)
+            self.car_images_unScaled.append(self.car_image)
+            self.car_image = pygame.transform.scale(self.car_image, (30, 17))
+            self.car_images.append(self.car_image)
+            i += 1
+        self.car_colors = [pygame.Color(240,163,10),pygame.Color(27,161,226),pygame.Color(0,80,239),pygame.Color(162,0,37),pygame.Color(130,90,44),pygame.Color(216,0,115),pygame.Color(164,196,0),pygame.Color(106,0,255),pygame.Color(96,169,23),pygame.Color(0,138,0),pygame.Color(118,96,138),pygame.Color(109,135,100),pygame.Color(250,104,0),pygame.Color(244,114,208),pygame.Color(0,171,169),pygame.Color(122,59,63),pygame.Color(229,20,0),pygame.Color(170,0,255),pygame.Color(216,193,0),pygame.Color(255,255,255)]
         self.dead_car_image = pygame.transform.scale(pygame.image.load('dead_car.png'), (25,10))
-
+        self.pos1 = pygame.Rect(int(100),int(100 ),160,80)
+        self.pos2 = pygame.Rect(int(500),int(100 ),160,80)
                    
     def draw(self):
         self.screen.fill(pygame.Color(0,0,0))
@@ -419,6 +422,51 @@ class PyGameWindowView:
         pygame.display.update()
 
 
+    def evolution_animation(self,time):
+
+        self.screen.fill(pygame.Color(60,60,60))
+
+        font = pygame.font.Font(None, 30)
+        Gen_text = 'When a daddy car and a mother car love each other very much...'
+        print_Gen = font.render(Gen_text, 1, (255, 255, 255))
+        Gen_pos = print_Gen.get_rect(center = (800/2.0,50))
+        self.screen.blit(print_Gen,Gen_pos) 
+
+        
+        daddyCar = pygame.transform.scale(self.car_images_unScaled[0], (160,80))
+        mommyCar = pygame.transform.scale(self.car_images_unScaled[1],(160,80))
+
+        if time <.5:
+            self.pos1 = pygame.Rect(int(100),int(100 ),160,80)
+            self.pos2 = pygame.Rect(int(500),int(100 ),160,80)
+
+        elif time <3:
+            self.pos1 = pygame.Rect(int(100 + 80*(time-.5)),int(100 +10*(time-.5)),160,80)
+            self.pos2 = pygame.Rect(int(500 - 80*(time-.5)),int(100 +10*(time-.5)),160,80)
+
+        xpos_list = [50, 128, 206, 284, 362, 440, 518, 596, 674, 752, 50, 128, 206, 284, 362, 440, 518, 596, 674, 752]
+        ypos_list = [300,300,300,300,   300, 300, 300, 300, 300, 300, 400, 400,400, 400, 400, 400, 400, 400, 400, 400]
+        if time > 3:
+            text_ev = 'Evolution!!'
+            print_ev = font.render(text_ev, 1, (255, 255, 255))
+            Gen_pos_ev = print_ev.get_rect(center = (800/2.0,250))
+            self.screen.blit(print_ev,Gen_pos_ev) 
+
+            i = 0
+            for car in self.car_images_unScaled:
+                pos = pygame.Rect(xpos_list[i]-30,ypos_list[i],160,80)
+                self.screen.blit(pygame.transform.scale(car,(80,50)),pos)
+                i += 1
 
 
-  
+        self.screen.blit(daddyCar, self.pos1)
+        self.screen.blit(mommyCar,self.pos2)
+
+
+
+        pygame.display.update()
+
+
+
+
+

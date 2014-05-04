@@ -55,7 +55,6 @@ class Genome:
             bestChrom2=self.chromosomes[1]
             for chrom in self.chromosomes:
 
-                print 'best1',bestChrom1.strength,'best2',bestChrom2.strength,'this',chrom.strength
                 if abs(chrom.strength - bestChrom1.strength) <5:
                     pass
                 elif chrom.strength > bestChrom1.strength:
