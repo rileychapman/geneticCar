@@ -13,6 +13,8 @@ class PyGameWindowView:
         self.screen = screen
         self.car_images = []
         self.car_images_unScaled = []
+        self.ymax=400
+        self.xstep=20
         i = 0
         while i < 20:
             fileName = 'car' + str(i) + '.png'
@@ -355,10 +357,16 @@ class PyGameWindowView:
 
         
         pygame.draw.line(self.screen, (255,255,255), (500,340),(800,340)) 
-        for i in range(0,17,4):            
+        
+        if not self.model.genome.bestFitness == [] and self.model.genome.bestFitness[-1]>1600:
+            self.ymax= 1600
+        elif not self.model.genome.bestFitness == [] and self.model.genome.bestFitness[-1]>self.ymax:
+            self.ymax=self.ymax*2
+            
+        for i in range(0,self.ymax/100+1,self.ymax/400):            
             y_str = str(i*100)
             print_y = font.render(y_str, 1, (255,255,255))
-            y_pos = print_y.get_rect(bottomleft = (525, 480-7.5*i))
+            y_pos = print_y.get_rect(bottomleft = (525, 480-30*400*i/self.ymax))
             self.screen.blit(print_y,y_pos) 
         
         
@@ -370,10 +378,12 @@ class PyGameWindowView:
         for fit in self.model.genome.bestFitness:
             
             if fit>1600:
-                fit = fit -10000+1600
+                fit = 38(fit-10000)+1600
             
-            xnew=x+5
-            ynew=yi-.075*fit
+            xnew=x+self.xstep
+            if xnew >=800:
+                self.xstep=self.xstep/2
+            ynew=yi-.3*400*fit/self.ymax
                            
             pygame.draw.line(self.screen, (255,255,255), (x,y),(xnew,ynew)) 
             #pygame.display.update()                

@@ -54,11 +54,8 @@ while running:
     if not False in [element.FAIL for element in model.ducks] or model.Killed:
         timeStart = time.time()
         timeElapsed = 0
-<<<<<<< HEAD
-        while False:#timeElapsed <5:
-=======
-        while timeElapsed <0:
->>>>>>> parent of 39c9b5f... before rebase
+
+        while timeElapsed <5:
             print timeElapsed
             view.evolution_animation(timeElapsed)
             timeElapsed = time.time()-timeStart
