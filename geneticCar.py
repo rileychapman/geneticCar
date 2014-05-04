@@ -52,8 +52,16 @@ while running:
     view.draw_sophie()
     time.sleep(0.001)
     if not False in [element.FAIL for element in model.ducks] or model.Killed:
+        timeStart = time.time()
+        timeElapsed = 0
+        while timeElapsed <0:
+            print timeElapsed
+            view.evolution_animation(timeElapsed)
+            timeElapsed = time.time()-timeStart
+
+
+
         model.genome.evolve()
-        time.sleep(.5)
         model.new_generation()
 #        print "new generation"
 #        print "evolved",model.genome.chromosomes[0].genes

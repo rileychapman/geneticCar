@@ -40,7 +40,6 @@ def mixMatrix(M1,M2):
 				Lint.append(M2[i][j])
 
 		MOut.append(Lint)
-	print 'lenmout',len(MOut)
 	return MOut
 
 def mixMatrix1(M1,M2):
