@@ -164,7 +164,7 @@ class PyGameController:
                             yIndAppend = 499
                         for i in range(5):
                             for j in range(5):
-                                self.model.ArrayTrack[xIndAppend+i-2][yIndAppend+j-2] = 1 
+                                self.model.ArrayTrack[xIndAppend-i][yIndAppend-j] = 1 
 
 #                        
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
@@ -193,7 +193,7 @@ class PyGameController:
                             yIndAppend = 499
                         for i in range(5):
                             for j in range(5):
-                                self.model.ArrayTrack[xIndAppend+i-2][yIndAppend+j-2] = 1 
+                                self.model.ArrayTrack[xIndAppend-i][yIndAppend-j] = 1 
                             
                     self.model.Track3[1].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
@@ -227,7 +227,7 @@ class PyGameController:
                             yIndAppend = 499
                         for i in range(5):
                             for j in range(5):
-                                self.model.ArrayTrack[xIndAppend+i-2][yIndAppend+j-2] = 1 
+                                self.model.ArrayTrack[xIndAppend-i][yIndAppend-j] = 1 
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     xInd +=1
             elif (p1[1]-p2[1]) != 0:# abs(p1[0]-p2[0]) <= abs(p1[1]-p2[1]) :
@@ -253,7 +253,7 @@ class PyGameController:
                             yIndAppend = 499
                         for i in range(5):
                             for j in range(5):
-                                self.model.ArrayTrack[xIndAppend+i-2][yIndAppend+j-2] = 1 
+                                self.model.ArrayTrack[xIndAppend-i][yIndAppend-j] = 1 
                     self.model.Track3[0].append(Wall((xIndAppend,yIndAppend)))
                     yInd +=1
             outerInd+=1
