@@ -14,7 +14,7 @@ class Duck:
     """Code for moving car"""
 
     def __init__(self,model,pos):
-        self.rect = pygame.Rect(pos[0], pos[1], 30, 20)
+        self.rect = pygame.Rect(pos[0], pos[1], 30, 15)
         self.x = pos[0]       #x position
         self.y = pos[1]        #y position
         self.dx = 0        
@@ -29,7 +29,7 @@ class Duck:
         self.RecentMovement = []
         self.TotalMovement = []
         self.S = [50,50,50]
-        self.SensorList = []
+        self.SensorList = [[],[],[]]
         self.color = color
         self.assign_color()
         self.Fitness2 = 0
@@ -120,6 +120,9 @@ class Duck:
             else:
                 self.Fitness = self.Fitnessnew
 
+        if self.Fitness < -100:
+            self.FAIL = True
+
 
     def time_limit(self):
 #        print "in time limit"
@@ -133,6 +136,7 @@ class Duck:
             self.FAIL = True
 
     def movement_limit(self):
+
         positions = self.pointlist
         try:
             point1 = self.pointlist[-50]
@@ -140,57 +144,31 @@ class Duck:
             xDist = point1[0]-point2[0]
             yDist = point1[1]-point2[1]
 
-            if math.hypot(xDist,yDist) < 1:
+            if math.hypot(xDist,yDist) < 5:
 
                 self.color = pygame.Color(255, 0, 0)
                 self.FAIL = True
                 print "Too Slow"
         except IndexError:
             pass
-    
+
     def success_check(self):
         xp = self.rect.x
         yp = self.rect.y
             
-        if False:#(math.hypot(100-xp, 100-yp) < 50) and ((time.time() - self.last_fail_time) > 15) and self.Fitness >800:
+        if (math.hypot(100-xp, 100-yp) < 50) and self.Fitness >600:
             print "SUCCESS!"
             time_taken=time.time() - self.last_fail_time
             #print "Time to complete", time_taken
             self.Fitness = 10000-time_taken
             self.FAIL = True
 
-            
-    
-     
-    def check_sensor(self, theta, xp, yp):
-
-        x = 500*math.sin(theta)
-        y = 500*math.cos(theta)
-        
-        pygame.display.update()        
-#        collide = []        
-        distance = math.sqrt((x-xp)**2 + (y-yp)**2)
-        dx = (x-xp)/distance
-        dy = (y-yp)/distance
-#        pygame.draw.line(self.screen,(255,0,0),(xp,yp),(x,y))
-        distance = 0
-        time1 = time.time()     
-        while distance <= 600:
-            print time.time()
-            xp += dx
-            yp += dy            
-            distance += 1            
-            if self.model.ArrayTrack[int(xp)][int(yp)] == 1:
-#                collide.append((xp,yp))
-                print 'time',time.time()-time1
-                return distance
-        return 0
 
 
 
                 
     def read_sensors(self):
-        self.SensorList = []
+        self.SensorList = [[],[],[]]
 
         self.model.sensorPoints = []
         xp = int(self.rect.x)
@@ -200,9 +178,9 @@ class Duck:
         theta = float(self.theta)
         #print "Current car orientation", theta
         
-        sensor1 = self.check_sensor2(theta, xp, yp)
-        sensor2 = self.check_sensor2(theta+math.pi/2, xp, yp)
-        sensor3 = self.check_sensor2(theta-math.pi/2, xp, yp)
+        sensor1 = self.check_sensor2(theta, xp, yp,0)
+        sensor2 = self.check_sensor2(theta+math.pi/2, xp, yp,1)
+        sensor3 = self.check_sensor2(theta-math.pi/2, xp, yp,2)
         
         #print "Closest forward block", sensor1
         #print "Closest left block", sensor2
@@ -232,67 +210,24 @@ class Duck:
                 #print "FAIL"
 
 
-    def check_sensor1(self, theta, xp, yp):
-        self.SensorList = []
-        x = 500*math.sin(theta+math.pi/2)
-        y = 500*math.cos(theta+math.pi/2)
-        
 
-        #calculating slopeb
-        if abs(x) >= abs(y):
-            functionOf  = 'X'
-            if x != 0:
-                slope = y/float(x)
-            else:
-                slope = 9999
-        else:
-            functionOf = 'Y'
-            if y != 0:
-                slope = x/float(y)
-            else:
-                slope = 9999
 
-        #calculating direction of travel along the slope
-
-        if functionOf == 'X':
-            dirTravel = x/abs(x)
-        else:
-            dirTravel = y/abs(y)
-
-        #iterating through that slope
-
-        for i in range(500):
-            if functionOf == 'X':
-                xInd = i + xp
-                yInd = i*slope + yp
-            else:
-                yInd = i + yp
-                xInd = i*slope + xp
-
-            self.SensorList.append((xInd,yInd))
-
-            try:
-                if self.model.ArrayTrack[int(xInd)][int(yInd)] == 1:
-                    dist = math.hypot(xp-xInd,yp-yInd)
-                    return dist 
-            except IndexError:
-                return 500
-
-    def check_sensor2(self, theta, xp, yp):
+    def check_sensor2(self, theta, xp, yp,iteration):
         x = 500*math.sin(theta)
         y = 500*math.cos(theta)
     
-        for i in range(1000):
-            i2 = i/2
+        for i in range(3*500):
+            i2 = i/3
             xInd = xp + i2*math.cos(theta)
             yInd = yp + i2*math.sin(theta)
-            self.SensorList.append((xInd,yInd))
+            self.SensorList[iteration].append((xInd,yInd))
 
             try:
                 if self.model.ArrayTrack[int(xInd)][int(yInd)] == 1:
                     return math.hypot(xp-xInd,yp-yInd)
             except IndexError:
                 return 500
+        
         return 500
 
 
