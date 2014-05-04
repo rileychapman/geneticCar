@@ -243,7 +243,9 @@ class PyGameWindowView:
 
     def draw_sophie(self):
         #print 'drew frame'
+
         self.screen.fill(pygame.Color(60,60,60))
+
         
         i = 14
         for element in self.model.ducks:
@@ -338,15 +340,42 @@ class PyGameWindowView:
                         
 #            if i == len(self.model.ducks):
 #                totalfitness = []
+        
         res = sorted(range(len(totalfitness)), key=lambda i: totalfitness[i])[-2:]
         mostfit = [totalfitness[res[0]], totalfitness[res[1]]]
         best_text = "Two most fit  " +str(mostfit)
+
         print_best = font.render(best_text, 1, (255,255,255))
         best_pos = print_best.get_rect(bottomleft = (600, 75))
         self.screen.blit(print_best,best_pos)
         
-        pygame.display.update()
 
+        
+        pygame.draw.line(self.screen, (255,255,255), (500,340),(800,340)) 
+        for i in range(0,7,2):            
+            y_str = str(i*100)
+            print_y = font.render(y_str, 1, (255,255,255))
+            y_pos = print_y.get_rect(bottomleft = (525, 480-20*i))
+            self.screen.blit(print_y,y_pos) 
+        
+        
+            
+        x= 550
+        yi = 475
+        y=yi            
+        
+        for fit in self.model.genome.bestFitness:
+            
+            xnew=x+5
+            ynew=yi-.2*fit
+                           
+            pygame.draw.line(self.screen, (255,255,255), (x,y),(xnew,ynew)) 
+            #pygame.display.update()                
+            
+            y = ynew
+            x=xnew
+
+        pygame.display.update()
 
 
 

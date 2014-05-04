@@ -55,12 +55,16 @@ while running:
         model.genome.evolve()
         time.sleep(.5)
         model.new_generation()
-        print "new generation"
-        print "evolved",model.genome.chromosomes[0].genes
+#        print "new generation"
+#        print "evolved",model.genome.chromosomes[0].genes
         chromNum = 0     
         model.Iteration =0
+<<<<<<< HEAD
+        
+=======
         model.Killed = False
     
+>>>>>>> d5bb24249213070d3a3c8a61738833bda55484d4
     #changes to next chromosome
  
     
