@@ -55,7 +55,7 @@ while running:
         timeStart = time.time()
         timeElapsed = 0
 
-        while timeElapsed <5:
+        while False:
             print timeElapsed
             view.evolution_animation(timeElapsed)
             timeElapsed = time.time()-timeStart
