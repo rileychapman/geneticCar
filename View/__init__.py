@@ -352,10 +352,10 @@ class PyGameWindowView:
 
         
         pygame.draw.line(self.screen, (255,255,255), (500,340),(800,340)) 
-        for i in range(0,7,2):            
+        for i in range(0,17,4):            
             y_str = str(i*100)
             print_y = font.render(y_str, 1, (255,255,255))
-            y_pos = print_y.get_rect(bottomleft = (525, 480-20*i))
+            y_pos = print_y.get_rect(bottomleft = (525, 480-7.5*i))
             self.screen.blit(print_y,y_pos) 
         
         
@@ -367,7 +367,7 @@ class PyGameWindowView:
         for fit in self.model.genome.bestFitness:
             
             xnew=x+5
-            ynew=yi-.2*fit
+            ynew=yi-.075*fit
                            
             pygame.draw.line(self.screen, (255,255,255), (x,y),(xnew,ynew)) 
             #pygame.display.update()                
