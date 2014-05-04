@@ -105,8 +105,7 @@ class Duck:
 
         self.movement_limit()
 
-        self.success_check()
-
+        
         if True:
             distances = [math.hypot((self.x-element.pos[0]) , (self.y-element.pos[1])) for element in self.model.Track3[0]]
             distInt = 500
@@ -123,6 +122,7 @@ class Duck:
         if self.Fitness < -100:
             self.FAIL = True
 
+        self.success_check()
 
     def time_limit(self):
 #        print "in time limit"
@@ -160,7 +160,7 @@ class Duck:
             print "SUCCESS!"
             time_taken=time.time() - self.last_fail_time
             #print "Time to complete", time_taken
-            self.Fitness = 10000-time_taken
+            self.Fitness = int(10000-time_taken)
             self.FAIL = True
 
 
