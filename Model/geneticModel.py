@@ -20,7 +20,7 @@ class Chromosome:
         print "   chromosome: " + str(self.genes) + '   strength: ' + str(self.strength)
 
 class Genome:
-    def __init__(self,population = 20,mutationRate = .5, mutationRange = .2):
+    def __init__(self,population = 20,mutationRate = .25, mutationRange = .2):
         chrom = []
         for i in range(population):
             chrom.append(Chromosome(i))

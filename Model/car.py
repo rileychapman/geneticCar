@@ -19,7 +19,7 @@ class Duck:
         self.y = pos[1]        #y position
         self.dx = 0        
         self.dy = 0
-        self.theta=0 #angle from the reference frame of the car is at angle zero if it pointed in the positive x direction. 
+        self.theta=1.57 #angle from the reference frame of the car is at angle zero if it pointed in the positive x direction. 
         self.radius = 5 #wheel radius
         self.pointlist = [pos,pos]
         self.model= model
