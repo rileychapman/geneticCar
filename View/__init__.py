@@ -257,17 +257,12 @@ class PyGameWindowView:
             #pygame.draw.rect(self.screen, self.model.ducks[i].color, element.rect)
             rotatedImage = pygame.transform.rotate(self.car_images[i],self.model.ducks[i].theta * -57.2957)
             self.screen.blit(rotatedImage, self.model.ducks[i].rect)
-            #print "drawing rect",i,element.rect.center
-#            if not self.model.ducks[i].FAIL:
-#                pygame.draw.rect(self.screen, pygame.Color(0,255,0), element.rect)
-#            else:
-#                pygame.draw.rect(self.screen, pygame.Color(255,0,0), element.rect)
+            #pygame.draw.rect(self.screen,pygame.Color(255,255,255), element.rect)
             
             i-=1
             for b in element.SensorList:
                 try:
                     c = [b[0],b[-1]]
-                    #pygame.draw.lines(self.screen,pygame.Color(255,255,255),False,c)
                 except:
                     pass    
                  
@@ -280,7 +275,7 @@ class PyGameWindowView:
         else:
             for trackblock in self.model.Track3[1]:
                 pygame.draw.rect(self.screen,pygame.Color(255,255,255),trackblock.rect)
-            for trackblock in self.model.Track3[0]: #model.FinalTrack[1]
+            for trackblock in self.model.Track3[0]: 
 
                 pygame.draw.rect(self.screen,pygame.Color(255,200,0),trackblock.rect)
                 

@@ -14,7 +14,7 @@ class Duck:
     """Code for moving car"""
 
     def __init__(self,model,pos):
-        self.rect = pygame.Rect(pos[0], pos[1], 30, 15)
+        self.rect = pygame.Rect(pos[0], pos[1], 20, 20)
         self.x = pos[0]       #x position
         self.y = pos[1]        #y position
         self.dx = 0        
@@ -205,9 +205,7 @@ class Duck:
             if self.rect.colliderect(wall.rect):
                 self.last_fail_time = time.time()
                 self.color = pygame.Color(255, 0, 0)
-#                print self.last_fail_time
                 self.FAIL = True
-                #print "FAIL"
 
 
 
