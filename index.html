@@ -74,8 +74,8 @@ $ git checkout gh-pages
 
 <p>We are still torn between whether we’d like to make this an educational or fun program. We’re definitely interested in pursuing genetic algorithms as a ML component to our project, but we’re not really sure how we’ll implement this. There are two possible frameworks we can pursue:</p>
 
-<p>1. Educational program, focused on teaching users the differences between different AI algorithms
-2. A fun program that lets the user watch the progression of a car as it learns to drive, this would be similar to boxcar2d</p>
+<p>1. Educational program, focused on teaching users the differences between different AI algorithms</p>
+<p>2. A fun program that lets the user watch the progression of a car as it learns to drive, this would be similar to boxcar2d</p>
 
 <p>Benefits of an educational program would be that it would let us explore different algorithms ourselves, and we would learn a lot more in the progress on the front of machine learning. Additionally, this educational program would be much more useful to an average user than a fun-focused project. However, a downside would be that we would have to account for different kinds of ML, which would involve many bugs and introduce a lot of complexity in our code. Additionally, if we pursue many different kinds of machine learning, we may spread ourselves too thin and end up not doing any implementation well.</p>
 
@@ -84,11 +84,12 @@ $ git checkout gh-pages
 <p>We’ll probably end up going in the direction of a fun-focused program like boxcar2d. At our current energy and resources, we probably wouldn’t be able to pull off multiple implementations well enough to merit going down that path. We feel that by focusing all our energy on making a good genetic algorithm, we’ll end up with a solid product that we can be proud of.</p>
 
 <p>We’ve divided development into sections, where each member of our team is focused in implementing something specific.
-
-Paul: Track-drawing, control of the car
-
-Josh and Riley: Matrix mutation and fitness, aka genetic algorithm
-Sophie: View, sensors</p>
+<ul>
+<li>Paul: Track-drawing, control of the car</li>
+<li>Josh and Riley: Matrix mutation and fitness, aka genetic algorithm</li>
+<li>Sophie: View, sensors</li>
+</ul>
+</p>
 
 <p>We’re using Model-View-Controller, and we’ve divided each section into its own folder. We have a main script that calls the init from the model, view, and controller. That way, each member can edit files in their own folder and we won’t have to worry about conflicts. Each member has their own git branch, and we’ll merge all our changes into a main branch. We have a weekly meeting, where members will discuss the changes to the code they have done, to make sure everyone is on the same page.
 </p>
