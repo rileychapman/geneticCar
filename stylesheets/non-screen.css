@@ -38,12 +38,7 @@ header h1 {
   font-size: 2em;
 }
 
-section#downloads {
-  height: 171px;
-  width: 602px;
-  margin: 51px auto -250px;
-  background: transparent url(../images/shield.png) center 0 no-repeat;
-}
+
 
 section#downloads a {
   display: none;
@@ -52,7 +47,7 @@ section#downloads a {
 span.banner-fix {
   background: transparent url(../images/shield-fallback.png) center top no-repeat;
   height: 31px;
-  width: 640px;
+  width: 1000px;
   top: 20px;
 }
 
