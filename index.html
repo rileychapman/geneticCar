@@ -61,8 +61,20 @@ $ git checkout gh-pages
 <h3>
 <a id="projectproposal" name="projectproposal" class="anchor" href="#projectproposal"><span class="octicon octicon-link"></span></a>Project Proposal</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>The primary focus of our project will be to create a genetic algorithm that causes the behaviors of a simulated car to evolve over time. The car will move around a track, but not be told either where it is around the track or how to move. Instead, it will know what direction driving forward will make it go in and how far away from a wall it is. Different iterations of the car will have different responses to these inputs. Over the course of many generations, these reactions will mutate and evolve until an optimal set of parameters has been determined. The project will be similar in some ways to the webapp <a href="http://boxcar2d.com/">BoxCar2D</a>. We will not be overlapping with other courses or working with anyone from a different section. We do not anticipate needing an angel advisor. </p>
 
+<p>At the minimum, we’d like our car to be able to teach itself how to drive around a hard coded track. Though this track will definitely be more complex than a circular ring, by using a hardcoded track we will limit additional complication. This will allow us to just test the genetic algorithm and then move on to designing the less fundamental parts of our project.</p>
+
+<p>Our primary worry about this plan is how we will have the cars respond to their “sensor”  variables and how we can mutate this behavior. We are reasonable confident that we can simulate the car, and create tracks, but are less confident about what the parameters are that will determine how the car responds to the sensor variables that we pass to it.</p>
+
+<p>After we have finished our minimum deliverable we  would like to introduce roadblocks and obstacles inside the track. These could include potholes and ramps, which the car would have to learn to manipulate to complete the course faster. An extension to this could be implementing physics in determining the health of each generation of our cart. For example, we could emulate the way ramps work in the real world. Depending on how the cart approaches the ramp, it could drastically improve or reduce it’s score. </p>
+
+<p>A second stretch goal would be to implement user drawn tracks. We would invite the user to draw a track with his mouse and generate a track from the input. This introduces complexities with dealing with interpreting inputs from a wide variety of user who may not be drawing the track seriously.</p>
+
+<p>Our last stretch goal would be turning our project into a web app. As none of us have experience with python web apps, we think additional and interesting challenge. This would require us to learn how to develop user interfaces and teach us how to debug a different type of system.</p>
+
+<p>Our first step for this project will be to create a simulation of a car that is able to move and collide with walls that we hard code into place. Second, we will add a fitness function that determines how well a car has done. Third, we will edit the algorithm that drives the car so that it will respond to various inputs. Finally, to complete our initial goals, we will add the genetic algorithm that will select for the best inputs and incrementally improve the car over time. </p>
+<p><a href=#top>Back to top</a></p>
 <h3>
 <a id="designproposal" name="designproposal" class="anchor" href="#designproposal"><span class="octicon octicon-link"></span></a>Design Proposal</h3>
 
@@ -93,22 +105,42 @@ $ git checkout gh-pages
 
 <p>We’re using Model-View-Controller, and we’ve divided each section into its own folder. We have a main script that calls the init from the model, view, and controller. That way, each member can edit files in their own folder and we won’t have to worry about conflicts. Each member has their own git branch, and we’ll merge all our changes into a main branch. We have a weekly meeting, where members will discuss the changes to the code they have done, to make sure everyone is on the same page.
 </p>
-
+<p><a href=#top>Back to top</a></p>
 <h3>
 <a id="designrefinement" name="designrefinement" class="anchor" href="#designrefinement"><span class="octicon octicon-link"></span></a>Design Refinement</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+
+<p>While we are still progressing forward with the goal of “fun” in mind, we’ve realized that the car requires much more stringent code than we expected. The previous model contained the drawn walls in lists and the sensors check for a rect collision at every pixel. However, it’s quite intensive to check each pixel value for each value in the list, and our sensors ran quite slowly. We’ve changes the walls into arrays, so sensor runtime is much lower now.</p>
+
+<p>Additionally, we’ve added directional control to our car. The matrix now controls the left and right wheels of the car, so the car can now turn. This allows for more complex behavior. There is now a theta value associated to the car as well, which allows us to “attach” sensors to the front, left, and right sides of the car that move along with the car.</p>
+
+<p>We’re beginning to see matrix evolution, but there are still some bugs that have to be ironed out. Particularly, the sensors often see right through the track, which greatly messes up the drive of the car. There is also a lot of wiggling as the car rapidly drives left to right, which slows down progress as well.</p>
+<p><a href=#top>Back to top</a></p>
+
 
 <h3>
 <a id="final" name="final" class="anchor" href="#final"><span class="octicon octicon-link"></span></a>Reflection</h3>
+<p>At this point, we’ve completed development of all the algorithms and track elements. We’ve changed the way track drawing is done, so sensor errors with the wall appear much less. Additionally, we’ve changed control of our car from a linear relationship to a quadratic one, which allows for more complex behavior of the car in relation to the input of the sensor values. A more indepth summary of how exactly this occurs was shown in the powerpoint presentation above.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>We’ve changed our program so that it now supports 15 cars instead of only 1. This change was made because of our design focus on the “fun” approach. By having an entire generation of cars shown at once, the user can “cheer” on his favorite car, and see the results from genetic evolution much quicker.  By adding a graph, we can also visually show progress over time, in case the user doubts whether our model works or not. We’ve also changed the car from a rect to a sprite, which makes our representation of a “smart car” more believable.</p>
+
+<p>We’ve kind of achieved our minimum deliverable of having a car learn to drive around a hard coded track. We never actually implemented the hard coded track, but dove right into user drawn tracks. The car can successfully drive around these tracks. Unfortunately, we never got around to our many reach goals. We never implemented a web app and we never implemented obstacles. However, we did fix the reach goal of implementing drawn tracks from the very beginning, and got a really cool UI for presenting our work too. Dividing the work was a really good idea, since it made more complex goals easier to achieve. Though there were difficulties with merging branches, with different code, it was still pretty smooth sailing.</p>
+
+<p>It was a great idea to implement 15 cars at once. This really focused on the user-fun part of our project, and made our program really fun to watch. Adding the a “raceboard” for all of the cars was a great idea too, since it made it easier for a user to cheer for a certain car. We found that making each car distinguishable really helped get the user interested in the progress all the cars were making. Next time, we want to include more elements for user-interaction, and probably make a webapp. Perhaps we might want to use Tkinter for prettier menus as well.</p>
+
+<p>Although our division of labor was good throughout the project, our use of version control greatly improved as the project progressed. Originally, with only a main branch, editing files was a tricky logistical task. Then we figured out git branching. From there, the division of adding new features and tracking down bugs went smoothly. Each team member was able to effectively work independently, and integration of everything went well.</p>
+
+<p>One of our most persistent bugs had to do with the sensors in the simulation of the car. For the time that we were showing lines to represent the sensors it was very apparent that occasionally, the sensors would see through the walls of the track. This would cause the cars to turn instant 180’s and otherwise wreaked havoc on the control algorithm. This bug manifested itself somewhere in the part of the code where the sensors worked out where the walls where, and also in the part of the code that kept track of where the walls were. We had a curious situation in our simulation in that our program knew everything about the position of the track, but the part of it that had to control the car had to extrapolate the position of the track using its sensors. This design choice was made so that the control algorithm that evolved from our program could, in theory, be placed on an actual robot.</p>
+<p><a href=#top>Back to top</a></p>
+
+
+
       </section>
 
       <footer>
         <span class="ribbon-outer">
           <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/rileychapman">rileychapman</a> can be found on <a href="https://github.com/rileychapman/geneticCar">GitHub</a></p>
+            <p>This project was made by <a href="https://github.com/rileychapman" class="user-mention">@rileychapman</a>, <a href="https://github.com/jsapers" class="user-mention">@jsapers</a>, <a href="https://github.com/ptitchener" class="user-mention">@ptitchener</a> and <a href="https://github.com/srli" class="user-mention">@srli</a></p>
           </span>
           <span class="left-tail"></span>
           <span class="right-tail"></span>
