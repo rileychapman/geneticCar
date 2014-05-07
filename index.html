@@ -123,7 +123,7 @@
 <a id="designrefinement" name="designrefinement" class="anchor" href="#designrefinement"><span class="octicon octicon-link"></span></a>Design Refinement</h3>
 
 <p>Our current class diagram:</p>
-<center><img src="images/class-diagrams.png" alt="class-diagrams.png"></center>
+<center><img src="../images/class-diagrams.png" alt="class-diagrams.png"></center>
 <p>While we are still progressing forward with the goal of “fun” in mind, we’ve realized that the car requires much more stringent code than we expected. The previous model contained the drawn walls in lists and the sensors check for a rect collision at every pixel. However, it’s quite intensive to check each pixel value for each value in the list, and our sensors ran quite slowly. We’ve changes the walls into arrays, so sensor runtime is much lower now.</p>
 
 <p>Additionally, we’ve added directional control to our car. The matrix now controls the left and right wheels of the car, so the car can now turn. This allows for more complex behavior. There is now a theta value associated to the car as well, which allows us to “attach” sensors to the front, left, and right sides of the car that move along with the car.</p>
