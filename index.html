@@ -49,14 +49,27 @@
         <h3>
 <a id="top" name="welcome-genetic" class="anchor" href="#welcome-genetic"><span class="octicon octicon-link"></span></a>Welcome to our Genetic Car!</h3>
 
-<p>The goal of this Software Design project is to create an intelligent car that will drive around a user-drawn track. We are using genetic algorithms to naturally evolve better and better cars through each generation. This site is will be used for deliverables. Some interesting links are: <a href="#projectproposal">Project Proposal</a> <a href="#designproposal">Design Proposal</a> <a href="#designrefinement">Design Refinement</a> <a href="#final">Reflection</a></p>
+<p>The goal of this Software Design project is to create an intelligent car that will drive around a user-drawn track. We are using genetic algorithms to naturally evolve better and better cars through each generation. </p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>The team is: Riley Chapman (<a href="https://github.com/rileychapman" class="user-mention">@rileychapman</a>), Josh Sapers (<a href="https://github.com/jsapers" class="user-mention">@jsapers</a>), Paul Titchener (<a href="https://github.com/ptitchener" class="user-mention">@ptitchener</a>) and Sophie Li (<a href="https://github.com/srli" class="user-mention">@srli</a>).</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>This site is will be used for deliverables. Some interesting links are: </p>
+
+<p>
+<ul>
+<li><a href="#slideshow">Final Slideshow</a></li>
+<li><a href="#projectproposal">Project Proposal</a> </li>
+<li><a href="#designproposal">Design Proposal</a></li>
+<li> <a href="#designrefinement">Design Refinement</a> </li>
+<li><a href="#final">Reflection</a></li>
+</ul>
+</p>
+
+<h3>
+<a id="slideshow" name="slideshow" class="anchor" href="#slideshow"><span class="octicon octicon-link"></span></a>Slideshow</h3>
+<p>We put together a slideshow for our final presentation that goes in detail about our project and our progress. Take a look through it for a tl;dr of our project progress and final results.</p>
+<center><iframe src="https://docs.google.com/presentation/d/19Rvq0ZM46b6EHsD4HGqgEygVku50xUYhsJhBq-BrHHU/embed?start=false&loop=false&delayms=5000" frameborder="0" width="600" height="390" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></center>
+<p><a href=#top>Back to top</a></p>
 
 <h3>
 <a id="projectproposal" name="projectproposal" class="anchor" href="#projectproposal"><span class="octicon octicon-link"></span></a>Project Proposal</h3>
@@ -109,7 +122,8 @@ $ git checkout gh-pages
 <h3>
 <a id="designrefinement" name="designrefinement" class="anchor" href="#designrefinement"><span class="octicon octicon-link"></span></a>Design Refinement</h3>
 
-
+<p>Our current class diagram:</p>
+<center><img src="images/class-diagrams.png" alt="class-diagrams.png"></center>
 <p>While we are still progressing forward with the goal of “fun” in mind, we’ve realized that the car requires much more stringent code than we expected. The previous model contained the drawn walls in lists and the sensors check for a rect collision at every pixel. However, it’s quite intensive to check each pixel value for each value in the list, and our sensors ran quite slowly. We’ve changes the walls into arrays, so sensor runtime is much lower now.</p>
 
 <p>Additionally, we’ve added directional control to our car. The matrix now controls the left and right wheels of the car, so the car can now turn. This allows for more complex behavior. There is now a theta value associated to the car as well, which allows us to “attach” sensors to the front, left, and right sides of the car that move along with the car.</p>
