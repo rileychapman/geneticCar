@@ -66,7 +66,7 @@
 </p>
 
 <h3>
-<a id="slideshow" name="slideshow" class="anchor" href="#slideshow"><span class="octicon octicon-link"></span></a>Final Presentation/h3>
+<a id="slideshow" name="slideshow" class="anchor" href="#slideshow"><span class="octicon octicon-link"></span></a>Final Presentation</h3>
 <p>We put together a slideshow for our final presentation that goes in detail about our project and our progress. Take a look through it for a tl;dr of our project progress and final results.</p>
 <center><iframe src="https://docs.google.com/presentation/d/19Rvq0ZM46b6EHsD4HGqgEygVku50xUYhsJhBq-BrHHU/embed?start=false&loop=false&delayms=5000" frameborder="0" width="600" height="390" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></center>
 <p>We also recorded a video of our program in action, take a looK!</p>
@@ -93,9 +93,8 @@
 <h3>
 <a id="designproposal" name="designproposal" class="anchor" href="#designproposal"><span class="octicon octicon-link"></span></a>Design Proposal</h3>
 
-<p>Currently, our design looks like this:
-
-</p>
+<p>Currently, our design looks like this:</p>
+<center><img src="https://lh4.googleusercontent.com/avDgVs3c1CLGCa9F1q3o8x8hf4zylddfdq3E7BjRBBU=w467-h465-no" alt="car and line" height="350"></center>
 
 <p>We’ll save the tracks as a list of rects, and use a rect as a car. Collision will be simply rect collisions. Sensors are in progress, and simply check for a rect collision on each pixel value between the car at the wall. The matrix controls the wheels of the car, allowing it to move forwards/backwards and left/right</p>
 
@@ -125,8 +124,10 @@
 <a id="designrefinement" name="designrefinement" class="anchor" href="#designrefinement"><span class="octicon octicon-link"></span></a>Design Refinement</h3>
 
 <p>Our current class diagram:</p>
-<center><img src=url(../images/class-diagrams.png) alt="class-diagrams.png"></center>
+<center><img src="https://lh4.googleusercontent.com/-McrSezZ7M9Y/U2mKS6J99yI/AAAAAAAADTM/iEL2L3YL8DQ/w618-h286-no/class-diagrams.png" alt="class-diagrams.png"></center>
 <p>While we are still progressing forward with the goal of “fun” in mind, we’ve realized that the car requires much more stringent code than we expected. The previous model contained the drawn walls in lists and the sensors check for a rect collision at every pixel. However, it’s quite intensive to check each pixel value for each value in the list, and our sensors ran quite slowly. We’ve changes the walls into arrays, so sensor runtime is much lower now.</p>
+
+<center><img src="https://lh6.googleusercontent.com/-qYzyyaVWe6k/U2mLN5zjkgI/AAAAAAAADT4/vmdH3-1SctI/w470-h477-no/pic3.png" alt="array blocks" height="350"></center>
 
 <p>Additionally, we’ve added directional control to our car. The matrix now controls the left and right wheels of the car, so the car can now turn. This allows for more complex behavior. There is now a theta value associated to the car as well, which allows us to “attach” sensors to the front, left, and right sides of the car that move along with the car.</p>
 
@@ -140,13 +141,20 @@
 
 <p>We’ve changed our program so that it now supports 15 cars instead of only 1. This change was made because of our design focus on the “fun” approach. By having an entire generation of cars shown at once, the user can “cheer” on his favorite car, and see the results from genetic evolution much quicker.  By adding a graph, we can also visually show progress over time, in case the user doubts whether our model works or not. We’ve also changed the car from a rect to a sprite, which makes our representation of a “smart car” more believable.</p>
 
+<p>Our original presentation:</p>
+<center><img src="https://lh5.googleusercontent.com/-ETbKzmCIWy0/U2mKTSN6tbI/AAAAAAAADTc/mqFx1XzeNao/w677-h425-no/pic4.png" alt="15 cars"></center>
+
+<p>Our final presentation:</p>
+<center><img src="https://lh5.googleusercontent.com/-IyBwZ2Cr4Hg/U2mKTk64vVI/AAAAAAAADTU/kMgTL4jnawo/w698-h432-no/pic5.png" alt="15 cars that are cars"></center>
+
+
 <p>We’ve kind of achieved our minimum deliverable of having a car learn to drive around a hard coded track. We never actually implemented the hard coded track, but dove right into user drawn tracks. The car can successfully drive around these tracks. Unfortunately, we never got around to our many reach goals. We never implemented a web app and we never implemented obstacles. However, we did fix the reach goal of implementing drawn tracks from the very beginning, and got a really cool UI for presenting our work too. Dividing the work was a really good idea, since it made more complex goals easier to achieve. Though there were difficulties with merging branches, with different code, it was still pretty smooth sailing.</p>
 
 <p>It was a great idea to implement 15 cars at once. This really focused on the user-fun part of our project, and made our program really fun to watch. Adding the a “raceboard” for all of the cars was a great idea too, since it made it easier for a user to cheer for a certain car. We found that making each car distinguishable really helped get the user interested in the progress all the cars were making. Next time, we want to include more elements for user-interaction, and probably make a webapp. Perhaps we might want to use Tkinter for prettier menus as well.</p>
 
 <p>Although our division of labor was good throughout the project, our use of version control greatly improved as the project progressed. Originally, with only a main branch, editing files was a tricky logistical task. Then we figured out git branching. From there, the division of adding new features and tracking down bugs went smoothly. Each team member was able to effectively work independently, and integration of everything went well.</p>
 
-<p>One of our most persistent bugs had to do with the sensors in the simulation of the car. For the time that we were showing lines to represent the sensors it was very apparent that occasionally, the sensors would see through the walls of the track. This would cause the cars to turn instant 180’s and otherwise wreaked havoc on the control algorithm. This bug manifested itself somewhere in the part of the code where the sensors worked out where the walls where, and also in the part of the code that kept track of where the walls were. We had a curious situation in our simulation in that our program knew everything about the position of the track, but the part of it that had to control the car had to extrapolate the position of the track using its sensors. This design choice was made so that the control algorithm that evolved from our program could, in theory, be placed on an actual robot.</p>
+<p>One of our most persistent bugs had to do with the sensors in the simulation of the car. For the time that we were showing lines to represent the sensors it was very apparent that occasionally, the sensors would see through the walls of the track. This would cause the cars to turn instant 180’s and otherwise wrecked havoc on the control algorithm. This bug manifested itself somewhere in the part of the code where the sensors worked out where the walls where, and also in the part of the code that kept track of where the walls were. We had a curious situation in our simulation in that our program knew everything about the position of the track, but the part of it that had to control the car had to extrapolate the position of the track using its sensors. This design choice was made so that the control algorithm that evolved from our program could, in theory, be placed on an actual robot.</p>
 <p><a href=#top>Back to top</a></p>
 
 
